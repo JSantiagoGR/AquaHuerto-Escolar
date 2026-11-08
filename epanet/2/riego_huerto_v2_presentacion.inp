@@ -1,0 +1,208 @@
+[TITLE]
+Riego huerto v2 - 1 cajon 1x1 m - 2 laterales - 4 microaspersores Hunter SD-B (PROVISIONAL)
+Tuboplus 20 mm C16 DI 14.40 mm (OFICIAL). Curva de bomba PROVISIONAL. Tinaco ORIGINAL PROVISIONAL.
+PRESENTACION: misma hidraulica que riego_huerto_v2_final.inp (solo cambian coordenadas y etiquetas)
+
+[JUNCTIONS]
+;ID              	Elev (m)	Demand (L/s)	Pattern
+ J-TK            	0.265	0.00000000		;Salida del tinaco (rosca 1/2")
+ J-CHK           	0.265	0.00000000		;Salida de la valvula check
+ J-C1            	0.265	0.00000000		;Codo 90 superior (baja)
+ J-C2            	0.080	0.00000000		;Codo 90 inferior (a bomba)
+ J-PIN           	0.080	0.00000000		;Succion de la bomba
+ J-POUT          	0.080	0.00000000		;Descarga de la bomba
+ J-FLOW          	0.080	0.00000000		;Entrada YF-S201
+ J-FLOW2         	0.080	0.00000000		;Salida YF-S201
+ J-EV1           	0.080	0.00000000		;Entrada electrovalvula
+ J-EV2           	0.080	0.00000000		;Salida electrovalvula
+ J-R1            	0.080	0.00000000		;Codo inferior de la subida
+ J-R2            	0.530	0.00000000		;Codo superior de la subida
+ J-T             	0.530	0.00000000		;T centrada de distribucion
+ J-CL            	0.530	0.00000000		;Codo lateral 1
+ J-CR            	0.530	0.00000000		;Codo lateral 2
+ T-E1            	0.530	0.00000000		;Tee aspersor 1 (L1, A)
+ T-E2            	0.530	0.00000000		;Tee aspersor 2 (L1, B)
+ T-E3            	0.530	0.00000000		;Tee aspersor 3 (L2, A)
+ T-E4            	0.530	0.00000000		;Tee aspersor 4 (L2, B)
+ E1              	0.560	0.00000000		;Microaspersor 1 SD-B (L1, A)
+ E2              	0.560	0.00000000		;Microaspersor 2 SD-B (L1, B)
+ E3              	0.560	0.00000000		;Microaspersor 3 SD-B (L2, A)
+ E4              	0.560	0.00000000		;Microaspersor 4 SD-B (L2, B)
+ TAP1            	0.530	0.00000000		;Tapon final lateral 1
+ TAP2            	0.530	0.00000000		;Tapon final lateral 2
+
+[RESERVOIRS]
+;ID              	Head (m)	Pattern
+ R1              	1.190		;TINACO ORIGINAL PROVISIONAL - nivel de agua (z sobre tierra del huerto)
+
+[TANKS]
+
+[PIPES]
+;ID              	Node1           	Node2           	Length (m)	Diam (mm)	Roughness	MinorLoss	Status
+ P-TK            	R1              	J-TK            	0.0400	14.40	0.007	0.5000	Open	;Salida/niple del tinaco
+ CHK             	J-TK            	J-CHK           	0.0550	14.40	0.007	2.7000	CV	;VALVULA CHECK 1/2" (solo tinaco->bomba)
+ T-A             	J-CHK           	J-C1            	0.1390	14.40	0.007	2.4000	Open	;Tubo corto + codo 90
+ T-B             	J-C1            	J-C2            	0.1850	14.40	0.007	2.0000	Open	;Bajada vertical + codo 90
+ T-C             	J-C2            	J-PIN           	0.3170	14.40	0.007	0.9500	Open	;Tubo a bomba + union mixta + adaptador
+ T-D             	J-POUT          	J-FLOW          	0.1620	14.40	0.007	1.6500	Open	;Adaptador + union mixta + tubo + conector
+ YF              	J-FLOW          	J-FLOW2         	0.0620	11.00	0.007	2.0000	Open	;CAUDALIMETRO YF-S201 (D int 11 mm)
+ T-E             	J-FLOW2         	J-EV1           	0.1340	14.40	0.007	0.8000	Open	;Conectores + tubo
+ EV              	J-EV1           	J-EV2           	0.0850	14.40	0.007	7.6525	Open	;ELECTROVALVULA NC 12 V (OPEN en riego)
+ T-F             	J-EV2           	J-R1            	2.7960	14.40	0.007	2.4000	Open	;LINEA PRINCIPAL + codo 90
+ T-G             	J-R1            	J-R2            	0.4500	14.40	0.007	2.0000	Open	;SUBIDA al cajon + codo 90
+ T-H             	J-R2            	J-T             	0.0830	14.40	0.007	2.2000	Open	;Tramo a T + T division
+ BR-L            	J-T             	J-CL            	0.2500	14.40	0.007	2.0000	Open	;Brazo izquierdo + codo
+ BR-R            	J-T             	J-CR            	0.2500	14.40	0.007	2.0000	Open	;Brazo derecho + codo
+ L1-A            	J-CL            	T-E1            	0.2170	14.40	0.007	0.8000	Open	;LATERAL 1 tramo a aspersor 1
+ L1-B            	T-E1            	T-E2            	0.5000	14.40	0.007	0.8000	Open	;LATERAL 1 tramo a aspersor 2
+ L1-T            	T-E2            	TAP1            	0.0230	14.40	0.007	0.0000	Open	;Niple + tapon L1 (sin flujo)
+ L2-A            	J-CR            	T-E3            	0.2170	14.40	0.007	0.8000	Open	;LATERAL 2 tramo a aspersor 3
+ L2-B            	T-E3            	T-E4            	0.5000	14.40	0.007	0.8000	Open	;LATERAL 2 tramo a aspersor 4
+ L2-T            	T-E4            	TAP2            	0.0230	14.40	0.007	0.0000	Open	;Niple + tapon L2 (sin flujo)
+ RE1             	T-E1            	E1              	0.0300	4.00	0.007	1.0000	Open	;Adaptador 1/2"->espiga 6 mm
+ RE2             	T-E2            	E2              	0.0300	4.00	0.007	1.0000	Open	;Adaptador 1/2"->espiga 6 mm
+ RE3             	T-E3            	E3              	0.0300	4.00	0.007	1.0000	Open	;Adaptador 1/2"->espiga 6 mm
+ RE4             	T-E4            	E4              	0.0300	4.00	0.007	1.0000	Open	;Adaptador 1/2"->espiga 6 mm
+
+[PUMPS]
+;ID              	Node1           	Node2           	Parameters
+ PU1             	J-PIN           	J-POUT          	HEAD PUMP_CURVE_PROVISIONAL	;BOMBA GOOD PUMPS 12 V (curva NO certificada)
+
+[VALVES]
+; Sin valvulas de control: la check es una Pipe con Status CV (CHK) y la electrovalvula una Pipe ON/OFF (EV)
+
+[TAGS]
+ LINK 	CHK	VALVULA_CHECK
+ LINK 	PU1	BOMBA_12V
+ LINK 	YF	YF-S201
+ LINK 	EV	ELECTROVALVULA_NC
+ NODE 	E1	HUNTER_SD-B_PROVISIONAL
+ NODE 	E2	HUNTER_SD-B_PROVISIONAL
+ NODE 	E3	HUNTER_SD-B_PROVISIONAL
+ NODE 	E4	HUNTER_SD-B_PROVISIONAL
+
+[DEMANDS]
+
+[STATUS]
+ EV              	OPEN	;Electrovalvula ABIERTA - escenario RIEGO
+ PU1             	OPEN	;Bomba ENCENDIDA - escenario RIEGO
+
+[PATTERNS]
+
+[CURVES]
+;ID              	X-Value (L/s)	Y-Value (m)
+;PUMP: PUMP_CURVE_PROVISIONAL - NO ES LA CURVA CERTIFICADA DEL FABRICANTE (ver DECISIONS.md)
+ PUMP_CURVE_PROVISIONAL	0.0000	91.910
+ PUMP_CURVE_PROVISIONAL	0.0500	45.960
+ PUMP_CURVE_PROVISIONAL	0.1000	0.000
+
+[CONTROLS]
+
+[RULES]
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0
+ Demand Charge      	0
+
+[EMITTERS]
+;Junction        	Coefficient (L/s / m^n)
+ E1              	0.00283179	;SD-B PROVISIONAL maximo ajuste: 50 L/h a 1.5 bar (Hunter), n=0.5827
+ E2              	0.00283179	;SD-B PROVISIONAL maximo ajuste: 50 L/h a 1.5 bar (Hunter), n=0.5827
+ E3              	0.00283179	;SD-B PROVISIONAL maximo ajuste: 50 L/h a 1.5 bar (Hunter), n=0.5827
+ E4              	0.00283179	;SD-B PROVISIONAL maximo ajuste: 50 L/h a 1.5 bar (Hunter), n=0.5827
+
+[QUALITY]
+
+[SOURCES]
+
+[REACTIONS]
+ Order Bulk 1
+ Order Tank 1
+ Order Wall 1
+ Global Bulk 0
+ Global Wall 0
+
+[MIXING]
+
+[TIMES]
+ Duration           	0:00
+ Hydraulic Timestep 	1:00
+ Report Timestep    	1:00
+ Statistic          	NONE
+
+[REPORT]
+ Status             	Yes
+ Summary            	No
+ Nodes              	All
+ Links              	All
+
+[OPTIONS]
+ Units              	LPS
+ Headloss           	D-W
+ Specific Gravity   	1.0
+ Viscosity          	1.0
+ Trials             	100
+ Accuracy           	0.00001
+ Unbalanced         	Stop
+ Pattern            	1
+ Demand Multiplier  	1.0
+ Emitter Exponent   	0.5827
+ Quality            	None mg/L
+ Demand Model       	DDA
+
+[COORDINATES]
+;Node            	X-Coord         	Y-Coord
+ R1              	0.00	0.00
+ J-TK            	1600.00	0.00
+ J-CHK           	3800.00	0.00
+ J-C1            	5200.00	0.00
+ J-C2            	5200.00	-2000.00
+ J-PIN           	6800.00	-2000.00
+ J-POUT          	9400.00	-2000.00
+ J-FLOW          	11000.00	-2000.00
+ J-FLOW2         	13000.00	-2000.00
+ J-EV1           	14400.00	-2000.00
+ J-EV2           	16400.00	-2000.00
+ J-R1            	21600.00	-2000.00
+ J-R2            	21600.00	0.00
+ J-T             	24200.00	0.00
+ J-CL            	24200.00	3000.00
+ J-CR            	24200.00	-3000.00
+ T-E1            	26200.00	3000.00
+ T-E2            	31200.00	3000.00
+ TAP1            	33200.00	3000.00
+ T-E3            	26200.00	-3000.00
+ T-E4            	31200.00	-3000.00
+ TAP2            	33200.00	-3000.00
+ E1              	26200.00	4200.00
+ E2              	31200.00	4200.00
+ E3              	26200.00	-1800.00
+ E4              	31200.00	-1800.00
+
+[VERTICES]
+
+[LABELS]
+ -1300.00	1500.00	"TINACO (R1)"
+ 2200.00	1500.00	"CHECK 1/2in (CHK)"
+ 5600.00	-700.00	"BAJADA"
+ 6600.00	-2600.00	"BOMBA 12 V (PU1)"
+ 10600.00	-1100.00	"YF-S201 (YF)"
+ 13600.00	-2600.00	"ELECTROVALVULA NC (EV)"
+ 16600.00	-1100.00	"LINEA PRINCIPAL"
+ 21900.00	-800.00	"SUBIDA"
+ 19600.00	1400.00	"CAJON - T (J-T)"
+ 26900.00	3750.00	"LATERAL 1 (L1)"
+ 26900.00	-2250.00	"LATERAL 2 (L2)"
+ 25500.00	5200.00	"SD-B E1"
+ 30500.00	5200.00	"SD-B E2"
+ 25500.00	-3500.00	"SD-B E3"
+ 30500.00	-3500.00	"SD-B E4"
+ 24400.00	6600.00	"4 MICROASPERSORES SD-B (PROVISIONAL)"
+
+[BACKDROP]
+ DIMENSIONS	-2500.00	-4800.00	36000.00	7400.00
+ UNITS	None
+ OFFSET	0.00	0.00
+
+[END]

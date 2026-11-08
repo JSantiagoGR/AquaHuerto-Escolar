@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "epanet": {
+      "type": "stdio",
+      "command": "C:\\Users\\jaime\\AppData\\Roaming\\Python\\Python314\\Scripts\\uvx.exe",
+      "args": [
+        "--python",
+        "3.12",
+        "--with",
+        "mcp<2",
+        "mcp-server-epanet"
+      ],
+      "env": {}
+    }
+  }
+}

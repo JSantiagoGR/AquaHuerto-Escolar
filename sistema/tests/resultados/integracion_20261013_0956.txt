@@ -1,0 +1,31 @@
+PRUEBAS DE INTEGRACION (simulador sim_01 + broker + Node-RED + SQLite) 2026-10-13 09:56
+[PASS] Broker rechaza clientes anónimos 
+[PASS] ACL: el simulador NO puede enviar comandos al ESP32 real 
+[PASS] SET_MODE AUTOMATICO -> ACK OK con modo aplicado 
+[PASS] Comando con id repetido -> DUPLICATE 
+[PASS] Comando de riego RETENIDO al reconectar -> se ignora (RETAINED) 
+[PASS] Comando antiguo (ts -10 min) -> STALE 
+[PASS] Configuración inválida (mín > óptima) -> REJECTED y versión sin cambio 
+[PASS] Configuración válida -> OK con version_applied 
+[PASS] Riego manual 0.5 L termina por volumen (TARGET) 
+[PASS] Node-RED guarda el riego en SQLite 
+[PASS] STOP durante el riego -> STOP_CMD 
+[PASS] Falla del EC-5 simulada -> alarma SOIL_SENSOR 
+[PASS] La alerta queda registrada en SQLite 
+[FAIL] Emergencia (15 %VWC a las 13:00) -> riego EMERGENCY limitado {'type': 'WATERING_START', 'event_id': 'sim_01-52', 'reason': 'EMERGENCY', 'mode': 'AUTOMATICO', 'crop': 'tomate', 'stage': 'Floración y fructif.', 'target_l': 1.9, 'vwc_before': 15.3, 'goal_vwc': 32.1, 'ia_pred_dvwc': 5.6, 'cycle': 1, 'ts': 1791918126, 'uptime_s': 975, 'device': 'sim_01', 'simulated': True}
+[PASS] Mañana 06:30 con 30 %VWC (bajo óptima-histéresis) -> riego SCHEDULED 
+[PASS] Pronóstico de lluvia -> pospone el riego rutinario (RAIN_EXPECTED) 
+[PASS] Lluvia simulada -> evento POSIBLE_LLUVIA (sin litros de bomba) 
+[PASS] El evento de lluvia queda en SQLite 
+[PASS] Riego externo simulado -> POSIBLE_RIEGO_EXTERNO 
+[PASS] IA del simulador publica estado y plan 
+[PASS] SET_MODE IA -> ACK OK 
+[PASS] Pérdida de MQTT -> mensaje de última voluntad (offline) 
+[PASS] Reconexión automática -> online 
+[PASS] Desconexión y reconexión registradas en SQLite 
+[PASS] Lecturas del simulador guardadas y marcadas como simuladas 
+[PASS] Open-Meteo real consultado por HTTPS (HTTP 200) 
+[PASS] Exportación CSV desde esta PC 
+[PASS] Dashboard desde la red local exige usuario (401) y acepta credenciales (200) 
+[PASS] Editor/Admin API de Node-RED protegido (401 sin token) 
+RESULTADO: 28 PASS, 1 FAIL

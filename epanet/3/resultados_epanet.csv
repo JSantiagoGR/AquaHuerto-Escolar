@@ -1,0 +1,88 @@
+tipo,id,descripcion,elev_m,head_m,presion_m_PRELIMINAR,presion_bar_PRELIMINAR,demanda_Ls,demanda_Lh,caudal_Ls,caudal_Lmin,velocidad_ms,headloss_m,estado
+nodo,J-TK,Salida del tinaco (EXISTENTE),0.265,1.1835,0.9185,0.0899,0.000000,0.00,,,,,
+nodo,J-BOL,Salida valvula de bola (EXISTENTE),0.265,1.1811,0.9161,0.0897,0.000000,0.00,,,,,
+nodo,J-CHK,Salida check (EXISTENTE),0.265,1.1504,0.8854,0.0867,0.000000,0.00,,,,,
+nodo,J-TEX,T existente (EXISTENTE),0.265,1.1216,0.8566,0.0839,0.000000,0.00,,,,,
+nodo,J-B,Pie de la bajada existente / codo nuevo C1,0.080,1.1167,1.0367,0.1015,0.000000,0.00,,,,,
+nodo,J-PIN1,Union mixta succion,0.080,1.0881,1.0081,0.0987,0.000000,0.00,,,,,
+nodo,J-PIN,Puerto de succion de la bomba,0.080,0.9618,0.8818,0.0863,0.000000,0.00,,,,,
+nodo,J-POUT,Puerto de descarga de la bomba,0.080,23.9424,23.8624,2.3367,0.000000,0.00,,,,,
+nodo,J-POUT2,Union mixta descarga,0.080,23.7194,23.6394,2.3148,0.000000,0.00,,,,,
+nodo,J-FLOW,Entrada YF-S201,0.080,23.7073,23.6273,2.3137,0.000000,0.00,,,,,
+nodo,J-FLOW2,Salida YF-S201,0.080,23.6379,23.5579,2.3069,0.000000,0.00,,,,,
+nodo,J-EV1,Entrada electrovalvula,0.080,23.6257,23.5457,2.3057,0.000000,0.00,,,,,
+nodo,J-EV2,Salida electrovalvula,0.080,23.5407,23.4607,2.2974,0.000000,0.00,,,,,
+nodo,J-R1,Codo inferior de la subida,0.080,23.4404,23.3604,2.2875,0.000000,0.00,,,,,
+nodo,J-R2,Codo superior de la subida,1.520,23.3802,21.8602,2.1406,0.000000,0.00,,,,,
+nodo,J-X,CRUZ de distribucion (4 conexiones),1.520,23.3780,21.8580,2.1404,0.000000,0.00,,,,,
+nodo,J-H1,Conector Tuboplus -> espiga lateral 1,1.520,23.3714,21.8514,2.1398,0.000000,0.00,,,,,
+nodo,M1,Inicio manguera lateral 1,1.520,23.3661,21.8461,2.1392,0.000000,0.00,,,,,
+nodo,S11,Toma del aspersor 1 en lateral 1,1.520,23.3652,21.8452,2.1392,0.000000,0.00,,,,,
+nodo,A11,"ASPERSOR A11 (lateral 1, posicion 1) PROVISIONAL",1.520,23.3378,21.8178,2.1365,0.008333,30.00,,,,,
+nodo,S12,Toma del aspersor 2 en lateral 1,1.520,23.3641,21.8441,2.1390,0.000000,0.00,,,,,
+nodo,A12,"ASPERSOR A12 (lateral 1, posicion 2) PROVISIONAL",1.520,23.3366,21.8166,2.1364,0.008333,30.00,,,,,
+nodo,S13,Toma del aspersor 3 en lateral 1,1.520,23.3635,21.8435,2.1390,0.000000,0.00,,,,,
+nodo,A13,"ASPERSOR A13 (lateral 1, posicion 3) PROVISIONAL",1.520,23.3361,21.8161,2.1363,0.008333,30.00,,,,,
+nodo,TAP1,Tapon final lateral 1,1.520,23.3635,21.8435,2.1390,0.000000,0.00,,,,,
+nodo,J-H2,Conector Tuboplus -> espiga lateral 2,1.520,23.3751,21.8551,2.1401,0.000000,0.00,,,,,
+nodo,M2,Inicio manguera lateral 2,1.520,23.3698,21.8498,2.1396,0.000000,0.00,,,,,
+nodo,S21,Toma del aspersor 1 en lateral 2,1.520,23.3689,21.8489,2.1395,0.000000,0.00,,,,,
+nodo,A21,"ASPERSOR A21 (lateral 2, posicion 1) PROVISIONAL",1.520,23.3415,21.8215,2.1368,0.008333,30.00,,,,,
+nodo,S22,Toma del aspersor 2 en lateral 2,1.520,23.3678,21.8478,2.1394,0.000000,0.00,,,,,
+nodo,A22,"ASPERSOR A22 (lateral 2, posicion 2) PROVISIONAL",1.520,23.3403,21.8203,2.1367,0.008333,30.00,,,,,
+nodo,S23,Toma del aspersor 3 en lateral 2,1.520,23.3672,21.8472,2.1394,0.000000,0.00,,,,,
+nodo,A23,"ASPERSOR A23 (lateral 2, posicion 3) PROVISIONAL",1.520,23.3398,21.8198,2.1367,0.008333,30.00,,,,,
+nodo,TAP2,Tapon final lateral 2,1.520,23.3672,21.8472,2.1394,0.000000,0.00,,,,,
+nodo,J-H3,Conector Tuboplus -> espiga lateral 3,1.520,23.3714,21.8514,2.1398,0.000000,0.00,,,,,
+nodo,M3,Inicio manguera lateral 3,1.520,23.3661,21.8461,2.1392,0.000000,0.00,,,,,
+nodo,S31,Toma del aspersor 1 en lateral 3,1.520,23.3652,21.8452,2.1392,0.000000,0.00,,,,,
+nodo,A31,"ASPERSOR A31 (lateral 3, posicion 1) PROVISIONAL",1.520,23.3378,21.8178,2.1365,0.008333,30.00,,,,,
+nodo,S32,Toma del aspersor 2 en lateral 3,1.520,23.3641,21.8441,2.1390,0.000000,0.00,,,,,
+nodo,A32,"ASPERSOR A32 (lateral 3, posicion 2) PROVISIONAL",1.520,23.3366,21.8166,2.1364,0.008333,30.00,,,,,
+nodo,S33,Toma del aspersor 3 en lateral 3,1.520,23.3635,21.8435,2.1390,0.000000,0.00,,,,,
+nodo,A33,"ASPERSOR A33 (lateral 3, posicion 3) PROVISIONAL",1.520,23.3361,21.8161,2.1363,0.008333,30.00,,,,,
+nodo,TAP3,Tapon final lateral 3,1.520,23.3635,21.8435,2.1390,0.000000,0.00,,,,,
+nodo,R1,TINACO R1,1.190,1.1900,0.0000,0.0000,-0.075000,-270.00,,,,,
+enlace,P-TK,Salida/niple del tinaco (EXISTENTE),,,,,,,0.075000,4.5000,0.4605,0.00647,ABIERTO
+enlace,BOLA,"VALVULA DE BOLA manual (EXISTENTE, abierta)",,,,,,,0.075000,4.5000,0.4605,0.00247,ABIERTO
+enlace,CHK,VALVULA CHECK (EXISTENTE),,,,,,,0.075000,4.5000,0.4605,0.03064,ABIERTO
+enlace,EX-TB,Conector + Tuboplus + T (EXISTENTES),,,,,,,0.075000,4.5000,0.4605,0.02878,ABIERTO
+enlace,EX-BAJ,BAJADA vertical Tuboplus (EXISTENTE),,,,,,,0.075000,4.5000,0.4605,0.00496,ABIERTO
+enlace,N-A,Codo nuevo C1 + Tuboplus + union mixta,,,,,,,0.075000,4.5000,0.4605,0.02861,ABIERTO
+enlace,AD-IN,"Adaptacion 1/2"" -> puerto 3/8"" (rosca PENDIENTE)",,,,,,,0.075000,4.5000,1.9488,0.12631,ABIERTO
+enlace,AD-OUT,"Puerto 3/8"" -> adaptacion -> 1/2"" (rosca PENDIENTE)",,,,,,,0.075000,4.5000,1.9488,0.22304,ABIERTO
+enlace,N-B,Union mixta + niple Tuboplus + conector,,,,,,,0.075000,4.5000,0.4605,0.01204,ABIERTO
+enlace,YF,CAUDALIMETRO YF-S201,,,,,,,0.075000,4.5000,0.7892,0.06943,ABIERTO
+enlace,N-C,Conectores + niple Tuboplus,,,,,,,0.075000,4.5000,0.4605,0.01223,ABIERTO
+enlace,EV,ELECTROVALVULA NC (OPEN en riego),,,,,,,0.075000,4.5000,0.4605,0.08495,ABIERTO
+enlace,N-D,LINEA PRINCIPAL + codo inferior de subida,,,,,,,0.075000,4.5000,0.4605,0.10032,ABIERTO
+enlace,N-E,SUBIDA VERTICAL a z 1.52 m + codo superior,,,,,,,0.075000,4.5000,0.4605,0.06018,ABIERTO
+enlace,N-H,Tramo superior a la CRUZ,,,,,,,0.075000,4.5000,0.4605,0.00222,ABIERTO
+enlace,XO1,Salida lateral de cruz + brazo Tuboplus + codo 90 + conector (L1),,,,,,,0.025000,1.5000,0.1535,0.00661,ABIERTO
+enlace,ESP1,"Adaptador rosca 1/2"" -> espiga (L1)",,,,,,,0.025000,1.5000,0.3930,0.00530,ABIERTO
+enlace,HL11,Manguera lateral 1 tramo 1,,,,,,,0.025000,1.5000,0.2210,0.00089,ABIERTO
+enlace,RA11,Conexion del aspersor A11,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HL12,Manguera lateral 1 tramo 2,,,,,,,0.016667,1.0000,0.1474,0.00113,ABIERTO
+enlace,RA12,Conexion del aspersor A12,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HL13,Manguera lateral 1 tramo 3,,,,,,,0.008333,0.5000,0.0737,0.00056,ABIERTO
+enlace,RA13,Conexion del aspersor A13,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HT1,Manguera hasta tapon L1 (sin flujo),,,,,,,0.000000,0.0000,0.0000,0.00000,ABIERTO
+enlace,XO2,Salida recta de cruz + niple + conector (L2),,,,,,,0.025000,1.5000,0.1535,0.00290,ABIERTO
+enlace,ESP2,"Adaptador rosca 1/2"" -> espiga (L2)",,,,,,,0.025000,1.5000,0.3930,0.00530,ABIERTO
+enlace,HL21,Manguera lateral 2 tramo 1,,,,,,,0.025000,1.5000,0.2210,0.00089,ABIERTO
+enlace,RA21,Conexion del aspersor A21,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HL22,Manguera lateral 2 tramo 2,,,,,,,0.016667,1.0000,0.1474,0.00113,ABIERTO
+enlace,RA22,Conexion del aspersor A22,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HL23,Manguera lateral 2 tramo 3,,,,,,,0.008333,0.5000,0.0737,0.00056,ABIERTO
+enlace,RA23,Conexion del aspersor A23,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HT2,Manguera hasta tapon L2 (sin flujo),,,,,,,0.000000,0.0000,0.0000,0.00000,ABIERTO
+enlace,XO3,Salida lateral de cruz + brazo Tuboplus + codo 90 + conector (L3),,,,,,,0.025000,1.5000,0.1535,0.00661,ABIERTO
+enlace,ESP3,"Adaptador rosca 1/2"" -> espiga (L3)",,,,,,,0.025000,1.5000,0.3930,0.00530,ABIERTO
+enlace,HL31,Manguera lateral 3 tramo 1,,,,,,,0.025000,1.5000,0.2210,0.00089,ABIERTO
+enlace,RA31,Conexion del aspersor A31,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HL32,Manguera lateral 3 tramo 2,,,,,,,0.016667,1.0000,0.1474,0.00113,ABIERTO
+enlace,RA32,Conexion del aspersor A32,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HL33,Manguera lateral 3 tramo 3,,,,,,,0.008333,0.5000,0.0737,0.00056,ABIERTO
+enlace,RA33,Conexion del aspersor A33,,,,,,,0.008333,0.5000,0.6631,0.02743,ABIERTO
+enlace,HT3,Manguera hasta tapon L3 (sin flujo),,,,,,,0.000000,0.0000,0.0000,0.00000,ABIERTO
+enlace,PU1,BOMBA PU1 (curva PROVISIONAL),,,,,,,0.075000,4.5000,0.0000,-22.98064,ABIERTO

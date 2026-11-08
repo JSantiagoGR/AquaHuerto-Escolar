@@ -1,0 +1,5 @@
+PRUEBAS DE RECUPERACION CON EL ESP32 REAL (2026-10-11 23:13-23:15)
+[PASS] Broker detenido 8 s y reiniciado: ESP32, Node-RED y simulador reconectaron solos (log del broker)
+[PASS] REINICIAR por consola: arranque #3 en perfil A, modo MANUAL, potencia DESHABILITADA
+[PASS] Tras reiniciar: Wi-Fi en 2.2 s (IP IP_DEL_ESP32), MQTT en 2.6 s, Open-Meteo HTTPS en 8 s
+RESULTADO: 3 PASS, 0 FAIL

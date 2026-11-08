@@ -1,0 +1,46 @@
+menu "Riego automatizado — red y MQTT"
+
+    config RIEGO_WIFI_SSID
+        string "SSID de la red Wi-Fi"
+        default ""
+        help
+            Vacío = el ESP32 funciona sin red (todas las protecciones son locales).
+            Se recomienda definirlo en sdkconfig.secrets (no versionado).
+
+    config RIEGO_WIFI_PASSWORD
+        string "Contraseña Wi-Fi"
+        default ""
+
+    config RIEGO_MQTT_URI
+        string "URI del broker MQTT"
+        default ""
+        help
+            Ejemplo: mqtt://192.168.0.100:1883
+
+    config RIEGO_MQTT_USERNAME
+        string "Usuario MQTT (opcional)"
+        default ""
+
+    config RIEGO_MQTT_PASSWORD
+        string "Contraseña MQTT (opcional)"
+        default ""
+
+    config RIEGO_MQTT_BASE_TOPIC
+        string "Topic base"
+        default "huerto/esp32"
+
+    config RIEGO_SIN_RED
+        bool "Compilar SIN Wi-Fi (solo para pruebas en el emulador QEMU)"
+        default n
+        help
+            QEMU no emula la radio Wi-Fi. Esta opción solo se activa en la
+            compilación de pruebas build_qemu (sdkconfig.qemu). Nunca en la placa.
+
+    config RIEGO_CMD_TOKEN
+        string "Token para comandos MQTT de accionamiento (opcional)"
+        default ""
+        help
+            Si no está vacío, START_MANUAL, ENABLE_AUTO y los SET_* deben incluir
+            "token":"<valor>". No sustituye la autenticación del broker.
+
+endmenu

@@ -1,0 +1,9 @@
+Videos sugeridos para grabar y guardar en esta carpeta:
+
+1. Riego real en el huerto: abrir válvula, encender bomba, aspersores funcionando (30-60 s).
+2. Dashboard en el celular o laptop mostrando el riego en vivo y el botón DETENER.
+3. Corte de seguridad: STOP desde el dashboard y la bomba se apaga.
+4. Bot de Telegram: /estado, /ia y /modo.
+5. Recorrido del huerto: tinaco, gabinete, panel solar, cajón.
+
+Guardarlos en MP4 para que se reproduzcan sin Internet.

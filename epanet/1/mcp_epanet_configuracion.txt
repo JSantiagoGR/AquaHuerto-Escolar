@@ -1,0 +1,60 @@
+CONFIGURACION DEL SERVIDOR MCP DE EPANET
+Fecha: 2026-09-28 23:15 (hora local)
+
+SERVIDOR
+  Nombre MCP ........ epanet
+  Repositorio ....... https://github.com/KWR-Water/epanet-mcp-server
+  Paquete PyPI ...... mcp-server-epanet (servidor "EPANET Simulation Server" v1.30.0; usa EPyT / OWA-EPANET)
+  Transporte ........ stdio
+  Alcance ........... project  -> archivo .mcp.json en esta carpeta
+
+COMANDO REGISTRADO (sintaxis verificada con `claude mcp add --help`, Claude Code 2.1.284)
+  claude mcp add --transport stdio --scope project epanet -- ^
+     C:\Users\jaime\AppData\Roaming\Python\Python314\Scripts\uvx.exe --python 3.12 --with "mcp<2" mcp-server-epanet
+
+  command: C:\Users\jaime\AppData\Roaming\Python\Python314\Scripts\uvx.exe
+  args:    --python 3.12 --with mcp<2 mcp-server-epanet
+
+PASOS Y PROBLEMAS RESUELTOS
+  1. `claude` no estaba en el PATH; se uso la CLI incluida en la app de escritorio:
+     %APPDATA%\Claude\claude-code\2.1.284\claude.exe
+  2. uv/uvx no existia -> instalado con `python -m pip install --user uv` (paquete oficial de Astral en PyPI).
+     uvx 0.12.20. Ruta: C:\Users\jaime\AppData\Roaming\Python\Python314\Scripts (NO esta en el PATH;
+     por eso el MCP se registro con la ruta absoluta de uvx.exe).
+  3. Primer registro (`uvx mcp-server-epanet`) -> el servidor FALLABA al arrancar:
+       ModuleNotFoundError: No module named 'mcp.server.fastmcp'. This is mcp 2.x ...
+     Causa: el paquete usa FastMCP (SDK mcp 1.x) y uvx resolvio mcp 2.x.
+     Correccion: `--with "mcp<2"`. Ademas `--python 3.12` porque Python 3.14 (el del sistema) no tiene
+     wheels para las dependencias numericas.
+  4. Prueba real del protocolo MCP (initialize + tools/list + tools/call por stdio): OK.
+     Herramientas expuestas (7): run_epanet_simulation, modify_network, plot_network, plot_pressures,
+     plot_velocities, get_pressures_less_than, get_pipes_over.
+  5. Simulacion ejecutada via MCP (tools/call run_epanet_simulation):
+       riego_huerto_final.inp       -> Nodes: 8 | Pipes: 8 | Min Pressure: 67.39 m | Max Velocity: 0.21 m/s
+       riego_huerto_24_goteros.inp  -> Nodes: 31 | Pipes: 31 | Min Pressure: 67.40 m | Max Velocity: 0.21 m/s
+       get_pressures_less_than(1.0 m) -> None found ; get_pipes_over(0.5 m/s) -> None found
+     (Coinciden con EPANET 2.2 via WNTR y con EPyT; ver validacion_epanet.txt)
+
+RESULTADO DE `claude mcp get epanet`
+  epanet:
+    Scope: Project config (shared via .mcp.json)
+    Status: Pending approval (run `claude` to approve)
+    Type: stdio
+    Command: C:\Users\jaime\AppData\Roaming\Python\Python314\Scripts\uvx.exe
+    Args: --python 3.12 --with mcp<2 mcp-server-epanet
+    Environment:
+
+RESULTADO DE `claude mcp list`
+  tiacommander: C:\TiaCommander\TiaCommander.exe  - Connected
+  epanet: C:\Users\jaime\AppData\Roaming\Python\Python314\Scripts\uvx.exe --python 3.12 --with mcp<2 mcp-server-epanet - Pending approval (run `claude` to approve)
+
+¿REQUIERE REINICIAR CLAUDE CODE?
+  SI. Las herramientas mcp__epanet__* no se cargan en la sesion en curso. En la proxima sesion abierta
+  en esta carpeta, Claude Code pedira APROBAR el servidor de proyecto (.mcp.json); al aprobarlo quedara
+  "Connected". En esta sesion el servidor se uso directamente por el protocolo MCP (stdio).
+
+NOTAS DE USO
+  - El servidor busca los .inp en las subcarpetas "Networks" y "Modified" del directorio de trabajo
+    (las crea al iniciar). Para usarlo: copiar el .inp a .\Networks\ y llamar p. ej.
+    run_epanet_simulation(file_name="riego_huerto_final.inp").
+  - La primera ejecucion descarga dependencias a la cache de uv (~1 min).

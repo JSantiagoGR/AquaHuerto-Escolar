@@ -1,0 +1,5 @@
+escenario,rol,descripcion,subida,brazos,tuboplus_nuevo_estimado_m,margen_m,cumple_estimado,estado,codos90,codos45
+A,DISENO PRINCIPAL / DESEADO,Subida VERTICAL (codos 90) + cruz + brazos Tuboplus con codos 90,vertical,tuboplus,5.148,-1.148,NO,ESTIMADO,5,0
+A2,variante,Subida vertical + desvio de laterales exteriores con la manguera,vertical,manguera,4.534,-0.534,NO,ESTIMADO,3,0
+B,ALTERNATIVA DE CONTINGENCIA,Subida a 45 deg (2 codos 45) + brazos Tuboplus con codos 90,45,tuboplus,4.332,-0.332,NO,ESTIMADO,3,2
+B2,contingencia extrema,Subida a 45 deg + desvio exterior con la manguera,45,manguera,3.718,0.282,SI,ESTIMADO,1,2

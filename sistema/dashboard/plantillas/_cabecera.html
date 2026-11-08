@@ -1,0 +1,35 @@
+<div v-if="S.simulated" class="rg-demo"><v-icon>mdi-flask-outline</v-icon> MODO DEMOSTRACIÓN — DATOS SIMULADOS <span class="rg-demo-sub">(dispositivo {{ S.device }}: ningún dato de esta vista proviene de sensores reales)</span></div>
+<div class="rg-head">
+  <div class="rg-head-left">
+    <label class="rg-devlbl"><v-icon size="16">mdi-chip</v-icon> Dispositivo
+      <select class="rg-devsel" :value="S.device" @change="selectDevice($event.target.value)">
+        <option v-for="o in devOptions" :key="o.value" :value="o.value">{{ o.title }}</option>
+      </select></label>
+    <v-chip size="small" :color="S.online ? 'success' : 'error'" variant="flat"><v-icon start>{{ S.online ? 'mdi-chip' : 'mdi-lan-disconnect' }}</v-icon>{{ (S.simulated ? 'Simulador' : 'ESP32') + (S.online ? ' en línea' : ' sin conexión') }}</v-chip>
+    <v-chip size="small" :color="S.broker && S.broker.connected ? 'success' : 'error'" variant="flat"><v-icon start>mdi-access-point-network</v-icon>MQTT {{ S.broker && S.broker.connected ? 'conectado' : 'desconectado' }}</v-chip>
+    <v-chip size="small" color="primary" variant="flat"><v-icon start>mdi-steering</v-icon>Modo activo: {{ modeName(modeNow) }}</v-chip>
+    <v-chip v-if="ST.power_outputs === false" size="small" color="grey-darken-1" variant="flat"><v-icon start>mdi-power-plug-off</v-icon>Salidas de potencia deshabilitadas</v-chip>
+  </div>
+  <div class="rg-head-right">{{ ST.local_time || '' }} <span v-if="S.last_seen">· datos {{ ago(S.last_seen) }}</span></div>
+</div>
+<v-alert v-if="ST.state === 'FAULT'" class="rg-res" density="compact" type="error" variant="tonal">
+  <b>SISTEMA EN FALLA</b> — los riegos están bloqueados por seguridad.
+  <span v-if="(ST.alarms || []).includes('NO_FLOW')"> Causa: la bomba encendió pero <b>no pasó agua</b> (sin pulsos del caudalímetro). Revisa el nivel del tinaco, la llave de paso, que la bomba suene (12 V) y el aire en la manguera.</span>
+  <span v-else> Alarmas: {{ (ST.alarms || []).join(', ') }}.</span>
+  <div class="mt-1"><v-btn size="small" color="error" variant="flat" prepend-icon="mdi-alert-remove" :disabled="busy"
+    @click="ask('¿Limpiar la falla?', 'Hazlo solo después de revisar la causa. Si el problema sigue, el siguiente riego volverá a detenerse por seguridad.', () => cmd('CLEAR_ALARM', { alarm: 'ALL' }, 'Limpiar falla'), 'LIMPIAR FALLA', true)">LIMPIAR FALLA</v-btn></div>
+</v-alert>
+<v-alert v-if="extraDiario" class="rg-res" density="compact" type="error" variant="tonal" closable @click:close="extraDiario = null">
+  <b>MÁXIMO DIARIO ALCANZADO</b> — hoy ya se regaron {{ n((T.flow || {}).today_l, 1) }} de {{ n(C.max_liters_daily, C.max_liters_daily % 1 ? 1 : 0) }} L, así que el riego no se hizo.
+  <div class="mt-1"><v-btn size="small" color="error" variant="flat" prepend-icon="mdi-water-plus" :disabled="busy" @click="permitirExtra">PERMITIR RIEGO EXTRA</v-btn></div>
+</v-alert>
+<v-alert v-if="modeNow === 'MANUAL' && S.prev_mode && S.prev_mode !== 'MANUAL' && ST.state === 'IDLE'" class="rg-res" density="compact" type="warning" variant="tonal">
+  <b>EL SISTEMA QUEDÓ EN MANUAL</b> — se cambió para el riego manual; antes estaba en <b>{{ modeName(S.prev_mode) }}</b>. Mientras siga en MANUAL no regará solo.
+  <div class="mt-1"><v-btn size="small" color="primary" variant="flat" prepend-icon="mdi-restore" :disabled="busy" class="mr-2"
+    @click="cmd('SET_MODE', { mode: S.prev_mode }, 'Regreso a ' + modeName(S.prev_mode))">REGRESAR A {{ modeName(S.prev_mode) }}</v-btn>
+  <v-btn size="small" variant="tonal" prepend-icon="mdi-hand-back-right" @click="req('prev_mode_clear', {})">QUEDARSE EN MANUAL</v-btn></div>
+</v-alert>
+<v-alert v-if="res" class="rg-res" density="compact" :type="resColor(res.status)" variant="tonal" closable @click:close="res = null">
+  <b>{{ res.label || res.cmd }}</b>: {{ res.status === 'OK' ? (res.cmd ? 'CONFIRMADO por el dispositivo' : 'GUARDADO en el servidor') : res.status }} — {{ res.message }}
+  <v-progress-linear v-if="res.status === 'SENDING' || res.status === 'PENDING'" indeterminate color="info" class="mt-1"></v-progress-linear>
+</v-alert>

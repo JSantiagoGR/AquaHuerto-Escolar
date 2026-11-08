@@ -1,0 +1,82 @@
+{
+"reporte/figuras/fig_bloques.png": [
+1745,
+902
+],
+"reporte/figuras/fig_bomba.png": [
+1237,
+748
+],
+"reporte/figuras/fig_control.png": [
+846,
+1148
+],
+"reporte/figuras/fig_elevacion.png": [
+1718,
+779
+],
+"reporte/figuras/fig_perdidas.png": [
+1638,
+769
+],
+"reporte/figuras/fig_perfil.png": [
+1523,
+745
+],
+"reporte/figuras/fig_planta.png": [
+1004,
+914
+],
+"reporte/figuras/fig_sensibilidad.png": [
+1974,
+736
+],
+"capturas_epanet/00_Modelo_Limpio.png": [
+1544,
+824
+],
+"capturas_epanet/01_Pressure_Flow.png": [
+1544,
+824
+],
+"capturas_epanet/02_Pressure_Velocity.png": [
+1544,
+824
+],
+"capturas_epanet/03_Demand_UnitHeadloss.png": [
+1544,
+824
+],
+"fotos_reales/F01_vista_general_tinaco_cajon.jpg": [
+1932,
+2576
+],
+"fotos_reales/F02_cajon_subida_y_cruz.jpg": [
+1449,
+2576
+],
+"fotos_reales/F03_lineas_y_aspersores.jpg": [
+1932,
+2576
+],
+"fotos_reales/F04_bomba_placa.jpg": [
+960,
+1280
+],
+"fotos_reales/F05_caja_bomba_frente.jpg": [
+1152,
+1536
+],
+"fotos_reales/F06_caja_bomba_etiqueta_SKU.jpg": [
+1152,
+1536
+],
+"fotos_reales/F07_caja_bomba_lateral.jpg": [
+1152,
+1536
+],
+"fotos_reales/F08_manguera_negra.jpg": [
+1200,
+1600
+]
+}

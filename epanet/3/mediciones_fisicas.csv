@@ -1,0 +1,18 @@
+clave_CONFIG,medicion,valor_actual,estado,como_medir
+M0_z_linea_principal,Altura del eje de la linea principal / pie de la bajada existente sobre la tierra,0.08,ESTIMADO,Flexometro desde la tierra del huerto al eje del tubo
+M1_d_bajada_a_bomba,Horizontal: eje de la bajada existente (centro del codo nuevo) -> cara de la tuerca union de succion,0.07,ESTIMADO,Presentar codo y conjunto bomba; medir del eje de la bajada a la cara de la union
+M2_L_conjunto_bomba,Largo ocupado por bomba + 2 adaptadores + 2 uniones (cara union succion -> cara union descarga),0.295,ESTIMADO,Armar el conjunto en banco y medir
+M3_L_conjunto_yf,Largo ocupado por YF-S201 + 2 conectores (cara a cara),0.136,ESTIMADO,Armar y medir
+M4_L_conjunto_ev,Largo ocupado por electrovalvula + 2 conectores (cara a cara),0.159,ESTIMADO,Armar y medir
+M4b_niples_entre_conjuntos,Corte de cada niple Tuboplus bomba->YF y YF->EV (2 niples),0.06,ESTIMADO,Hueco visible deseado + 2 x 16 mm de insercion
+M5_d_conjunto_a_subida,Horizontal: cara de salida del conjunto electrovalvula -> eje de la subida (centro del codo inferior),2.74,ESTIMADO,"Flexometro sobre el piso, en linea recta hacia el cajon"
+M6_z_superior_cajon,Altura del piso a la parte superior del cajon (base 0.12 + cajon 0.40),0.52,ESTIMADO,Flexometro
+M7_h_cruz_sobre_cajon,Altura adicional del borde superior del cajon al eje de la cruz,1.0,ESTIMADO,Definir y medir
+M8_d_superior_a_cruz,Horizontal arriba: eje de la subida -> eje de la cruz,0.083,ESTIMADO,Flexometro
+M9_manguera_DI_mm,Diametro INTERIOR de la manguera negra,12.0,ESTIMADO (NO MEDIDO),Vernier (puntas interiores)
+M9b_manguera_DE_mm,Diametro EXTERIOR de la manguera negra,16.0,ESTIMADO (NO MEDIDO),Vernier
+M10_rosca_bomba,"Diametro, paso y tipo de rosca de los puertos de la bomba","3/8"" (NPT o BSP sin confirmar); OD 16-17 mm medido",PENDIENTE,"Galga de roscas / hilos por pulgada (NPT 18, BSP 19)"
+M11_y_lineas,Posicion de las 3 lineas a lo ancho del cajon (m),"(0.17, 0.5, 0.83)",ESTIMADO,Medir sobre el cajon
+M11b_x_aspersores,Posicion de los 3 aspersores a lo largo de cada linea (m),"(0.17, 0.5, 0.83)",ESTIMADO,Medir
+M12_L_lineas,Longitud real de cada linea de manguera (None = calculada),,ESTIMADO (calculada),Medir cada manguera cortada
+X_borde_cajon,Distancia horizontal salida del tinaco -> borde del cajon (referencia),4.0,ESTIMADO,Flexometro

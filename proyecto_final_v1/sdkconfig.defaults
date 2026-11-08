@@ -1,0 +1,26 @@
+# Objetivo real: ESP32-D0WD-V3 rev v3.1 (ESP32-WROOM-32U), flash 4 MB
+CONFIG_IDF_TARGET="esp32"
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+
+# Consola por UART0 (USB CP210x)
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+CONFIG_ESP_CONSOLE_UART_BAUDRATE=115200
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+CONFIG_BOOTLOADER_LOG_LEVEL_WARN=y
+
+# Watchdog de tareas: si la tarea de control se bloquea, el ESP32 se reinicia
+# y al reiniciar las salidas vuelven a estado seguro.
+CONFIG_ESP_TASK_WDT_EN=y
+CONFIG_ESP_TASK_WDT_INIT=y
+CONFIG_ESP_TASK_WDT_TIMEOUT_S=5
+CONFIG_ESP_TASK_WDT_PANIC=y
+
+# Detección de caída de alimentación (brownout)
+CONFIG_ESP_BROWNOUT_DET=y
+
+# FreeRTOS a 1000 Hz para temporización fina del bucle de control
+CONFIG_FREERTOS_HZ=1000
+
+# MQTT 3.1.1
+CONFIG_MQTT_PROTOCOL_311=y

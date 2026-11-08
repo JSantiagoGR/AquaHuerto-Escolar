@@ -1,0 +1,18 @@
+corte,descripcion,cantidad,longitud_corte_m,subtotal_m,tubo_4m_asignado,enlace_EPANET,longitud_EPANET_cc_m,nota
+A_salida_check_codo,Conector macho (rosca a check) -> codo 90 sup.,1,0.090,0.090,Tubo 1,T-A,0.1390,corte incluye 2 x insercion (p=15-16 mm) en sockets
+B_bajada_vertical,Bajada vertical codo-codo,1,0.161,0.161,Tubo 1,T-B,0.1850,corte incluye 2 x insercion (p=15-16 mm) en sockets
+C_codo_a_bomba,Codo inferior -> union mixta de succion,1,0.240,0.240,Tubo 1,T-C,0.3170,corte incluye 2 x insercion (p=15-16 mm) en sockets
+D_bomba_a_yfs201,Union mixta descarga -> conector hembra YF-S201,1,0.060,0.060,Tubo 1,T-D,0.1620,corte incluye 2 x insercion (p=15-16 mm) en sockets
+E_yfs201_a_valvula,Conector YF-S201 -> conector electrovalvula,1,0.060,0.060,Tubo 1,T-E,0.1340,corte incluye 2 x insercion (p=15-16 mm) en sockets
+F_linea_principal,Conector electrovalvula -> codo de subida,1,2.747,2.747,Tubo 1,T-F,2.7960,corte incluye 2 x insercion (p=15-16 mm) en sockets
+G_subida_vertical,Subida vertical codo-codo,1,0.426,0.426,Tubo 1,T-G,0.4500,corte incluye 2 x insercion (p=15-16 mm) en sockets
+H_codo_a_T,Codo superior -> T centrada (derivacion),1,0.060,0.060,Tubo 1,T-H,0.0830,corte incluye 2 x insercion (p=15-16 mm) en sockets
+I_brazo,Brazo T -> codo (izq. y der.),2,0.227,0.454,Tubo 2,BR-L/BR-R,0.2500,corte incluye 2 x insercion (p=15-16 mm) en sockets
+J_codo_a_aspersor_A,Codo -> tee aspersor A (L1 y L2),2,0.194,0.388,Tubo 2,L1-A/L2-A,0.2170,corte incluye 2 x insercion (p=15-16 mm) en sockets
+K_aspersor_A_a_B,Tee aspersor A -> tee aspersor B (L1 y L2),2,0.478,0.956,Tubo 2,L1-B/L2-B,0.5000,corte incluye 2 x insercion (p=15-16 mm) en sockets
+L_niple_tapon,Niple tee aspersor B -> tapon (L1 y L2),2,0.040,0.080,Tubo 2,L1-T/L2-T,0.0230,corte incluye 2 x insercion (p=15-16 mm) en sockets
+
+TOTAL,Tuboplus 20 mm C16 utilizado,,,5.722,,,,
+Tubo 1,4.00 m,,,3.844,sobrante 0.156 m,,,
+Tubo 2,4.00 m,,,1.878,sobrante 2.122 m,,,
+LIMITE,maximo 8.00 m / objetivo 7.50 m,,,margen 2.278 m,OK,,,

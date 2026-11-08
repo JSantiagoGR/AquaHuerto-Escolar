@@ -1,0 +1,132 @@
+{
+    "tdaily": {
+        "2026-10-04": {
+            "tmax": 19.2,
+            "tmin": 17.5,
+            "src": "open-meteo"
+        },
+        "2026-10-05": {
+            "tmax": 21.6,
+            "tmin": 16.4,
+            "src": "open-meteo"
+        },
+        "2026-10-06": {
+            "tmax": 26.6,
+            "tmin": 17.8,
+            "src": "open-meteo"
+        },
+        "2026-10-07": {
+            "tmax": 28.1,
+            "tmin": 17.4,
+            "src": "open-meteo"
+        },
+        "2026-10-08": {
+            "tmax": 28.5,
+            "tmin": 16.8,
+            "src": "open-meteo"
+        },
+        "2026-10-09": {
+            "tmax": 28.1,
+            "tmin": 15.4,
+            "src": "open-meteo"
+        },
+        "2026-10-10": {
+            "tmax": 29.6,
+            "tmin": 15.4,
+            "src": "open-meteo"
+        },
+        "2026-10-11": {
+            "tmax": 31.4,
+            "tmin": 18.8,
+            "src": "open-meteo"
+        },
+        "2026-10-12": {
+            "tmax": 33.2,
+            "tmin": 19.2,
+            "src": "open-meteo"
+        },
+        "2026-10-13": {
+            "tmax": 34.1,
+            "tmin": 19.9,
+            "src": "open-meteo"
+        },
+        "2026-10-14": {
+            "tmax": 31.6,
+            "tmin": 22,
+            "src": "open-meteo"
+        },
+        "2026-10-15": {
+            "tmax": 29.6,
+            "tmin": 16.8,
+            "src": "open-meteo"
+        },
+        "2026-10-16": {
+            "tmax": 17,
+            "tmin": 8.4,
+            "src": "open-meteo"
+        },
+        "2026-10-17": {
+            "tmax": 14.7,
+            "tmin": 7,
+            "src": "open-meteo"
+        },
+        "2026-10-18": {
+            "tmax": 20.7,
+            "tmin": 9.7,
+            "src": "open-meteo"
+        },
+        "2026-10-19": {
+            "tmax": 25.5,
+            "tmin": 12.1,
+            "src": "open-meteo"
+        },
+        "2026-10-20": {
+            "tmax": 26.9,
+            "tmin": 14.8,
+            "src": "open-meteo"
+        },
+        "2026-10-21": {
+            "tmax": 28,
+            "tmin": 15.8,
+            "src": "open-meteo"
+        },
+        "2026-10-22": {
+            "tmax": 27.5,
+            "tmin": 16.4,
+            "src": "open-meteo"
+        },
+        "2026-10-23": {
+            "tmax": 27.2,
+            "tmin": 17,
+            "src": "open-meteo"
+        },
+        "2026-10-24": {
+            "tmax": 27.7,
+            "tmin": 15.4,
+            "src": "open-meteo"
+        },
+        "2026-10-25": {
+            "tmax": 26.4,
+            "tmin": 14.3,
+            "src": "open-meteo"
+        }
+    },
+    "selected_device": "sim_01",
+    "profile_version": 514,
+    "bed": {
+        "area_m2": 1,
+        "depth_cm": 37.5,
+        "drainage": "libre",
+        "mix": "50% tierra negra, 30% peat moss, 20% lombricomposta",
+        "ts": 1791788110
+    },
+    "soil_cal": {
+        "fc_vwc": 40,
+        "wp_vwc": 16,
+        "method": "ESTIMADO (no medido): promedio ponderado de 50% tierra negra, 30% peat moss, 20% lombricomposta; cama 37.5 cm con drenaje libre. Medir FC en sitio (48 h tapado).",
+        "notes": "",
+        "ts": 1791788117,
+        "data_version": 1
+    },
+    "prev_mode": {}
+}

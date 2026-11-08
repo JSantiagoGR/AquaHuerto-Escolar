@@ -1,0 +1,43 @@
+ESCENARIO A,DISENO PRINCIPAL / DESEADO,Subida VERTICAL (codos 90) + cruz + brazos Tuboplus con codos 90
+seccion,tramo,descripcion,estado_medida,distancia_referencia_m,resta_conexiones_m,suma_inserciones_m,cantidad,longitud_neta_tuboplus_m
+TRAMOS ESTIMADOS,A,Eje bajada (codo nuevo 90) -> union mixta succion,ESTIMADO,0.070,0.012,0.016,1,0.074
+TRAMOS ESTIMADOS,B,Niple bomba -> YF-S201,ESTIMADO,0.060,0.000,0.000,1,0.060
+TRAMOS ESTIMADOS,C,Niple YF-S201 -> electrovalvula,ESTIMADO,0.060,0.000,0.000,1,0.060
+TRAMOS ESTIMADOS,D,Linea principal: conector EV -> codo 90 inferior de la subida,ESTIMADO,2.740,0.012,0.016,1,2.744
+TRAMOS ESTIMADOS,E,Subida VERTICAL 0.08 -> 1.52 m (codo 90 - codo 90),ESTIMADO + ESTIMADO,1.440,0.024,0.000,1,1.416
+TRAMOS ESTIMADOS,H,Codo superior -> cruz,ESTIMADO,0.083,0.023,0.000,1,0.060
+TRAMOS ESTIMADOS,I,Brazos cruz -> codo 90 (laterales exteriores),ESTIMADO,0.330,0.023,0.000,2,0.614
+TRAMOS ESTIMADOS,N,Niples cruz/codo -> conector hembra (1 por linea),ESTIMADO,0.040,0.000,0.000,3,0.120
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Conjunto bomba (bomba + adaptadores + uniones),ESTIMADO,0.295,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Conjunto YF-S201 + conectores,ESTIMADO,0.136,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Conjunto electrovalvula + conectores,ESTIMADO,0.159,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,"Codos (5 x 90, 0 x 45), cruz, conectores (tomas oficiales)",OFICIAL,,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Mangueras negras (laterales),ESTIMADO,,,,,0
+TOTAL,,Tuboplus NUEVO escenario A,ESTIMADO,,,,,5.148
+LIMITE,,Limite de compra,,,,,,4.000
+MARGEN,,Limite - total (negativo = excede),ESTIMADO,,,,,-1.148
+VEREDICTO,,EXCEDE (ESTIMADO: confirmar con mediciones),,,,,,
+CONDICION,,Para cumplir con las demas medidas fijas: M1 + M5 <= 1.662 m (actual estimado 2.810 m),,,,,,
+
+ESCENARIO B,ALTERNATIVA DE CONTINGENCIA,Subida a 45 deg (2 codos 45) + brazos Tuboplus con codos 90
+seccion,tramo,descripcion,estado_medida,distancia_referencia_m,resta_conexiones_m,suma_inserciones_m,cantidad,longitud_neta_tuboplus_m
+TRAMOS ESTIMADOS,A,Eje bajada (codo nuevo 90) -> union mixta succion,ESTIMADO,0.070,0.012,0.016,1,0.074
+TRAMOS ESTIMADOS,B,Niple bomba -> YF-S201,ESTIMADO,0.060,0.000,0.000,1,0.060
+TRAMOS ESTIMADOS,C,Niple YF-S201 -> electrovalvula,ESTIMADO,0.060,0.000,0.000,1,0.060
+TRAMOS ESTIMADOS,D,Linea principal: conector EV -> codo 45 inferior,ESTIMADO,1.300,0.005,0.016,1,1.311
+TRAMOS ESTIMADOS,E,Subida a 45 deg 0.08 -> 1.52 m,ESTIMADO + ESTIMADO,2.036,0.010,0.000,1,2.026
+TRAMOS ESTIMADOS,H,Codo superior -> cruz,ESTIMADO,0.083,0.016,0.000,1,0.067
+TRAMOS ESTIMADOS,I,Brazos cruz -> codo 90 (laterales exteriores),ESTIMADO,0.330,0.023,0.000,2,0.614
+TRAMOS ESTIMADOS,N,Niples cruz/codo -> conector hembra (1 por linea),ESTIMADO,0.040,0.000,0.000,3,0.120
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Conjunto bomba (bomba + adaptadores + uniones),ESTIMADO,0.295,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Conjunto YF-S201 + conectores,ESTIMADO,0.136,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Conjunto electrovalvula + conectores,ESTIMADO,0.159,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,"Codos (3 x 90, 2 x 45), cruz, conectores (tomas oficiales)",OFICIAL,,,,,0
+LONGITUD OCUPADA POR COMPONENTES (NO es Tuboplus),,Mangueras negras (laterales),ESTIMADO,,,,,0
+TOTAL,,Tuboplus NUEVO escenario B,ESTIMADO,,,,,4.332
+LIMITE,,Limite de compra,,,,,,4.000
+MARGEN,,Limite - total (negativo = excede),ESTIMADO,,,,,-0.332
+VEREDICTO,,EXCEDE (ESTIMADO: confirmar con mediciones),,,,,,
+CONDICION,,Para cumplir con las demas medidas fijas: M1 + M5 <= 2.478 m (actual estimado 2.810 m),,,,,,
+
+NO_CUENTA,,"Instalacion existente (niple, bola, check, conector, Tuboplus, T, bajada)",,,,,,0

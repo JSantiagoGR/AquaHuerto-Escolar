@@ -1,0 +1,250 @@
+[TITLE]
+Riego huerto v3 - GEOMETRIA A (DISENO PRINCIPAL / DESEADO): Subida VERTICAL (codos 90) + cruz + brazos Tuboplus con codos 90
+Cruz + 3 laterales de manguera x 3 aspersores = 9 (DEMANDA FIJA). Tuboplus DI 14.40 mm (OFICIAL).
+Curva de bomba PROVISIONAL; manguera NO medida; aspersores PROVISIONALES; geometria ESTIMADA hasta medir. PRESENTACION: misma hidraulica que riego_huerto_v3_final.inp
+
+[JUNCTIONS]
+;ID              	Elev (m)	Demand (L/s)	Pattern
+ J-TK            	0.265	0.00000000		;Salida del tinaco (EXISTENTE)
+ J-BOL           	0.265	0.00000000		;Salida valvula de bola (EXISTENTE)
+ J-CHK           	0.265	0.00000000		;Salida check (EXISTENTE)
+ J-TEX           	0.265	0.00000000		;T existente (EXISTENTE)
+ J-B             	0.080	0.00000000		;Pie de la bajada existente / codo nuevo C1
+ J-PIN1          	0.080	0.00000000		;Union mixta succion
+ J-PIN           	0.080	0.00000000		;Puerto de succion de la bomba
+ J-POUT          	0.080	0.00000000		;Puerto de descarga de la bomba
+ J-POUT2         	0.080	0.00000000		;Union mixta descarga
+ J-FLOW          	0.080	0.00000000		;Entrada YF-S201
+ J-FLOW2         	0.080	0.00000000		;Salida YF-S201
+ J-EV1           	0.080	0.00000000		;Entrada electrovalvula
+ J-EV2           	0.080	0.00000000		;Salida electrovalvula
+ J-R1            	0.080	0.00000000		;Codo inferior de la subida
+ J-R2            	1.520	0.00000000		;Codo superior de la subida
+ J-X             	1.520	0.00000000		;CRUZ de distribucion (4 conexiones)
+ J-H1            	1.520	0.00000000		;Conector Tuboplus -> espiga lateral 1
+ M1              	1.520	0.00000000		;Inicio manguera lateral 1
+ S11             	1.520	0.00000000		;Toma del aspersor 1 en lateral 1
+ A11             	1.520	0.00833333		;ASPERSOR A11 (lateral 1, posicion 1) PROVISIONAL
+ S12             	1.520	0.00000000		;Toma del aspersor 2 en lateral 1
+ A12             	1.520	0.00833333		;ASPERSOR A12 (lateral 1, posicion 2) PROVISIONAL
+ S13             	1.520	0.00000000		;Toma del aspersor 3 en lateral 1
+ A13             	1.520	0.00833333		;ASPERSOR A13 (lateral 1, posicion 3) PROVISIONAL
+ TAP1            	1.520	0.00000000		;Tapon final lateral 1
+ J-H2            	1.520	0.00000000		;Conector Tuboplus -> espiga lateral 2
+ M2              	1.520	0.00000000		;Inicio manguera lateral 2
+ S21             	1.520	0.00000000		;Toma del aspersor 1 en lateral 2
+ A21             	1.520	0.00833333		;ASPERSOR A21 (lateral 2, posicion 1) PROVISIONAL
+ S22             	1.520	0.00000000		;Toma del aspersor 2 en lateral 2
+ A22             	1.520	0.00833333		;ASPERSOR A22 (lateral 2, posicion 2) PROVISIONAL
+ S23             	1.520	0.00000000		;Toma del aspersor 3 en lateral 2
+ A23             	1.520	0.00833333		;ASPERSOR A23 (lateral 2, posicion 3) PROVISIONAL
+ TAP2            	1.520	0.00000000		;Tapon final lateral 2
+ J-H3            	1.520	0.00000000		;Conector Tuboplus -> espiga lateral 3
+ M3              	1.520	0.00000000		;Inicio manguera lateral 3
+ S31             	1.520	0.00000000		;Toma del aspersor 1 en lateral 3
+ A31             	1.520	0.00833333		;ASPERSOR A31 (lateral 3, posicion 1) PROVISIONAL
+ S32             	1.520	0.00000000		;Toma del aspersor 2 en lateral 3
+ A32             	1.520	0.00833333		;ASPERSOR A32 (lateral 3, posicion 2) PROVISIONAL
+ S33             	1.520	0.00000000		;Toma del aspersor 3 en lateral 3
+ A33             	1.520	0.00833333		;ASPERSOR A33 (lateral 3, posicion 3) PROVISIONAL
+ TAP3            	1.520	0.00000000		;Tapon final lateral 3
+
+[RESERVOIRS]
+ R1              	1.190		;TINACO PROVISIONAL (nivel de agua)
+
+[TANKS]
+
+[PIPES]
+;ID              	Node1           	Node2           	Length (m)	Diam (mm)	Roughness	MinorLoss	Status
+ P-TK            	R1              	J-TK            	0.0400	14.40	0.007	0.5000	Open	;Salida/niple del tinaco (EXISTENTE)
+ BOLA            	J-TK            	J-BOL           	0.0600	14.40	0.007	0.0800	Open	;VALVULA DE BOLA manual (EXISTENTE, abierta)
+ CHK             	J-BOL           	J-CHK           	0.0550	14.40	0.007	2.7000	CV	;VALVULA CHECK (EXISTENTE)
+ EX-TB           	J-CHK           	J-TEX           	0.1870	14.40	0.007	2.2000	Open	;Conector + Tuboplus + T (EXISTENTES)
+ EX-BAJ          	J-TEX           	J-B             	0.1850	14.40	0.007	0.0000	Open	;BAJADA vertical Tuboplus (EXISTENTE)
+ N-A             	J-B             	J-PIN1          	0.1000	14.40	0.007	2.4000	Open	;Codo nuevo C1 + Tuboplus + union mixta
+ AD-IN           	J-PIN1          	J-PIN           	0.0350	7.00	0.007	0.5000	Open	;Adaptacion 1/2" -> puerto 3/8" (rosca PENDIENTE)
+ AD-OUT          	J-POUT          	J-POUT2         	0.0350	7.00	0.007	1.0000	Open	;Puerto 3/8" -> adaptacion -> 1/2" (rosca PENDIENTE)
+ N-B             	J-POUT2         	J-FLOW          	0.1270	14.40	0.007	0.8000	Open	;Union mixta + niple Tuboplus + conector
+ YF              	J-FLOW          	J-FLOW2         	0.0620	11.00	0.007	2.0000	Open	;CAUDALIMETRO YF-S201
+ N-C             	J-FLOW2         	J-EV1           	0.1340	14.40	0.007	0.8000	Open	;Conectores + niple Tuboplus
+ EV              	J-EV1           	J-EV2           	0.0850	14.40	0.007	7.6525	Open	;ELECTROVALVULA NC (OPEN en riego)
+ N-D             	J-EV2           	J-R1            	2.7770	14.40	0.007	2.4000	Open	;LINEA PRINCIPAL + codo inferior de subida
+ N-E             	J-R1            	J-R2            	1.4400	14.40	0.007	2.0000	Open	;SUBIDA VERTICAL a z 1.52 m + codo superior
+ N-H             	J-R2            	J-X             	0.0830	14.40	0.007	0.0000	Open	;Tramo superior a la CRUZ
+ XO1             	J-X             	J-H1            	0.4340	14.40	0.007	4.6000	Open	;Salida lateral de cruz + brazo Tuboplus + codo 90 + conector (L1)
+ ESP1            	J-H1            	M1              	0.0400	9.00	0.007	0.5000	Open	;Adaptador rosca 1/2" -> espiga (L1)
+ HL11            	M1              	S11             	0.1450	12.00	0.007	0.0000	Open	;Manguera lateral 1 tramo 1
+ RA11            	S11             	A11             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A11
+ HL12            	S11             	S12             	0.3300	12.00	0.007	0.0000	Open	;Manguera lateral 1 tramo 2
+ RA12            	S12             	A12             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A12
+ HL13            	S12             	S13             	0.3300	12.00	0.007	0.0000	Open	;Manguera lateral 1 tramo 3
+ RA13            	S13             	A13             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A13
+ HT1             	S13             	TAP1            	0.1000	12.00	0.007	0.0000	Open	;Manguera hasta tapon L1 (sin flujo)
+ XO2             	J-X             	J-H2            	0.1040	14.40	0.007	2.2000	Open	;Salida recta de cruz + niple + conector (L2)
+ ESP2            	J-H2            	M2              	0.0400	9.00	0.007	0.5000	Open	;Adaptador rosca 1/2" -> espiga (L2)
+ HL21            	M2              	S21             	0.1450	12.00	0.007	0.0000	Open	;Manguera lateral 2 tramo 1
+ RA21            	S21             	A21             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A21
+ HL22            	S21             	S22             	0.3300	12.00	0.007	0.0000	Open	;Manguera lateral 2 tramo 2
+ RA22            	S22             	A22             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A22
+ HL23            	S22             	S23             	0.3300	12.00	0.007	0.0000	Open	;Manguera lateral 2 tramo 3
+ RA23            	S23             	A23             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A23
+ HT2             	S23             	TAP2            	0.1000	12.00	0.007	0.0000	Open	;Manguera hasta tapon L2 (sin flujo)
+ XO3             	J-X             	J-H3            	0.4340	14.40	0.007	4.6000	Open	;Salida lateral de cruz + brazo Tuboplus + codo 90 + conector (L3)
+ ESP3            	J-H3            	M3              	0.0400	9.00	0.007	0.5000	Open	;Adaptador rosca 1/2" -> espiga (L3)
+ HL31            	M3              	S31             	0.1450	12.00	0.007	0.0000	Open	;Manguera lateral 3 tramo 1
+ RA31            	S31             	A31             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A31
+ HL32            	S31             	S32             	0.3300	12.00	0.007	0.0000	Open	;Manguera lateral 3 tramo 2
+ RA32            	S32             	A32             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A32
+ HL33            	S32             	S33             	0.3300	12.00	0.007	0.0000	Open	;Manguera lateral 3 tramo 3
+ RA33            	S33             	A33             	0.0300	4.00	0.007	1.0000	Open	;Conexion del aspersor A33
+ HT3             	S33             	TAP3            	0.1000	12.00	0.007	0.0000	Open	;Manguera hasta tapon L3 (sin flujo)
+
+[PUMPS]
+ PU1             	J-PIN           	J-POUT          	HEAD PUMP_CURVE_PROVISIONAL	;BOMBA GOOD PUMPS 12 V 72 W (curva NO publicada)
+
+[VALVES]
+; Check = Pipe CV (CHK). Electrovalvula = Pipe ON/OFF (EV). Valvula de bola = Pipe con K (BOLA).
+
+[TAGS]
+ LINK 	CHK	CHECK_EXISTENTE
+ LINK 	BOLA	VALVULA_BOLA_EXISTENTE
+ LINK 	PU1	BOMBA
+ LINK 	YF	YF-S201
+ LINK 	EV	ELECTROVALVULA_NC
+ NODE 	J-X	CRUZ
+
+[DEMANDS]
+
+[STATUS]
+ EV              	OPEN	;riego activo
+ PU1             	OPEN	;bomba encendida
+ BOLA            	OPEN	;valvula manual abierta
+
+[PATTERNS]
+
+[CURVES]
+;PUMP: PUMP_CURVE_PROVISIONAL - NO es la curva del fabricante (ver DECISIONS.md)
+ PUMP_CURVE_PROVISIONAL	0.0000	91.910
+ PUMP_CURVE_PROVISIONAL	0.0500	45.960
+ PUMP_CURVE_PROVISIONAL	0.1000	0.000
+
+[CONTROLS]
+
+[RULES]
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0
+ Demand Charge      	0
+
+[EMITTERS]
+; Sin emisores: la curva presion-caudal de los aspersores reales NO se conoce (demanda fija).
+
+[QUALITY]
+
+[SOURCES]
+
+[REACTIONS]
+ Global Bulk 0
+ Global Wall 0
+
+[MIXING]
+
+[TIMES]
+ Duration           	0:00
+ Hydraulic Timestep 	1:00
+ Report Timestep    	1:00
+ Statistic          	NONE
+
+[REPORT]
+ Status             	Yes
+ Summary            	No
+ Nodes              	All
+ Links              	All
+
+[OPTIONS]
+ Units              	LPS
+ Headloss           	D-W
+ Specific Gravity   	1.0
+ Viscosity          	1.0
+ Trials             	100
+ Accuracy           	0.00001
+ Unbalanced         	Continue 10
+ Pattern            	1
+ Demand Multiplier  	1.0
+ Emitter Exponent   	0.5
+ Quality            	None mg/L
+ Demand Model       	DDA
+
+[COORDINATES]
+ R1              	0.00	0.00
+ J-TK            	1500.00	0.00
+ J-BOL           	3000.00	0.00
+ J-CHK           	4500.00	0.00
+ J-TEX           	6000.00	0.00
+ J-B             	6000.00	-2500.00
+ J-PIN1          	7400.00	-2500.00
+ J-PIN           	8400.00	-2500.00
+ J-POUT          	10600.00	-2500.00
+ J-POUT2         	11600.00	-2500.00
+ J-FLOW          	13000.00	-2500.00
+ J-FLOW2         	15000.00	-2500.00
+ J-EV1           	16400.00	-2500.00
+ J-EV2           	18400.00	-2500.00
+ J-R1            	24400.00	-2500.00
+ J-R2            	24400.00	1200.00
+ J-X             	26000.00	1200.00
+ J-H1            	27900.00	4800.00
+ M1              	28800.00	4800.00
+ S11             	30600.00	4800.00
+ A11             	30600.00	3800.00
+ S12             	33900.00	4800.00
+ A12             	33900.00	3800.00
+ S13             	37200.00	4800.00
+ A13             	37200.00	3800.00
+ TAP1            	39200.00	4800.00
+ J-H2            	27900.00	1200.00
+ M2              	28800.00	1200.00
+ S21             	30600.00	1200.00
+ A21             	30600.00	200.00
+ S22             	33900.00	1200.00
+ A22             	33900.00	200.00
+ S23             	37200.00	1200.00
+ A23             	37200.00	200.00
+ TAP2            	39200.00	1200.00
+ J-H3            	27900.00	-2400.00
+ M3              	28800.00	-2400.00
+ S31             	30600.00	-2400.00
+ A31             	30600.00	-3400.00
+ S32             	33900.00	-2400.00
+ A32             	33900.00	-3400.00
+ S33             	37200.00	-2400.00
+ A33             	37200.00	-3400.00
+ TAP3            	39200.00	-2400.00
+
+[VERTICES]
+ XO1             	26000.00	4800.00
+ XO3             	26000.00	-2400.00
+
+[LABELS]
+ -1300.00	1500.00	"TINACO (R1)"
+ 2400.00	1500.00	"EXISTENTE: BOLA + CHECK + T"
+ 6400.00	-900.00	"BAJADA (exist.)"
+ 7600.00	-3100.00	"BOMBA 12 V (PU1)"
+ 12600.00	-1600.00	"YF-S201 (YF)"
+ 14600.00	-3100.00	"ELECTROVALVULA NC (EV)"
+ 18000.00	-1600.00	"LINEA PRINCIPAL"
+ 19100.00	1000.00	"SUBIDA VERTICAL"
+ 19100.00	300.00	"a 1.52 m"
+ 22800.00	2700.00	"CRUZ (J-X)"
+ 31200.00	5550.00	"LATERAL 1 (manguera)"
+ 31200.00	1950.00	"LATERAL 2 (manguera)"
+ 31200.00	-1650.00	"LATERAL 3 (manguera)"
+ 29000.00	-4100.00	"9 ASPERSORES (3 por lateral)"
+
+[BACKDROP]
+ DIMENSIONS	-2500.00	-5000.00	41000.00	7200.00
+ UNITS	None
+ OFFSET	0.00	0.00
+
+[END]

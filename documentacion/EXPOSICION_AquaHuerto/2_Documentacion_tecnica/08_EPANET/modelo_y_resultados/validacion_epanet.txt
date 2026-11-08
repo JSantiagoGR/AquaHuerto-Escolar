@@ -1,0 +1,175 @@
+VALIDACION DEL MODELO EPANET v3 (CORREGIDO) - ESCENARIO A: SUBIDA VERTICAL (DISENO PRINCIPAL)
+=============================================================================================
+Fecha ............. 2026-10-03 (correccion)
+Archivos .......... riego_huerto_v3_final.inp / riego_huerto_v3_presentacion.inp (escenario A)
+Unidades .......... LPS ; Darcy-Weisbach
+
+CORRECCIONES APLICADAS
+  C1. Diseno principal = Escenario A (subida VERTICAL, codos 90, cruz a z 1.52 m, brazos Tuboplus, 3 lineas).
+  C2. Subida a 45 deg = Escenario B, solo ALTERNATIVA DE CONTINGENCIA (simulada como GEO_B / GEO_B2).
+  C3. Tuboplus calculado desde CONFIG["medidas"] (ESTIMADO/MEDIDO) con veredicto y condicion automaticos.
+  C4. "Uniformidad" -> UNIFORMIDAD HIDRAULICA DE PRESION (Pmin/Pmax); uniformidad de riego PENDIENTE.
+  C5. Presiones = PRELIMINARES DEPENDIENTES DE CURVA PROVISIONAL DE BOMBA.
+  C6. Rosca de bomba y adaptador: PENDIENTE DE CONFIRMAR TIPO DE ROSCA 3/8" (NPT/BSP).
+
+HERRAMIENTAS
+  1. EPANET 2.2 GUI: presentacion (subida vertical) -> Run Analysis: "Run was successful."; capturas 00-03 actualizadas.
+  2. EPANET 2.2.0 runepanet.exe: "EPANET ran successfully", sin WARNINGS (nominal).
+  3. WNTR 1.5 (EPANET 2.2) y EPyT / OWA-EPANET 2.3.5: caudales coinciden (< 1e-5 L/s).
+  4. MCP EPANET (KWR-Water 1.30.0): 43 nodos / 43 enlaces; presion minima 0.86 m (succion); velocidad maxima 1.95 m/s (puertos de bomba).
+  5. validar_modelo.py.
+
+RESULTADO: final 71 OK / 3 AVISOS / 0 FALLAS ; presentacion 69 OK / 3 AVISOS / 0 FALLAS
+  AVISO 1: Tuboplus nuevo escenario A = 5.148 m ESTIMADO > 4.00 m -> cumple solo si M1+M5 <= 1.662 m; NO se puede confirmar sin medir.
+  AVISO 2: Uniformidad de RIEGO pendiente de validacion experimental.
+  AVISO 3: Presion requerida por los aspersores reales desconocida; presiones preliminares (curva provisional).
+
+RESULTADOS (escenario A, nominal provisional 30 L/h)
+  Q total 0.0750 L/s = 4.50 L/min ; lateral 0.0250 L/s c/u ; 9 x 30 L/h (impuesto)
+  Presion aspersores 21.816-21.821 m (~2.14 bar) PRELIMINAR ; uniformidad hidraulica de presion Pmin/Pmax = 0.9998
+  Bomba 22.98 m a 0.075 L/s (PROVISIONAL) ; succion +0.88 m ; YF-S201 33.8 Hz ; V principal 0.461 m/s
+  Perdidas: distribuida 0.292 m ; menores 0.814 m (red)
+  Tuboplus ESTIMADO: A 5.148 | A2 4.534 | B 4.332 | B2 3.718 m (limite 4.00 m)
+  40 y 70 L/h por aspersor: NO viables (presiones negativas / bomba excede caudal maximo)
+
+==========================================================================================
+SALIDA COMPLETA: validar_modelo.py (riego_huerto_v3_final.inp)
+==========================================================================================
+[OK   ] Seccion [TITLE]
+[OK   ] Seccion [JUNCTIONS]
+[OK   ] Seccion [RESERVOIRS]
+[OK   ] Seccion [PIPES]
+[OK   ] Seccion [PUMPS]
+[OK   ] Seccion [CURVES]
+[OK   ] Seccion [OPTIONS]
+[OK   ] Seccion [COORDINATES]
+[OK   ] Seccion [STATUS]
+[OK   ] Seccion [END]
+[OK   ] Unidades LPS  -> LPS
+[OK   ] Darcy-Weisbach
+[OK   ] Enlaces con nodos existentes
+[OK   ] Sin nodos aislados
+[OK   ] Coordenadas completas
+[OK   ] Sin filtro en el modelo
+[OK   ] Exactamente 3 laterales  -> ['1', '2', '3']
+[OK   ] Exactamente 9 aspersores individuales  -> ['A11', 'A12', 'A13', 'A21', 'A22', 'A23', 'A31', 'A32', 'A33']
+[OK   ] 3 aspersores por lateral
+[OK   ] Demanda solo en los 9 aspersores
+[OK   ] Sin demanda equivalente unica
+[OK   ] Cruz J-X con 4 conexiones (1 entrada + 3 salidas)  -> ['N-H', 'XO1', 'XO2', 'XO3']
+[OK   ] Check CHK con status CV y sentido tinaco->bomba
+[OK   ] Electrovalvula EV OPEN
+[OK   ] Valvula de bola existente OPEN
+[OK   ] Cadena TINACO-BOLA-CHECK-T-BAJADA-BOMBA-YF-EV-PRINCIPAL-SUBIDA-CRUZ en orden
+[OK   ] Tuboplus DI 14.40 mm
+[OK   ] Manguera de laterales con DI de CONFIG (NO MEDIDO)  -> 12.0 mm (NO MEDIDO)
+[OK   ] Longitudes y diametros > 0
+[OK   ] Cruz y laterales a z = 0.12 + 0.40 + 1.00 = 1.52 m
+[OK   ] Bomba a z 0.08 m y salida del tinaco a 0.265 m
+[OK   ] Nivel de agua del tinaco 1.19 m (PROVISIONAL)
+[OK   ] Geometria principal = A (subida VERTICAL, DISENO DESEADO)
+[OK   ] Subida vertical en el modelo: N-E de longitud = desnivel (z 0.08 -> 1.52)  -> 1.440 m
+[OK   ] Escenario A usa 5 codos de 90 deg nuevos (bajada, subida x2, brazos x2)
+[OK   ] Escenario B (45 deg) calculado solo como alternativa
+[OK   ] Tabla de Tuboplus = geometria del generador
+[AVISO] Tuboplus NUEVO del diseno principal <= 4.00 m  -> 5.148 m (ESTIMADO); margen -1.148 m; para cumplir M1+M5 <= 1.662 m -> NO se puede confirmar hasta medir en sitio
+[OK   ] Mediciones fisicas pendientes listadas (mediciones_fisicas.csv)
+[OK   ] EPANET 2.2 runepanet.exe sin errores  -> ran successfully
+[OK   ] Sin WARNINGS de EPANET 2.2
+[OK   ] WNTR parsea  -> 44 nodos, 43 enlaces
+[OK   ] Red conexa
+[OK   ] EPANET 2.2 (WNTR) = OWA-EPANET (EPyT)  -> max dif 7.45e-09 L/s
+[OK   ] Masa: salida del tinaco = suma de 9 aspersores  -> 0.075000 L/s
+[OK   ] Continuidad en serie
+[OK   ] Cruz: entrada = suma de 3 salidas
+[OK   ] Lateral 1 = suma de sus 3 aspersores  -> 0.02500 L/s
+[OK   ] Lateral 2 = suma de sus 3 aspersores  -> 0.02500 L/s
+[OK   ] Lateral 3 = suma de sus 3 aspersores  -> 0.02500 L/s
+[OK   ] Tapones sin flujo
+[OK   ] Check y electrovalvula con flujo positivo
+[OK   ] Caudal total = 9 x caudal por aspersor  -> 0.07500 L/s = 4.500 L/min
+[OK   ] Caudal por lateral = 3 x aspersor
+[OK   ] YF-S201 dentro de 1-30 L/min  -> 4.50 L/min -> 33.7 Hz
+[OK   ] Caudal por debajo de 6 L/min (maximo anunciado de la bomba)  -> margen 25 %
+[OK   ] Presion positiva en los 9 aspersores  -> 21.82, 21.82, 21.82, 21.82, 21.82, 21.82, 21.82, 21.82, 21.82 m
+[OK   ] Uniformidad HIDRAULICA de presion Pmin/Pmax >= 0.95 (NO es uniformidad de riego)  -> 0.9998
+[AVISO] Uniformidad de RIEGO  -> PENDIENTE DE VALIDACION EXPERIMENTAL (patron de mojado, radio, presion minima y apertura-caudal desconocidos)
+[OK   ] Succion de la bomba con presion positiva  -> 0.882 m
+[OK   ] Velocidad en Tuboplus < 1.5 m/s  -> max 0.461 m/s; principal 0.461 m/s
+[OK   ] Velocidad en manguera < 1.5 m/s
+[OK   ] Bomba opera por debajo del corte del presostato (0.9 MPa)  -> altura 22.98 m vs corte 91.9 m (curva PROVISIONAL)
+[AVISO] Requisito de presion del aspersor real  -> DESCONOCIDO; presion = PRELIMINAR DEPENDIENTE DE CURVA PROVISIONAL DE BOMBA
+[OK   ] Perdidas distribuidas y menores calculadas  -> distribuida 0.2918 m, menores 0.8138 m
+[OK   ] Manual D-W vs EPANET (laminar/turbulento) < 2 %  -> max 1.73 % en HL33
+[OK   ] Tramos en transicion: diferencia absoluta manual vs EPANET < 5 mm  -> max 2.84 mm (EPANET interpola Moody)
+[OK   ] Balance de energia tinaco -> A11  -> residuo -7.38e-07 m
+[OK   ] Escenarios de caudal 20/25/30/35/40/70 L/h presentes
+[OK   ] Sensibilidad de manguera con 3 diametros
+[OK   ] 70 L/h x 9 detectado como NO viable  -> WARNING: Negative pressures at 0:00:00 hrs. | WARNING: Pump PU1 open but exceeds maximum flow at 0:00:00 hrs. | EPyT: li
+[OK   ] Escenarios geometricos A2/B/B2 simulados
+[OK   ] Presentacion con hidraulica identica
+[OK   ] Presentacion con resultados identicos  -> dif 0.0e+00
+
+RESULTADO: 71 OK, 3 AVISOS, 0 FALLAS
+ESTADO FINAL: OK
+
+=== validar_modelo.py presentacion (resumen)
+[AVISO] Tuboplus NUEVO del diseno principal <= 4.00 m  -> 5.148 m (ESTIMADO); margen -1.148 m; para cumplir M1+M5 <= 1.662 m -> NO se puede confirmar hasta medir en sitio
+[AVISO] Uniformidad de RIEGO  -> PENDIENTE DE VALIDACION EXPERIMENTAL (patron de mojado, radio, presion minima y apertura-caudal desconocidos)
+[AVISO] Requisito de presion del aspersor real  -> DESCONOCIDO; presion = PRELIMINAR DEPENDIENTE DE CURVA PROVISIONAL DE BOMBA
+RESULTADO: 69 OK, 3 AVISOS, 0 FALLAS
+ESTADO FINAL: OK
+
+=== MCP EPANET
+Results for: riego_huerto_v3_final.inp
+Nodes: 43 | Pipes: 43
+Min Pressure: 0.86 Meters  | Max Velocity: 1.95 m/s
+Nodes under 1.0 in riego_huerto_v3_final.inp: {'J-TK': np.float64(0.92), 'J-BOL': np.float64(0.92), 'J-CHK': np.float64(0.89), 'J-TEX': np.float64(0.86), 'J-PIN': np.float64(0.88)}
+Results for: riego_huerto_v3_presentacion.inp
+Nodes: 43 | Pipes: 43
+Min Pressure: 0.86 Meters  | Max Velocity: 1.95 m/s
+Nodes under 1.0 in riego_huerto_v3_presentacion.inp: {'J-TK': np.float64(0.92), 'J-BOL': np.float64(0.92), 'J-CHK': np.float64(0.89), 'J-TEX': np.float64(0.86), 'J-PIN': np.float64(0.88)}
+
+=== Tabla Tuboplus (resumen)
+ESCENARIO A,DISENO PRINCIPAL / DESEADO,Subida VERTICAL (codos 90) + cruz + brazos Tuboplus con codos 90
+TOTAL,,Tuboplus NUEVO escenario A,ESTIMADO,,,,,5.148
+MARGEN,,Limite - total (negativo = excede),ESTIMADO,,,,,-1.148
+VEREDICTO,,EXCEDE (ESTIMADO: confirmar con mediciones),,,,,,
+CONDICION,,Para cumplir con las demas medidas fijas: M1 + M5 <= 1.662 m (actual estimado 2.810 m),,,,,,
+ESCENARIO B,ALTERNATIVA DE CONTINGENCIA,Subida a 45 deg (2 codos 45) + brazos Tuboplus con codos 90
+TOTAL,,Tuboplus NUEVO escenario B,ESTIMADO,,,,,4.332
+MARGEN,,Limite - total (negativo = excede),ESTIMADO,,,,,-0.332
+VEREDICTO,,EXCEDE (ESTIMADO: confirmar con mediciones),,,,,,
+CONDICION,,Para cumplir con las demas medidas fijas: M1 + M5 <= 2.478 m (actual estimado 2.810 m),,,,,,
+
+=== Escenarios
+escenario,epanet22_ok,Q_total_Lmin,P_min_m_PRELIM,P_max_m_PRELIM,uniformidad_hidraulica_presion_PminPmax,H_bomba_m,viable_hidraulicamente
+Q20,True,3.000,45.247,45.250,0.9999,45.960,SI
+Q25,True,3.750,33.554,33.558,0.9999,34.471,SI
+Q30,True,4.500,21.816,21.821,0.9998,22.981,SI
+Q35,True,5.250,10.034,10.041,0.9993,11.490,SI
+Q40,False,6.000,-1.791,-1.782,0.0000,0.000,NO
+Q70,False,,,,,,NO
+DH10,True,4.500,21.802,21.809,0.9997,22.981,SI
+DH12,True,4.500,21.816,21.821,0.9998,22.981,SI
+DH14,True,4.500,21.820,21.825,0.9998,22.981,SI
+CURVA_x0.25,True,4.500,4.581,4.586,0.9988,5.745,SI
+CURVA_x0.40,True,4.500,8.028,8.033,0.9993,9.192,SI
+CURVA_x0.50,True,4.500,10.326,10.331,0.9995,11.490,SI
+CURVA_x0.75,True,4.500,16.071,16.076,0.9997,17.235,SI
+HW150,True,4.500,21.855,21.860,0.9998,22.980,SI
+TINACO_MIN,True,4.500,20.926,20.931,0.9997,22.981,SI
+K_ALTOS,True,4.500,20.746,20.752,0.9997,22.981,SI
+K_BAJOS,True,4.500,22.082,22.088,0.9998,22.981,SI
+GEO_A2,True,4.500,21.817,21.821,0.9998,22.981,SI
+GEO_B,True,4.500,21.869,21.874,0.9998,22.981,SI
+GEO_B2,True,4.500,21.870,21.874,0.9998,22.981,SI
+
+=== EPANET 2.2 runepanet.exe (estado hidraulico)
+  Hydraulic Status:
+  -----------------------------------------------------------------------
+     0:00:00: Balanced after 2 trials
+     0:00:00: Reservoir R1 is emptying
+   
+   
+  Node Results:

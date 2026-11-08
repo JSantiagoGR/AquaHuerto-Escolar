@@ -1,0 +1,9 @@
+{
+  "name": "riego-nodered-userdir",
+  "private": true,
+  "description": "Directorio de usuario de la instancia Node-RED del riego (entorno final en Raspberry Pi)",
+  "dependencies": {
+    "@flowfuse/node-red-dashboard": "1.33.0",
+    "node-red-node-sqlite": "2.0.1"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "_info": "Ejemplos compatibles con el firmware Proyecto_Final_v1. Topic base: huerto/esp32. Los comandos se publican en huerto/esp32/command con retain=false y QoS 1. 'id' debe ser unico por comando. 'ts' (segundos Unix) es opcional; si se envia y el ESP32 tiene hora valida, se rechaza si difiere mas de 60 s. 'token' solo si se configuro CONFIG_RIEGO_CMD_TOKEN.",
+  "comandos": [
+    {"descripcion": "Pedir estado, telemetria y decision", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0001", "cmd": "GET_STATUS"}},
+    {"descripcion": "Pedir configuracion (se publica en huerto/esp32/config)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0002", "cmd": "GET_CONFIG"}},
+    {"descripcion": "Pedir historial de riegos (huerto/esp32/history)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0003", "cmd": "GET_HISTORY"}},
+    {"descripcion": "Riego manual de 1 litro", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0004", "cmd": "START_MANUAL", "liters": 1.0, "ts": 1791800000}},
+    {"descripcion": "Riego manual de 0.5 L forzado aunque el suelo este sobre el maximo", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0005", "cmd": "START_MANUAL", "liters": 0.5, "force": true}},
+    {"descripcion": "Detener inmediatamente (siempre se ejecuta)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0006", "cmd": "STOP"}},
+    {"descripcion": "Habilitar riego automatico", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0007", "cmd": "ENABLE_AUTO"}},
+    {"descripcion": "Deshabilitar riego automatico", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0008", "cmd": "DISABLE_AUTO"}},
+    {"descripcion": "Humedad minima (%VWC)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0009", "cmd": "SET_HUMIDITY_MIN", "value": 25}},
+    {"descripcion": "Humedad recomendada / objetivo (%VWC)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0010", "cmd": "SET_HUMIDITY_TARGET", "value": 35}},
+    {"descripcion": "Humedad maxima (%VWC)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0011", "cmd": "SET_HUMIDITY_MAX", "value": 45}},
+    {"descripcion": "Los tres umbrales a la vez (recomendado al cambiar de cultivo)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0012", "cmd": "SET_HUMIDITY_RANGE", "min": 25, "target": 35, "max": 45}},
+    {"descripcion": "Litros por ciclo automatico", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0013", "cmd": "SET_LITERS_PER_CYCLE", "value": 1.0}},
+    {"descripcion": "Espera de infiltracion (minutos)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0014", "cmd": "SET_INFILT_WAIT", "value": 15}},
+    {"descripcion": "Maximos de litros por evento y por dia", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0015", "cmd": "SET_MAX_LITERS", "event": 3.0, "daily": 10.0}},
+    {"descripcion": "Calibracion del YF-S201 con pulsos/L directo", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0016", "cmd": "SET_FLOW_CALIBRATION", "pulses_per_liter": 450}},
+    {"descripcion": "Calibracion del YF-S201 con medicion en recipiente", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0017", "cmd": "SET_FLOW_CALIBRATION", "pulses": 930, "measured_ml": 2000}},
+    {"descripcion": "Nivel minimo de seguridad del tinaco (%)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0018", "cmd": "SET_TANK_MIN_LEVEL", "value": 20}},
+    {"descripcion": "Calibrar tinaco: distancia del sensor al agua con tinaco vacio y lleno", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0019", "cmd": "SET_TANK_CALIBRATION", "empty_cm": 120.0, "full_cm": 20.0}},
+    {"descripcion": "Horario 1 de 06:00 a 09:00", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0020", "cmd": "SET_SCHEDULE", "window": 1, "enabled": true, "start": "06:00", "end": "09:00"}},
+    {"descripcion": "Horario 2 de 18:00 a 20:00", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0021", "cmd": "SET_SCHEDULE", "window": 2, "enabled": true, "start": "18:00", "end": "20:00"}},
+    {"descripcion": "Parametro generico (cualquier clave remota de GET_CONFIG)", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0022", "cmd": "SET_CONFIG", "key": "temp_postpone_c", "value": 34}},
+    {"descripcion": "Humedad critica para emergencia", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0023", "cmd": "SET_CONFIG", "key": "hum_critical", "value": 18}},
+    {"descripcion": "Desactivar emergencias", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0024", "cmd": "SET_CONFIG", "key": "emergency_en", "value": false}},
+    {"descripcion": "Borrar todas las alarmas resueltas", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0025", "cmd": "CLEAR_ALARM", "alarm": "ALL"}},
+    {"descripcion": "Borrar una alarma concreta", "topic": "huerto/esp32/command",
+     "payload": {"id": "nr-0026", "cmd": "CLEAR_ALARM", "alarm": "NO_FLOW"}}
+  ],
+  "respuestas_y_publicaciones": {
+    "huerto/esp32/ack": [
+      {"id": "nr-0004", "cmd": "START_MANUAL", "status": "OK", "message": "Riego manual de 1.00 L iniciado", "state": "MANUAL_WATERING", "ts": 1791800001, "uptime_s": 532},
+      {"id": "nr-0009", "cmd": "SET_HUMIDITY_MIN", "status": "REJECTED", "message": "Debe cumplirse MINIMA < OBJETIVO < MAXIMA (al menos 1 punto): 40.0 / 35.0 / 45.0", "state": "IDLE", "ts": 1791800002, "uptime_s": 533},
+      {"id": "nr-0004", "cmd": "START_MANUAL", "status": "DUPLICATE", "message": "Comando con id repetido: no se ejecuta otra vez", "state": "IDLE", "ts": 1791800003, "uptime_s": 534},
+      {"id": "nr-0030", "cmd": "START_MANUAL", "status": "RETAINED", "message": "Comando retenido ignorado: publique comandos con retain=false", "state": "IDLE", "ts": null, "uptime_s": 12}
+    ],
+    "huerto/esp32/status": [
+      {"online": true},
+      {"online": false, "reason": "LWT"}
+    ],
+    "huerto/esp32/telemetry": {
+      "ts": 1791800010, "uptime_s": 541,
+      "soil": {"valid": true, "vwc_pct": 27.4, "mv": 630, "in_cal_range": true, "status": "OK", "age_s": 12},
+      "tank": {"valid": true, "calibrated": false, "distance_cm": 94.9, "level_pct": null, "below_min": false, "status": "NO_CALIBRADO"},
+      "env": {"valid": true, "temp_c": 21.5, "rh_pct": 53.7, "last_valid_ts": 1791800005, "status": "OK"},
+      "flow": {"lpm": 0.0, "session_l": 0.0, "today_l": 1.011, "total_l": 12.345, "pulses": 455, "pulses_per_liter": 450.0},
+      "simulation": false
+    },
+    "huerto/esp32/state": {
+      "ts": 1791800010, "uptime_s": 541, "state": "MANUAL_WATERING", "phase": "PUMPING", "mode": "A",
+      "auto_enabled": false, "power_outputs": true, "simulation": false,
+      "pump": true, "valve": true, "pump_cmd": true, "valve_cmd": true, "emergency_latch": false,
+      "watering": {"active": true, "type": "MANUAL", "target_l": 1.0, "delivered_l": 0.42, "remaining_l": 0.58, "progress_pct": 42, "elapsed_s": 9, "flow_lpm": 3.9},
+      "event": {"active": false, "emergency": false, "cycles": 0, "liters": 0.0, "infiltration_remaining_s": 0},
+      "alarms": ["TANK_SENSOR"],
+      "decision": {"code": "AUTO_DISABLED", "text": "Riego automático deshabilitado"},
+      "next_window": "18:00", "time_valid": true, "local_time": "2026-10-11 07:15:02",
+      "wifi": true, "mqtt": true, "rssi": -61, "free_heap": 172000
+    },
+    "huerto/esp32/decision": {
+      "ts": 1791800020, "uptime_s": 551, "code": "OUTSIDE_WINDOW", "text": "Pospuesto hasta el próximo horario de riego",
+      "soil_vwc": 22.1, "hum_min": 25.0, "hum_target": 35.0, "next_window": "18:00", "in_window": false,
+      "auto_enabled": true, "state": "MONITORING"
+    },
+    "huerto/esp32/event": [
+      {"ts": 1791800000, "uptime_s": 531, "type": "WATERING_START", "reason": "MANUAL", "target_l": 1.0, "vwc_before": 27.4, "cycle": 1},
+      {"ts": 1791800020, "uptime_s": 551, "type": "WATERING_END", "reason": "MANUAL", "result": "TARGET", "target_l": 1.0, "delivered_l": 1.011, "pulses": 455, "duration_s": 20.3, "vwc_before": 27.4, "vwc_after": 27.6, "today_l": 1.011},
+      {"ts": 1791801900, "uptime_s": 2431, "type": "AUTO_EVENT_END", "why": "TARGET_REACHED", "cycles": 2, "liters": 2.0, "vwc_before": 22.0, "vwc_after": 35.6, "duration_s": 1900}
+    ],
+    "huerto/esp32/alarm": {
+      "ts": 1791800040, "uptime_s": 571, "code": "NO_FLOW", "severity": "CRITICAL", "active": true, "latched": true,
+      "message": "Bomba encendida sin pulsos del caudalímetro (sin agua, cebado, obstrucción o sensor)"
+    },
+    "huerto/esp32/history": {
+      "ts": 1791800100, "uptime_s": 631,
+      "entries": [
+        {"ts": 1791800000, "reason": "MANUAL", "result": "TARGET", "liters": 1.011, "duration_s": 20, "pulses": 455, "vwc_before": 27.4, "vwc_after": 27.6}
+      ]
+    },
+    "huerto/esp32/config": {
+      "ts": 1791800000, "uptime_s": 530, "tank_calibrated": false,
+      "params": {"hum_min": 25.0, "hum_target": 35.0, "hum_max": 45.0, "hum_critical": 18.0, "liters_per_cycle": 1.0,
+                 "max_liters_event": 3.0, "max_liters_daily": 10.0, "infilt_min": 15, "pulses_per_liter": 450.0,
+                 "tank_min_pct": 20, "win1_en": true, "win1_start": "06:00", "win1_end": "09:00",
+                 "win2_en": true, "win2_start": "18:00", "win2_end": "20:00", "tz": "CST6", "mode": 0,
+                 "power_enabled": false, "_nota": "se publican todos los parametros; ver MQTT_TOPICS.md"}
+    }
+  }
+}

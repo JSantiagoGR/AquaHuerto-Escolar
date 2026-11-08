@@ -1,0 +1,54 @@
+menu "Riego automatizado - valores INICIALES de red"
+    comment "Solo se usan en el primer arranque. Despues se cambian por consola (WIFI, MQTT, DEVICE) sin recompilar."
+
+    config RIEGO_WIFI_SSID
+        string "SSID inicial (red 'casa')"
+        default ""
+        help
+            Recomendado: dejar vacio y configurar por consola con
+            tools/provisionar_red.py (la contrasena no queda en archivos).
+
+    config RIEGO_WIFI_PASSWORD
+        string "Contrasena Wi-Fi inicial"
+        default ""
+
+    config RIEGO_MQTT_URI
+        string "URI inicial del broker MQTT"
+        default ""
+        help
+            Ejemplo: mqtt://192.168.1.64:1883 (IP real de la computadora con Mosquitto)
+
+    config RIEGO_MQTT_USERNAME
+        string "Usuario MQTT inicial"
+        default ""
+
+    config RIEGO_MQTT_PASSWORD
+        string "Contrasena MQTT inicial"
+        default ""
+
+    config RIEGO_MQTT_BASE_TOPIC
+        string "Topic base inicial"
+        default "huerto/casa/esp32_01"
+        help
+            Pruebas de casa: huerto/casa/esp32_01
+            Instalacion definitiva: huerto/final/esp32_principal
+
+    config RIEGO_DEVICE_ID
+        string "Identificador del dispositivo"
+        default "esp32_01"
+
+    config RIEGO_ENV_NAME
+        string "Entorno (casa | final)"
+        default "casa"
+
+    config RIEGO_SIN_RED
+        bool "Compilar SIN Wi-Fi (solo para pruebas en el emulador QEMU)"
+        default n
+        help
+            QEMU no emula la radio Wi-Fi. Solo para la compilacion build_qemu.
+
+    config RIEGO_CMD_TOKEN
+        string "Token para comandos MQTT de accionamiento (opcional)"
+        default ""
+
+endmenu

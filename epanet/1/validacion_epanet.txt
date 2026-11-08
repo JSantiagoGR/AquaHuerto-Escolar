@@ -1,0 +1,136 @@
+VALIDACION DEL MODELO EPANET - RIEGO POR GOTEO 1 CAJON
+======================================================
+Fecha/hora ........ 2026-09-28 23:15 (hora local del equipo)
+Archivo validado .. C:\TEC\SEMESTRE 5\Automatización industrial\Reto\EPANET\1\riego_huerto_final.inp
+Adicional ......... riego_huerto_24_goteros.inp (modelo opcional)
+
+HERRAMIENTAS UTILIZADAS
+  1. MCP EPANET (KWR-Water mcp-server-epanet 1.30.0) via protocolo MCP stdio -> run_epanet_simulation,
+     get_pressures_less_than, get_pipes_over. OK.
+  2. EPANET 2.2 toolkit (libreria incluida en WNTR 1.5.0, EpanetSimulator version=2.2) -> simulacion principal.
+  3. OWA-EPANET 2.3.5 via EPyT -> contraste de caudales y escenarios de sensibilidad.
+  4. WNTR 1.5.0 + NetworkX -> parseo, grafo, conectividad.
+  5. Script propio validar_modelo.py (chequeos estructurales del texto .INP).
+  Entorno: Python 3.12 (venv con uv); el Python 3.14 del sistema no tiene wheels de wntr/owa-epanet.
+
+RESULTADO
+  Parseo ............ SI (texto propio + WNTR + EPyT + MCP)
+  Simulacion ........ SI, sin errores ni advertencias en el reporte EPANET
+  Unidades .......... Flow Units = LPS ; Headloss = H-W ; longitudes m ; diametros mm ; head/presion m
+  Suma de demandas .. 4 x 0.00666667 = 0.02666668 L/s = 1.60000 L/min = 96.0000 L/h (nominal 0.0266667)
+  Caudal bomba PU1 .. 0.02666668 L/s (= suma de demandas; continuidad en serie exacta, dif 0.00e+00)
+  Estado final ...... OK (35/35 comprobaciones)  -  SIMULACION PRELIMINAR (ver advertencias)
+
+ERRORES INICIALES ENCONTRADOS Y CORRECCIONES
+  E1. [Entorno] `pip install epanet-toolkit`: paquete inexistente -> se uso owa-epanet/EPyT.
+  E2. [Entorno] wntr y owa-epanet no compilan en Python 3.14 -> venv Python 3.12 con uv; wntr y epyt OK
+      (owa-epanet requiere compilador C; no necesario porque EPyT y WNTR traen la libreria EPANET).
+  E3. [MCP] mcp-server-epanet fallaba: "No module named 'mcp.server.fastmcp' (mcp 2.x)" -> `--with "mcp<2"`.
+  E4. [Modelo] Primera version con V1 = TCV (Setting 0, K 0) y Accuracy 0.001: enlaces en serie con caudales
+      distintos (PU1/P-MAIN 0.026666574, V1 0.026666824, P-HEADER 0.026666680 L/s). Se probo
+      Accuracy 0.00001 y RQTOL 1e-12: sin mejora. Diagnostico por variantes: la TCV con K=0 es un enlace de
+      resistencia nula -> mal condicionamiento del metodo del gradiente. Correccion: V1 como enlace ON/OFF
+      (Pipe 0.01 m, D 12.7 mm, K 0, Status OPEN). Resultado: continuidad exacta (dif 0.00e+00 L/s).
+      No se invento ningun K de la valvula; su perdida real queda pendiente.
+  E5. [Modelo] Accuracy se dejo en 0.00001 (mas estricto que el 0.001 por defecto) por los caudales muy bajos.
+
+ADVERTENCIAS RESTANTES (no son errores de formato; dependen de datos fisicos que faltan)
+  A1. Curva de bomba PUMP_CURVE_PROVISIONAL (no certificada). Head de bomba 67.406 m y todas las presiones
+      (~67.39 m) dependen de ella: "Resultado preliminar dependiente de la curva provisional de bomba."
+  A2. R1 Head = 0 m y elevaciones = 0 m son DATUM provisional; la presion fisica NO esta validada.
+  A3. Diametros nominales (12.7 y 16 mm), no interiores medidos.
+  A4. Perdidas del YF-S201, electrovalvula y accesorios = 0 (no caracterizadas).
+  A5. Regimen: principal Re=2663 (transicion), cabezal Re=2114 y laterales Re=528 (laminar).
+      Hazen-Williams no es fisicamente valido en laminar; la sensibilidad D-W se hizo en EPANET
+      (diferencia absoluta < 1 cm). Ver calculos_hidraulicos.md.
+  A6. Presion estimada ~6.6 bar con la curva provisional: comparar con la presion admisible de goteros y
+      manguera cuando se conozca (dato pendiente).
+  A7. Resolucion de salida: el archivo binario de EPANET guarda resultados en precision simple
+      (~1e-5 m a 67 m); las perdidas pequenas en tablas de calculos se tomaron del toolkit (doble precision).
+
+MODELO OPCIONAL riego_huerto_24_goteros.inp
+  35/35 comprobaciones OK; 31 junctions + R1, 31 enlaces; suma de demandas 24 x 0.001111111 = 0.02666666 L/s;
+  continuidad exacta; MCP: Min Pressure 67.40 m, Max Velocity 0.21 m/s. Demandas FIJAS (no emisores).
+
+RESPALDO ORIGINAL
+  riego_huerto.inp.net - existe, 2695 bytes, modificado 2026-09-24 15:01:01, SHA-256
+  96A2448FADE508454F5D96B7D54B0C4F27D00CD3DD9F457A82479A2C400B5772 (identico antes y despues). No se modifico.
+  (Es un proyecto binario de EPANET 2.2, no un .INP de texto; no se uso como base del modelo.)
+
+======================================================================================
+SALIDA COMPLETA DE LA ULTIMA EJECUCION:  python validar_modelo.py riego_huerto_final.inp
+======================================================================================
+[OK]   Archivo legible y con secciones  -> ['BACKDROP', 'CONTROLS', 'COORDINATES', 'CURVES', 'DEMANDS', 'EMITTERS', 'END', 'ENERGY', 'JUNCTIONS', 'LABELS', 'MIXING', 'OPTIONS', 'PATTERNS', 'PIPES', 'PUMPS', 'QUALITY', 'REACTIONS', 'REPORT', 'RESERVOIRS', 'RULES', 'SOURCES', 'STATUS', 'TAGS', 'TANKS', 'TIMES', 'TITLE', 'VALVES', 'VERTICES']
+[OK]   Seccion [TITLE] presente
+[OK]   Seccion [JUNCTIONS] presente
+[OK]   Seccion [RESERVOIRS] presente
+[OK]   Seccion [PIPES] presente
+[OK]   Seccion [PUMPS] presente
+[OK]   Seccion [VALVES] presente
+[OK]   Seccion [CURVES] presente
+[OK]   Seccion [OPTIONS] presente
+[OK]   Seccion [COORDINATES] presente
+[OK]   Seccion [END] presente
+[OK]   Units = LPS  -> LPS
+[OK]   Headloss definido  -> H-W
+[OK]   IDs de nodos unicos
+[OK]   IDs de enlaces unicos
+[OK]   Todos los enlaces tienen nodos existentes
+[OK]   Ningun enlace une un nodo consigo mismo
+[OK]   Sin nodos aislados
+[OK]   Existe fuente hidraulica (reservoir/tank)  -> ['R1']
+[OK]   Longitudes > 0
+[OK]   Diametros > 0
+[OK]   Rugosidad > 0 en todas las tuberias
+[OK]   Bomba PU1 conectada (R1 -> J-PUMP)
+[OK]   Curva de bomba 'PUMP_CURVE_PROVISIONAL' definida en [CURVES]
+[OK]   Electrovalvula V1 (Pipe ON/OFF) OPEN en riego activo  -> OPEN
+[OK]   Coordenadas definidas para todos los nodos
+[OK]   Sin nodos superpuestos (coordenadas repetidas)
+[OK]   Suma de demandas ~ 0.0266667 L/s  -> 0.02666668 L/s = 1.60000 L/min = 96.0000 L/h
+[OK]   WNTR parsea el archivo  -> 9 nodos, 8 enlaces
+[OK]   Red conexa (un solo componente)
+[OK]   Todos los junctions alcanzables desde la fuente
+[OK]   Simulacion EPANET 2.2 ejecutada sin errores  -> sin advertencias
+[OK]   Caudal de bomba = suma de demandas  -> 0.026666681 L/s
+[OK]   Continuidad en serie PU1-P-MAIN-V1-P-HEADER  -> max dif = 0.00e+00 L/s
+[OK]   EPyT/OWA-EPANET reproduce los caudales  -> EPANET v20305, max dif = 8.00e-10 L/s
+
+NODOS:  ID | Head m | Pressure m | Demand L/s
+  J-PUMP       67.4057   67.4057 0.00000000
+  J-FLOW       67.3959   67.3959 0.00000000
+  J-HEAD-IN    67.3958   67.3958 0.00000000
+  J-H          67.3941   67.3941 0.00000000
+  L1           67.3939   67.3939 0.00666667
+  L2           67.3939   67.3939 0.00666667
+  L3           67.3939   67.3939 0.00666667
+  L4           67.3939   67.3939 0.00666667
+  R1            0.0000    0.0000 -0.02666668
+ENLACES: ID | tipo | Flow L/s | V m/s | hf m | status
+  P-MAIN    Pipe  0.02666668 0.2105 0.009883 OPEN
+  V1        Pipe  0.02666668 0.2105 0.000065 OPEN
+  P-HEADER  Pipe  0.02666668 0.1326 0.001712 OPEN
+  PL1       Pipe  0.00666667 0.0332 0.000195 OPEN
+  PL2       Pipe  0.00666667 0.0332 0.000195 OPEN
+  PL3       Pipe  0.00666667 0.0332 0.000195 OPEN
+  PL4       Pipe  0.00666667 0.0332 0.000195 OPEN
+  PU1       Pump  0.02666668 0.0000 -67.405739 OPEN  head gain=67.406 m
+
+ESTADO FINAL: OK
+
+======================================================================================
+SALIDA MCP (tools/call) - riego_huerto_final.inp
+======================================================================================
+SERVER: {'name': 'EPANET Simulation Server', 'version': '1.30.0'}
+
+=== MCP tool: run_epanet_simulation({'file_name': 'riego_huerto_final.inp'})
+Results for: riego_huerto_final.inp
+Source Path: Networks\riego_huerto_final.inp
+Nodes: 8 | Pipes: 8
+Min Pressure: 67.39 Meters  | Max Velocity: 0.21 m/s
+
+=== MCP tool: get_pressures_less_than({'file_name': 'riego_huerto_final.inp', 'threshold': 1.0})
+None found.
+
+=== MCP tool: get_pipes_over({'file_name': 'riego_huerto_final.inp', 'threshold': 0.5})
+None found.

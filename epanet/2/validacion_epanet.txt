@@ -1,0 +1,242 @@
+VALIDACION DEL MODELO EPANET v2 - RIEGO 1 CAJON, 2 LATERALES, 4 MICROASPERSORES (Hunter SD-B PROVISIONAL)
+=========================================================================================================
+Fecha ............. 2026-09-30 (revision: extrapolacion, cobertura, filtro, prueba de bomba)
+Archivos .......... riego_huerto_v2_final.inp  /  riego_huerto_v2_presentacion.inp (sin cambios en esta revision)
+Unidades .......... LPS (caudal), m (longitud y altura), mm (diametro); Darcy-Weisbach eps = 0.007 mm
+
+HERRAMIENTAS
+  1. EPANET 2.2.0 (runepanet.exe de la instalacion C:\Program Files (x86)\EPANET 2.2)  -> "EPANET ran successfully"
+  2. EPANET 2.2 (libreria del toolkit en WNTR 1.5.0, EpanetSimulator version 2.2)
+  3. OWA-EPANET 2.3.5 via EPyT (doble precision)  -> escenarios y contraste
+  4. MCP EPANET (KWR-Water mcp-server-epanet 1.30.0) por protocolo MCP stdio
+  5. WNTR + NetworkX (grafo/conectividad), validar_modelo.py (70 comprobaciones)
+  6. Interfaz grafica EPANET 2.2: archivo de presentacion abierto por linea de comandos; captura real de la
+     ventana (capturas_epanet/00_Modelo_Limpio.png). Run Analysis se ejecuto con runepanet.exe (mismo motor 2.2).
+
+ERRORES ENCONTRADOS Y CORREGIDOS DURANTE EL TRABAJO
+  E1. EPyT no abre rutas con caracteres no ASCII ("Automatización"): se simula sobre una copia temporal.
+  E2. Etiquetas encimadas en la presentacion a <=1000 px: redistribuidas (sin solapes de 900 a 1900 px).
+  E3. Figuras Python: rotulos encimados y grosor dominado por la bomba -> corregido.
+  (El .INP final no presento errores de formato en EPANET 2.2.)
+
+ADVERTENCIAS (no son fallas)
+  A1. Con la curva PROVISIONAL de bomba los aspersores quedan a 2.41 bar. La tabla OFICIAL del Solo-Drip
+      llega solo a 2.0 bar (40 L/h @1.0, 50 L/h @1.5, 60 L/h @2.0 bar); el rango general de funcionamiento
+      si llega a 2.5 bar. Por lo tanto los 65.9 L/h a 2.41 bar son una EXTRAPOLACION DEL MODELO (Q=C*P^n),
+      NO un dato oficial de Hunter, y el radio a esa presion es desconocido.
+  A2. Cobertura: con radio 0.30 m se cubre el 95.0 % del cajon; quedan fuera el centro, las 4 esquinas y los
+      4 puntos medios de borde (distancia maxima al aspersor mas cercano 0.354 m). Escenario r = 0.36 m:
+      100 % cubierto, ~1.80 bar y ~56 L/h (INTERPOLADO de la tabla oficial; no es dato publicado);
+      bomba requerida ~18.2 m a 0.0618 L/s.
+  A3. K de check, YF-S201, electrovalvula y rama de aspersor son ESTIMADOS (con sensibilidad).
+  A4. Filtro >= 100 mesh / 150 micras (minimo Hunter): en BOM y esquema fisico; NO incluido aun en el modelo.
+  A5. El modelo (regimen permanente) no representa el presostato: el posible ciclado de la bomba de diafragma
+      con solo 4 microaspersores y su curva Q-H real deben probarse fisicamente.
+
+RESULTADOS CLAVE (escenario base)
+  Caudal total ........ 0.07326 L/s = 4.395 L/min (YF-S201: 33.0 Hz, dentro de 1-30 L/min)
+  Lateral 1 / 2 ....... 0.03663 / 0.03663 L/s
+  Aspersores E1-E4 .... presion 24.62 m (2.41 bar) c/u ; 65.93 L/h c/u = EXTRAPOLACION DEL MODELO
+  Bomba ............... 24.58 m a 0.07326 L/s (curva PROVISIONAL); succion +1.00 m
+  V principal ......... 0.450 m/s
+  Perdidas ............ distribuida 0.250 m, menores 0.770 m (toda la red); ruta critica 0.591 m
+  Diseno (1.5 bar, 200 L/h) -> bomba requerida 15.04 m a 0.0556 L/s
+  Cobertura r 0.36 m (1.80 bar, ~56 L/h interpolado) -> bomba requerida 18.18 m a 0.0618 L/s
+  Tuboplus ............ 5.722 m de 8.00 m (margen 2.278 m)
+  Masa ................ salida tinaco = suma 4 emisores = 0.073256 L/s
+
+ESTADO FINAL: OK (final 68 OK / 2 avisos / 0 fallas; presentacion 66 OK / 2 avisos / 0 fallas;
+              presentacion con resultados identicos al final, diferencia 0; EPANET 2.2 sin errores ni warnings)
+
+==========================================================================================
+SALIDA COMPLETA: validar_modelo.py (riego_huerto_v2_final.inp)
+==========================================================================================
+[OK   ] Seccion [TITLE]
+[OK   ] Seccion [JUNCTIONS]
+[OK   ] Seccion [RESERVOIRS]
+[OK   ] Seccion [PIPES]
+[OK   ] Seccion [PUMPS]
+[OK   ] Seccion [CURVES]
+[OK   ] Seccion [EMITTERS]
+[OK   ] Seccion [OPTIONS]
+[OK   ] Seccion [COORDINATES]
+[OK   ] Seccion [STATUS]
+[OK   ] Seccion [END]
+[OK   ] Unidades LPS  -> LPS
+[OK   ] Formula de perdidas Darcy-Weisbach (referencia principal)  -> D-W
+[OK   ] Enlaces con nodos existentes
+[OK   ] Sin nodos aislados
+[OK   ] Coordenadas para todos los nodos
+[OK   ] Fuente hidraulica R1 (tinaco) presente  -> ['R1', '1.190']
+[OK   ] Exactamente 2 laterales  -> ['L1', 'L2']
+[OK   ] Exactamente 4 emisores en [EMITTERS]  -> ['E1', 'E2', 'E3', 'E4']
+[OK   ] Aspersores modelados individualmente como EMITTERS (sin demanda equivalente)  -> {'E1': 0.0, 'E2': 0.0, 'E3': 0.0, 'E4': 0.0}
+[OK   ] Ningun otro nodo con demanda
+[OK   ] Bomba PU1 entre J-PIN y J-POUT
+[OK   ] Check CHK con Status CV  -> CV
+[OK   ] Sentido del check: tinaco -> bomba (Node1=J-TK aguas arriba de la bomba)
+[OK   ] Electrovalvula EV abierta (riego)
+[OK   ] Cadena TINACO-CHECK-BOMBA-YF-S201-ELECTROVALVULA-PRINCIPAL-SUBIDA-T en orden
+[OK   ] T distribuye a 2 brazos
+[OK   ] Diametro interior Tuboplus 14.40 mm (no 12.7)
+[OK   ] YF-S201 con D interior 11 mm
+[OK   ] Longitudes > 0
+[OK   ] Diametros > 0
+[OK   ] Rugosidad Tuboplus 0.007 mm
+[OK   ] Elevaciones: bomba +0.08, salida tinaco +0.265, laterales +0.53, boquillas +0.56  -> {'J-TK': 0.265, 'J-CHK': 0.265, 'J-C1': 0.265, 'J-C2': 0.08, 'J-PIN': 0.08, 'J-POUT': 0.08, 'J-FLOW': 0.08, 'J-FLOW2': 0.08, 'J-EV1': 0.08, 'J-EV2': 0.08, 'J-R1': 0.08, 'J-R2': 0.53, 'J-T': 0.53, 'J-CL': 0.53, 'J-CR': 0.53, 'T-E1': 0.53, 'T-E2': 0.53, 'T-E3': 0.53, 'T-E4': 0.53, 'E1': 0.56, 'E2': 0.56, 'E3': 0.56, 'E4': 0.56, 'TAP1': 0.53, 'TAP2': 0.53}
+[OK   ] Nivel de agua del tinaco = 1.19 m (PROVISIONAL)  -> 1.190
+[OK   ] Desnivel agua -> nivel de riego = 0.67 m  -> 0.670 m
+[OK   ] Tuboplus utilizado <= 8.00 m  -> 5.722 m
+[OK   ] Tuboplus utilizado <= 7.50 m (objetivo con margen)  -> 5.722 m (margen 2.278 m)
+[OK   ] Cortes vs. longitudes EPANET coherentes (cortes < c-c por las tomas de conexiones)  -> cortes 5.722 m < c-c 6.246 m
+[OK   ] EPANET 2.2 (runepanet.exe) ejecuta sin errores  -> ... EPANET ran successfully.
+[OK   ] Sin WARNINGS de EPANET 2.2
+[OK   ] WNTR parsea el archivo  -> 26 nodos, 25 enlaces
+[OK   ] Red conexa
+[OK   ] EPANET 2.2 (WNTR) y OWA-EPANET (EPyT) coinciden en caudales  -> version EPyT 20305, max dif 1.86e-09 L/s
+[OK   ] Masa: salida del tinaco = suma de 4 emisores  -> 0.073256 vs 0.073256 L/s
+[OK   ] Masa: flujo de rama = flujo del emisor en cada nodo
+[OK   ] Continuidad en la cadena en serie  -> max dif 0.00e+00 L/s
+[OK   ] Continuidad en la T: T-H = BR-L + BR-R
+[OK   ] Lateral 1 = E1 + E2 ; Lateral 2 = E3 + E4  -> L1 0.03663 L/s, L2 0.03663 L/s
+[OK   ] Tapones sin flujo
+[OK   ] Check con flujo positivo (abierto, tinaco->bomba)  -> 0.07326 L/s
+[OK   ] Electrovalvula con flujo (abierta)
+[OK   ] Caudal total dentro del rango util del YF-S201 (1-30 L/min)  -> 0.07326 L/s = 4.395 L/min -> 33.0 Hz
+[OK   ] Reparto equitativo entre laterales (<2 %)
+[OK   ] Uniformidad entre emisores (<1 %)  -> 65.93, 65.93, 65.93, 65.93 L/h
+[OK   ] Velocidad en Tuboplus < 1.5 m/s  -> max 0.450 m/s; principal 0.450 m/s
+[OK   ] Presion positiva en la succion de la bomba  -> 1.003 m
+[OK   ] Sin presiones negativas
+[OK   ] Presion de emisores dentro del rango Hunter 0.5-2.5 bar  -> 2.41, 2.41, 2.41, 2.41 bar
+[AVISO] Presion de emisores dentro de la tabla oficial Hunter (1.0-2.0 bar: 40/50/60 L/h)  -> 2.41 bar > 2.0 bar: el caudal 65.9 L/h es una EXTRAPOLACION DEL MODELO (Q=C*P^n), NO un dato oficial de Hunter; depende de la curva PROVISIONAL de bomba
+[OK   ] Distancia maxima al aspersor mas cercano = 0.354 m (centro, esquinas y puntos medios de bordes)  -> 0.3536 m en 9 puntos
+[AVISO] Cobertura con radio 0.30 m completa  -> 95.0 % del cajon; sin cubrir centro, 4 esquinas y 4 puntos medios de borde
+[OK   ] Escenario de cobertura radio 0.36 m cubre 100 %  -> 100.0 %
+[OK   ] Presion para radio objetivo dentro de la tabla oficial (interpolacion, no extrapolacion)  -> 1.80 bar, ~56 L/h (interpolado de la tabla Hunter; CALCULADO, no dato del fabricante)
+[OK   ] Perdidas: distribuida y menores calculadas  -> distribuida 0.2503 m, menores 0.7695 m
+[OK   ] Calculo manual D-W vs EPANET (tramos laminares/turbulentos) < 2 %  -> max 1.09 % en T-F
+[OK   ] Tramos en transicion: diferencia manual (Colebrook) vs EPANET (interpolacion) < 10 %  -> max 8.7 %
+[OK   ] Contraste con Tabla 11 oficial Tuboplus (0.05 L/s: j=0.013 m/m, v=0.31 m/s)  -> j=0.0132 m/m, v=0.307 m/s
+[OK   ] Balance de energia tinaco -> E1 (Bernoulli) cierra  -> residuo 5.70e-07 m
+[OK   ] Presentacion: secciones hidraulicas identicas al final
+[OK   ] Presentacion: resultados identicos al final  -> dif 0.00e+00
+
+RESULTADO: 68 OK, 2 AVISOS, 0 FALLAS
+ESTADO FINAL: OK
+
+==========================================================================================
+SALIDA: validar_modelo.py riego_huerto_v2_presentacion.inp (resumen)
+==========================================================================================
+[OK   ] EPANET 2.2 (runepanet.exe) ejecuta sin errores  -> ... EPANET ran successfully.
+[OK   ] Sin WARNINGS de EPANET 2.2
+[OK   ] EPANET 2.2 (WNTR) y OWA-EPANET (EPyT) coinciden en caudales  -> version EPyT 20305, max dif 1.86e-09 L/s
+[AVISO] Presion de emisores dentro de la tabla oficial Hunter (1.0-2.0 bar: 40/50/60 L/h)  -> 2.41 bar > 2.0 bar: el caudal 65.9 L/h es una EXTRAPOLACION DEL MODELO (Q=C*P^n), NO un dato oficial de Hunter; depende de la curva PROVISIONAL de bomba
+[AVISO] Cobertura con radio 0.30 m completa  -> 95.0 % del cajon; sin cubrir centro, 4 esquinas y 4 puntos medios de borde
+RESULTADO: 66 OK, 2 AVISOS, 0 FALLAS
+ESTADO FINAL: OK
+
+==========================================================================================
+SALIDA: MCP EPANET (tools/call) - modelos sin cambios desde esa corrida
+==========================================================================================
+SERVER: {'name': 'EPANET Simulation Server', 'version': '1.30.0'}
+
+=== MCP tool: run_epanet_simulation({'file_name': 'riego_huerto_v2_final.inp'})
+Results for: riego_huerto_v2_final.inp
+Source Path: Networks\riego_huerto_v2_final.inp
+Nodes: 25 | Pipes: 25
+Min Pressure: 0.86 Meters  | Max Velocity: 1.46 m/s
+
+=== MCP tool: get_pressures_less_than({'file_name': 'riego_huerto_v2_final.inp', 'threshold': 1.0})
+Nodes under 1.0 in riego_huerto_v2_final.inp: {'J-TK': np.float64(0.92), 'J-CHK': np.float64(0.89), 'J-C1': np.float64(0.86)}
+
+=== MCP tool: get_pipes_over({'file_name': 'riego_huerto_v2_final.inp', 'threshold': 0.5})
+Pipes over 0.5 in riego_huerto_v2_final.inp: {'YF': np.float64(0.77), 'RE1': np.float64(1.46), 'RE2': np.float64(1.46), 'RE3': np.float64(1.46), 'RE4': np.float64(1.46)}
+SERVER: {'name': 'EPANET Simulation Server', 'version': '1.30.0'}
+
+=== MCP tool: run_epanet_simulation({'file_name': 'riego_huerto_v2_presentacion.inp'})
+Results for: riego_huerto_v2_presentacion.inp
+Source Path: Networks\riego_huerto_v2_presentacion.inp
+Nodes: 25 | Pipes: 25
+Min Pressure: 0.86 Meters  | Max Velocity: 1.46 m/s
+
+=== MCP tool: get_pressures_less_than({'file_name': 'riego_huerto_v2_presentacion.inp', 'threshold': 1.0})
+Nodes under 1.0 in riego_huerto_v2_presentacion.inp: {'J-TK': np.float64(0.92), 'J-CHK': np.float64(0.89), 'J-C1': np.float64(0.86)}
+
+=== MCP tool: get_pipes_over({'file_name': 'riego_huerto_v2_presentacion.inp', 'threshold': 0.5})
+Pipes over 0.5 in riego_huerto_v2_presentacion.inp: {'YF': np.float64(0.77), 'RE1': np.float64(1.46), 'RE2': np.float64(1.46), 'RE3': np.float64(1.46), 'RE4': np.float64(1.46)}
+
+==========================================================================================
+SALIDA: EPANET 2.2 runepanet.exe - reporte de riego_huerto_v2_final.inp
+==========================================================================================
+  Hydraulic Status:
+  -----------------------------------------------------------------------
+     0:00:00: Balanced after 9 trials
+     0:00:00: Reservoir R1 is emptying
+   
+   
+  Node Results:
+  ----------------------------------------------
+                     Demand      Head  Pressure
+  Node                  L/s         m         m
+  ----------------------------------------------
+  J-TK                 0.00      1.18      0.92
+  J-CHK                0.00      1.15      0.89
+  J-C1                 0.00      1.13      0.86
+  J-C2                 0.00      1.10      1.02
+  J-PIN                0.00      1.08      1.00
+  J-POUT               0.00     25.67     25.59
+  J-FLOW               0.00     25.65     25.57
+  J-FLOW2              0.00     25.58     25.50
+  J-EV1                0.00     25.57     25.49
+  J-EV2                0.00     25.49     25.41
+  J-R1                 0.00     25.39     25.31
+  J-R2                 0.00     25.36     24.83
+  J-T                  0.00     25.33     24.80
+  J-CL                 0.00     25.33     24.80
+  J-CR                 0.00     25.33     24.80
+  T-E1                 0.00     25.32     24.79
+  T-E2                 0.00     25.32     24.79
+  T-E3                 0.00     25.32     24.79
+  T-E4                 0.00     25.32     24.79
+  E1                   0.02     25.18     24.62
+  E2                   0.02     25.18     24.62
+  E3                   0.02     25.18     24.62
+  E4                   0.02     25.18     24.62
+  TAP1                 0.00     25.32     24.79
+  TAP2                 0.00     25.32     24.79
+  R1                  -0.07      1.19     -0.00  Reservoir
+   
+   
+  Link Results:
+  ----------------------------------------------
+                       Flow  Velocity  Headloss
+  Link                  L/s       m/s    /1000m
+  ----------------------------------------------
+  P-TK                 0.07      0.45    154.55
+  CHK                  0.07      0.45    531.67
+  T-A                  0.07      0.45    203.68
+  T-B                  0.07      0.45    137.15
+  T-C                  0.07      0.45     56.61
+  T-D                  0.07      0.45    130.70
+  YF                   0.07      0.77   1068.91
+  T-E                  0.07      0.45     87.26
+  EV                   0.07      0.45    953.62
+  T-F                  0.07      0.45     34.57
+  T-G                  0.07      0.45     71.53
+  T-H                  0.07      0.45    298.92
+  BR-L                 0.04      0.22     26.94
+  BR-R                 0.04      0.22     26.94
+  L1-A                 0.04      0.22     15.83
+  L1-B                 0.02      0.11      2.84
+  L1-T                 0.00      0.00      0.00
+  L2-A                 0.04      0.22     15.83
+  L2-B                 0.02      0.11      2.84
+  L2-T                 0.00      0.00      0.00
+  RE1                  0.02      1.46   4652.12
+  RE2                  0.02      1.46   4651.81
+  RE3                  0.02      1.46   4652.12
+  RE4                  0.02      1.46   4651.81
+  PU1                  0.07      0.00    -24.58  Pump
+   
+  Analysis ended Wed Sep 30 22:09:43 2026

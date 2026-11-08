@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Si usas o recreas este proyecto, por favor cítalo así."
+title: "AquaHuerto Escolar: sistema de riego inteligente con ESP32, energía solar, Raspberry Pi e IA"
+type: software
+date-released: 2026-11-07
+license: MIT
+repository-code: "https://github.com/JSantiagoGR/AquaHuerto-Escolar"
+authors:
+  - family-names: "Galaviz Reaza"
+    given-names: "Jaime Santiago"
+    website: "https://www.linkedin.com/in/santiagogalaviz"
+  - family-names: "Garcia"
+    given-names: "Eyra Cristal"
+  - family-names: "Palicio Torres"
+    given-names: "Victor Manuel"
+keywords:
+  - riego automático
+  - ESP32
+  - IoT
+  - MQTT
+  - Node-RED
+  - Raspberry Pi
+  - energía solar
+  - huerto escolar
+  - EPANET
+  - Blender

@@ -1,0 +1,30 @@
+PRUEBA DE CAMPO (Pi + esp32_principal, batería de 12 V desconectada) 2026-10-13 10:00
+[PASS] Configuración del Node-RED del profesor y del Mosquitto del sistema sin cambios
+[PASS] Node-RED de los equipos (1880/ui) responde
+[PASS] Instancia propia: Node-RED 1881 y broker 1884 escuchando
+[PASS] Arranque automático configurado (@reboot)
+[PASS] Las 10 páginas del dashboard responden sin contraseña (200)
+[PASS] Editor/API protegidos (401 sin usuario)
+[PASS] ESP32 publica estado con firmware riego-2.0.0
+[PASS] Modo MANUAL y potencia habilitada (autorizada por el equipo)
+[PASS] Telemetría real cada 10 s con hora NTP
+[PASS] DHT22 real válido (temperatura y HR plausibles)
+[PASS] EC-5 sin conectar se reporta inválido (no se inventa)
+[PASS] GET_STATUS -> ACK OK
+[PASS] Comando repetido -> DUPLICATE
+[PASS] Comando viejo (10 min) -> STALE (no riega)
+[PASS] Configuración inválida -> REJECTED
+[PASS] SET_MODE AUTOMATICO -> OK
+[PASS] SET_MODE MANUAL -> OK
+[PASS] START_MANUAL 0.3 L -> ACK OK (potencia habilitada)
+[PASS] Válvula y bomba se activan (relevadores conmutan)
+[PASS] Sin agua (batería desconectada) -> se corta solo por NO_FLOW
+[PASS] Bomba y válvula quedan apagadas
+[PASS] Alarma NO_FLOW publicada
+[PASS] CLEAR_ALARM NO_FLOW -> OK
+[PASS] Segundo riego de prueba -> ACK OK
+[PASS] STOP durante el riego -> STOP_CMD
+[PASS] La Pi guarda los riegos de prueba en SQLite
+[PASS] La Pi guarda telemetría REAL (simulated=0)
+[PASS] La alerta NO_FLOW queda registrada en la Pi
+RESULTADO: 28 PASS, 0 FAIL

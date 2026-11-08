@@ -1,0 +1,995 @@
+{
+ "version": 1,
+ "generado": "2026-10-11",
+ "fuentes": {
+  "FAO56-T11": "FAO Riego y Drenaje 56, Tabla 11 - https://www.fao.org/4/x0490e/x0490e0b.htm",
+  "FAO56-T12": "FAO Riego y Drenaje 56, Tabla 12 - https://www.fao.org/4/x0490e/x0490e0b.htm",
+  "FAO56-T22": "FAO Riego y Drenaje 56, Tabla 22 y Ec. 82-83 - https://www.fao.org/4/x0490e/x0490e0e.htm",
+  "ACES-1061": "Alabama Cooperative Extension System ANR-1061 - https://www.aces.edu/wp-content/uploads/2023/03/ANR-1061_SoilTemperatureConditionsforVegetableSeedGermination_030623bL-G.pdf",
+  "WVU-HT": "West Virginia University / SARE, Temperature Management in High Tunnels - https://sare.org/wp-content/uploads/Temperature-Management-in-High-Tunnels.pdf",
+  "PURDUE-GDD": "Purdue MRCC, Growing Degree Day description - https://mrcc.purdue.edu/resources/growing-degree-day-description",
+  "WISC-GDD": "University of Wisconsin Extension (hort.extension.wisc.edu) - umbral GDD comun 50 F; clima fresco 40 F"
+ },
+ "metodo_umbrales_vwc": {
+  "formula": "theta(d) = thetaFC - d*(thetaFC - thetaWP); d = fraccion de agotamiento del agua disponible (TAW)",
+  "maxima": "d = 0 (capacidad de campo)",
+  "reserva": "d = min(0.10, p/4)",
+  "objetivo": "d = p_aj/2",
+  "minima": "d = p_aj (inicio de estres, RAW = p*TAW)",
+  "emergencia": "d = min(p_aj + 0.20, 0.85)",
+  "p_aj": "p + 0.04*(5 - ETc), ETc = Kc_etapa * ET0 (Open-Meteo), limitado a 0.1-0.8",
+  "requisito": "thetaFC y thetaWP medidos con el EC-5 en el suelo real; sin ellos: PENDIENTE_DE_CALIBRACION"
+ },
+ "cultivos": [
+  {
+   "id": "lechuga",
+   "nombre": "Lechuga",
+   "cientifico": "Lactuca sativa",
+   "familia": "Asteraceae",
+   "temporada": "fresca",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 25,
+     "kc": 0.7,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo vegetativo",
+     "dias": 35,
+     "kc": 0.85,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Crecimiento máximo",
+     "dias": 30,
+     "kc": 1.0,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Cosecha",
+     "dias": 10,
+     "kc": 0.95,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 100,
+   "fila_fao_t11": "25/35/30/10 = 100 d, Oct/Nov, Arid Region",
+   "kc": {
+    "ini": 0.7,
+    "mid": 1.0,
+    "end": 0.95,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.3,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.3,
+    0.5
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 1.7,
+    "opt_min_c": 4.4,
+    "opt_max_c": 26.7,
+    "max_c": 29.4,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": 15.6,
+    "opt_max_c": 18.3,
+    "max_c": 23.9,
+    "fuente": "WVU-HT (hortalizas de hoja)"
+   },
+   "gdd": {
+    "base_c": 4.4,
+    "fuente": "PURDUE-GDD (lettuce 40 °F)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA-ALTA",
+    "texto": "p = 0.3: conviene riegos frecuentes y ligeros"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Raíz superficial: riego frecuente. El calor excesivo favorece la floración prematura.",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "WVU-HT (hortalizas de hoja)",
+    "PURDUE-GDD (lettuce 40 °F)"
+   ]
+  },
+  {
+   "id": "espinaca",
+   "nombre": "Espinaca",
+   "cientifico": "Spinacia oleracea",
+   "familia": "Amaranthaceae",
+   "temporada": "fresca",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 20,
+     "kc": 0.7,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo vegetativo",
+     "dias": 30,
+     "kc": 0.85,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Crecimiento máximo",
+     "dias": 40,
+     "kc": 1.0,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Cosecha",
+     "dias": 10,
+     "kc": 0.95,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 100,
+   "fila_fao_t11": "20/30/40/10 = 100 d, November, Arid Region",
+   "kc": {
+    "ini": 0.7,
+    "mid": 1.0,
+    "end": 0.95,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.2,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.3,
+    0.5
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 1.7,
+    "opt_min_c": 7.2,
+    "opt_max_c": 23.9,
+    "max_c": 29.4,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": 15.6,
+    "opt_max_c": 18.3,
+    "max_c": 23.9,
+    "fuente": "WVU-HT (hortalizas de hoja)"
+   },
+   "gdd": {
+    "base_c": 4.4,
+    "fuente": "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "ALTA",
+    "texto": "p = 0.2: tolera poco agotamiento del agua disponible antes de estresarse"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "La más sensible al déficit hídrico de la lista (p = 0.20).",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "WVU-HT (hortalizas de hoja)",
+    "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   ]
+  },
+  {
+   "id": "rabano",
+   "nombre": "Rábano",
+   "cientifico": "Raphanus sativus",
+   "familia": "Brassicaceae",
+   "temporada": "fresca",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 10,
+     "kc": 0.7,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo de hojas",
+     "dias": 10,
+     "kc": 0.8,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Engrosamiento de raíz",
+     "dias": 15,
+     "kc": 0.9,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 5,
+     "kc": 0.85,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 40,
+   "fila_fao_t11": "10/10/15/5 = 40 d, Winter, Arid Region",
+   "kc": {
+    "ini": 0.7,
+    "mid": 0.9,
+    "end": 0.85,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.3,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.3,
+    0.5
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 4.4,
+    "opt_min_c": 7.2,
+    "opt_max_c": 32.2,
+    "max_c": 35.0,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": null,
+    "opt_max_c": null,
+    "max_c": null,
+    "fuente": "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo"
+   },
+   "gdd": {
+    "base_c": 4.4,
+    "fuente": "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA-ALTA",
+    "texto": "p = 0.3: conviene riegos frecuentes y ligeros"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Ciclo muy corto; la humedad irregular puede agrietar la raíz.",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo",
+    "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   ]
+  },
+  {
+   "id": "zanahoria",
+   "nombre": "Zanahoria",
+   "cientifico": "Daucus carota",
+   "familia": "Apiaceae",
+   "temporada": "fresca",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 20,
+     "kc": 0.7,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo de hojas",
+     "dias": 30,
+     "kc": 0.88,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Engrosamiento de raíz",
+     "dias": 50,
+     "kc": 1.05,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 20,
+     "kc": 0.95,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 120,
+   "fila_fao_t11": "20/30/50/20 = 120 d, Oct/Jan, Arid climate (FAO da 50/30 d en etapa media)",
+   "kc": {
+    "ini": 0.7,
+    "mid": 1.05,
+    "end": 0.95,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.35,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.5,
+    1.0
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 4.4,
+    "opt_min_c": 7.2,
+    "opt_max_c": 29.4,
+    "max_c": 35.0,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": null,
+    "opt_max_c": null,
+    "max_c": null,
+    "fuente": "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo"
+   },
+   "gdd": {
+    "base_c": 4.4,
+    "fuente": "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA-ALTA",
+    "texto": "p = 0.35: conviene riegos frecuentes y ligeros"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "La germinación requiere superficie húmeda constante.",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo",
+    "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   ]
+  },
+  {
+   "id": "cebolla",
+   "nombre": "Cebolla (bulbo)",
+   "cientifico": "Allium cepa",
+   "familia": "Amaryllidaceae",
+   "temporada": "fresca",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 20,
+     "kc": 0.7,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo de hojas",
+     "dias": 35,
+     "kc": 0.88,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Formación de bulbo",
+     "dias": 110,
+     "kc": 1.05,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 45,
+     "kc": 0.75,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 210,
+   "fila_fao_t11": "20/35/110/45 = 210 d, Oct; Jan, Arid Region; Calif.",
+   "kc": {
+    "ini": 0.7,
+    "mid": 1.05,
+    "end": 0.75,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.3,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.3,
+    0.6
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 1.7,
+    "opt_min_c": 10.0,
+    "opt_max_c": 35.0,
+    "max_c": 35.0,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": null,
+    "opt_max_c": null,
+    "max_c": null,
+    "fuente": "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo"
+   },
+   "gdd": {
+    "base_c": 4.4,
+    "fuente": "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA-ALTA",
+    "texto": "p = 0.3: conviene riegos frecuentes y ligeros"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Reducir el riego al madurar el bulbo (Kc final 0.75).",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo",
+    "WISC-GDD (base típica de hortalizas de clima fresco; verificar para el cultivo)"
+   ]
+  },
+  {
+   "id": "tomate",
+   "nombre": "Tomate",
+   "cientifico": "Solanum lycopersicum",
+   "familia": "Solanaceae",
+   "temporada": "cálida",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 30,
+     "kc": 0.6,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo vegetativo",
+     "dias": 40,
+     "kc": 0.88,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Floración y fructificación",
+     "dias": 40,
+     "kc": 1.15,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 25,
+     "kc": 0.8,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 135,
+   "fila_fao_t11": "30/40/40/25 = 135 d, January, Arid Region",
+   "kc": {
+    "ini": 0.6,
+    "mid": 1.15,
+    "end": 0.8,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.4,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.7,
+    1.5
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 10.0,
+    "opt_min_c": 21.1,
+    "opt_max_c": 35.0,
+    "max_c": 35.0,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": 21.1,
+    "opt_max_c": 23.9,
+    "max_c": 29.4,
+    "fuente": "WVU-HT (tomate, floración a cosecha)"
+   },
+   "gdd": {
+    "base_c": 10.0,
+    "fuente": "PURDUE-GDD (tomato 50 °F)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA",
+    "texto": "p = 0.4: tolera agotamiento moderado"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Riego irregular en fructificación favorece pudrición apical y rajado. Kc final 0.70-0.90 (FAO).",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "WVU-HT (tomate, floración a cosecha)",
+    "PURDUE-GDD (tomato 50 °F)"
+   ]
+  },
+  {
+   "id": "pimiento",
+   "nombre": "Pimiento / chile morrón",
+   "cientifico": "Capsicum annuum",
+   "familia": "Solanaceae",
+   "temporada": "cálida",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 30,
+     "kc": 0.6,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo vegetativo",
+     "dias": 35,
+     "kc": 0.82,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Floración y fructificación",
+     "dias": 40,
+     "kc": 1.05,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 20,
+     "kc": 0.9,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 125,
+   "fila_fao_t11": "25-30/35/40/20 = 125 d, April/June, Europe and Medit.",
+   "kc": {
+    "ini": 0.6,
+    "mid": 1.05,
+    "end": 0.9,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.3,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.5,
+    1.0
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 15.6,
+    "opt_min_c": 18.3,
+    "opt_max_c": 35.0,
+    "max_c": 35.0,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": 21.1,
+    "opt_max_c": 26.7,
+    "max_c": 31.1,
+    "fuente": "WVU-HT (chile/pimiento: máx. 85-90 °F)"
+   },
+   "gdd": {
+    "base_c": 10.0,
+    "fuente": "WISC-GDD (umbral común 50 °F para cultivos de clima cálido; verificar)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA-ALTA",
+    "texto": "p = 0.3: conviene riegos frecuentes y ligeros"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Sensible al déficit en floración: caída de flores.",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "WVU-HT (chile/pimiento: máx. 85-90 °F)",
+    "WISC-GDD (umbral común 50 °F para cultivos de clima cálido; verificar)"
+   ]
+  },
+  {
+   "id": "pepino",
+   "nombre": "Pepino",
+   "cientifico": "Cucumis sativus",
+   "familia": "Cucurbitaceae",
+   "temporada": "cálida",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 20,
+     "kc": 0.6,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo vegetativo",
+     "dias": 30,
+     "kc": 0.8,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Floración y fructificación",
+     "dias": 40,
+     "kc": 1.0,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 15,
+     "kc": 0.75,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 105,
+   "fila_fao_t11": "20/30/40/15 = 105 d, June/Aug, Arid Region",
+   "kc": {
+    "ini": 0.6,
+    "mid": 1.0,
+    "end": 0.75,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.5,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.7,
+    1.2
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 15.6,
+    "opt_min_c": 15.6,
+    "opt_max_c": 35.0,
+    "max_c": 40.6,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": 21.1,
+    "opt_max_c": 29.4,
+    "max_c": 32.2,
+    "fuente": "WVU-HT (cucurbitáceas)"
+   },
+   "gdd": {
+    "base_c": 12.8,
+    "fuente": "PURDUE-GDD (cucumber 55 °F)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA-BAJA",
+    "texto": "p = 0.5: raíz más profunda, tolera más agotamiento (sensible en floración/fructificación)"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Kc ini 0.6 (mercado fresco, FAO). Fruto con alto contenido de agua: evitar déficit en fructificación.",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "WVU-HT (cucurbitáceas)",
+    "PURDUE-GDD (cucumber 55 °F)"
+   ]
+  },
+  {
+   "id": "calabacita",
+   "nombre": "Calabacita",
+   "cientifico": "Cucurbita pepo",
+   "familia": "Cucurbitaceae",
+   "temporada": "cálida",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 25,
+     "kc": 0.5,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo vegetativo",
+     "dias": 35,
+     "kc": 0.72,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Floración y fructificación",
+     "dias": 25,
+     "kc": 0.95,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 15,
+     "kc": 0.75,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 100,
+   "fila_fao_t11": "25/35/25/15 = 100 d, Apr; Dec, Medit.; Arid Reg.",
+   "kc": {
+    "ini": 0.5,
+    "mid": 0.95,
+    "end": 0.75,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.5,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.6,
+    1.0
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 15.6,
+    "opt_min_c": 21.1,
+    "opt_max_c": 35.0,
+    "max_c": 37.8,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": 21.1,
+    "opt_max_c": 29.4,
+    "max_c": 32.2,
+    "fuente": "WVU-HT (cucurbitáceas)"
+   },
+   "gdd": {
+    "base_c": 7.2,
+    "fuente": "PURDUE-GDD (squash 45 °F; fuente única, verificar)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA-BAJA",
+    "texto": "p = 0.5: raíz más profunda, tolera más agotamiento (sensible en floración/fructificación)"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Cosecha escalonada desde la etapa media.",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "WVU-HT (cucurbitáceas)",
+    "PURDUE-GDD (squash 45 °F; fuente única, verificar)"
+   ]
+  },
+  {
+   "id": "frijol_ejotero",
+   "nombre": "Frijol ejotero",
+   "cientifico": "Phaseolus vulgaris",
+   "familia": "Fabaceae",
+   "temporada": "cálida",
+   "tipo": "base",
+   "etapas": [
+    {
+     "clave": "inicial",
+     "nombre": "Establecimiento",
+     "dias": 20,
+     "kc": 0.5,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "desarrollo",
+     "nombre": "Desarrollo vegetativo",
+     "dias": 30,
+     "kc": 0.78,
+     "kc_nota": "promedio ini-mid (Kc varía linealmente en desarrollo)"
+    },
+    {
+     "clave": "media",
+     "nombre": "Floración y fructificación",
+     "dias": 30,
+     "kc": 1.05,
+     "kc_nota": "FAO-56 Tabla 12"
+    },
+    {
+     "clave": "final",
+     "nombre": "Maduración y cosecha",
+     "dias": 10,
+     "kc": 0.9,
+     "kc_nota": "Kc al final del ciclo"
+    }
+   ],
+   "ciclo_total_dias": 90,
+   "fila_fao_t11": "20/30/30/10 = 90 d, Feb/Mar, Calif., Mediterranean",
+   "kc": {
+    "ini": 0.5,
+    "mid": 1.05,
+    "end": 0.9,
+    "fuente": "FAO56-T12"
+   },
+   "p_agotamiento": 0.45,
+   "p_fuente": "FAO56-T22 (para ETc ~5 mm/d; se ajusta con p + 0.04(5-ETc))",
+   "raiz_m": [
+    0.5,
+    0.7
+   ],
+   "raiz_fuente": "FAO56-T22",
+   "temp_germinacion_suelo": {
+    "min_c": 15.6,
+    "opt_min_c": 18.3,
+    "opt_max_c": 29.4,
+    "max_c": 35.0,
+    "fuente": "ACES-1061"
+   },
+   "temp_aire_crecimiento": {
+    "opt_min_c": null,
+    "opt_max_c": null,
+    "max_c": null,
+    "fuente": "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo"
+   },
+   "gdd": {
+    "base_c": 10.0,
+    "fuente": "PURDUE-GDD (snap bean 50 °F)"
+   },
+   "sensibilidad_deficit": {
+    "nivel": "MEDIA",
+    "texto": "p = 0.45: tolera agotamiento moderado"
+   },
+   "humedad_vwc": {
+    "estado": "PENDIENTE_DE_CALIBRACION",
+    "nota": "Se calcula con capacidad de campo y punto de marchitez medidos con el EC-5 en el suelo real"
+   },
+   "horarios": {
+    "win1": [
+     "06:00",
+     "09:00"
+    ],
+    "win2": [
+     "18:00",
+     "20:00"
+    ]
+   },
+   "notas": "Kc ini 0.5 (FAO, ejote). Sensible al déficit en floración y llenado de vaina.",
+   "fuentes": [
+    "FAO56-T11",
+    "FAO56-T12",
+    "FAO56-T22",
+    "ACES-1061",
+    "PENDIENTE: no se encontró una tabla de extensión con temperatura del aire para este cultivo",
+    "PURDUE-GDD (snap bean 50 °F)"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+{"name":"riego-nodered-userdir","private":true,"description":"Directorio de usuario Node-RED aislado - Riego casa","dependencies":{"@flowfuse/node-red-dashboard":"^1.33.0","node-red-node-sqlite":"^2.0.1"},"allowScripts":{"sqlite3@6.0.1":true}}

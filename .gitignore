@@ -1,0 +1,24 @@
+# Secretos y datos locales: NUNCA versionar
+**/secrets/
+**/sdkconfig
+**/sdkconfig.old
+**/sdkconfig.secrets
+**/passwd
+**/*_cred.json
+**/.config.runtime.json
+**/.config.users.json*
+**/.sessions.json
+**/*.db
+**/*.db-*
+**/.env
+**/backups/
+# Generados / pesados
+**/node_modules/
+**/.venv/
+**/build*/
+**/managed_components/
+**/__pycache__/
+*.pyc
+*.log
+*.blend1
+~$*

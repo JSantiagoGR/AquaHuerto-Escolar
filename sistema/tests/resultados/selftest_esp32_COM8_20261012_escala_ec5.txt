@@ -1,0 +1,54 @@
+> LOG
+> SELFTEST
+SELFTEST INICIO (logica pura, entradas y reloj virtuales, sin GPIO)
+SELFTEST 01 Tierra seca inicia riego automatico              PASS
+SELFTEST 02 Humedad adecuada no riega                        PASS
+SELFTEST 03 Tierra sobre el maximo bloquea agua              PASS
+SELFTEST 04 Tinaco lleno permite riego                       PASS
+SELFTEST 05 Tinaco vacio bloquea riego                       PASS
+SELFTEST 06 Sensor de tinaco sin datos bloquea               PASS
+SELFTEST 07 EC-5 invalido no riega                           PASS
+SELFTEST 08 Caudal normal entrega 1 L por pulsos             PASS
+SELFTEST 09 Sin flujo -> falla NO_FLOW y todo apagado        PASS
+SELFTEST 10 Pulsos erraticos -> falla FLOW_HIGH              PASS
+SELFTEST 11 Manual 1 L: valvula antes, bomba, cierre         PASS
+SELFTEST 12 Automatico por humedad baja completa ciclo       PASS
+SELFTEST 13 Espera de infiltracion con salidas apagadas      PASS
+SELFTEST 14 Segundo ciclo si continua seco                   PASS
+SELFTEST 15 Fin del evento al alcanzar objetivo              PASS
+SELFTEST 16 Maximo de ciclos por evento                      PASS
+SELFTEST 17 Maximo de litros diarios                         PASS
+SELFTEST 18 STOP inmediato durante riego                     PASS
+SELFTEST 19 Sin MQTT el riego termina con limites locales    PASS
+SELFTEST 20 Parametros invalidos rechazados                  PASS
+SELFTEST 21 Reinicio durante riego: no reanuda y alarma      PASS
+SELFTEST 22 Falla del sensor ambiental alarma pero no bloquea PASS
+SELFTEST 23 Recuperacion tras CLEAR_ALARM                    PASS
+SELFTEST 24 Sin hora: no hay horario; emergencia limitada    PASS
+SELFTEST 25 Mediodia y fuera de horario posponen             PASS
+SELFTEST 26 Temperatura alta pospone riego rutinario         PASS
+SELFTEST 27 Suelo sin respuesta bloquea el automatico        PASS
+SELFTEST 28 Emergencia: un ciclo y espera entre emergencias  PASS
+SELFTEST 29 Flujo con todo apagado -> falla                  PASS
+SELFTEST 30 Manual rechazado durante evento automatico       PASS
+SELFTEST 31 Sin potencia: decide pero nunca riega            PASS
+SELFTEST 32 Modo MANUAL no inicia riegos solo                PASS
+SELFTEST 33 Reserva/maximo detienen nuevos ciclos            PASS
+SELFTEST 34 Histeresis: solo bajo (objetivo - histeresis)    PASS
+SELFTEST 35 Lluvia prevista pospone rutina, no emergencia    PASS
+SELFTEST 36 Manual hacia objetivo por dosis e infiltracion   PASS
+SELFTEST 37 IA en aprendizaje usa el automatico              PASS
+SELFTEST 38 IA activa: no riega si no hace falta             PASS
+SELFTEST 39 IA: dosis del modelo y correccion acotada        PASS
+SELFTEST 40 IA: emergencia aun fuera de horario              PASS
+SELFTEST 41 Cambio de modo seguro durante un evento          PASS
+SELFTEST 42 Horizonte del plan hasta el siguiente horario    PASS
+SELFTEST 43 Orden emergencia<min<obj<reserva<=max            PASS
+SELFTEST 44 IA aprende ganancia y secado (RLS)               PASS
+SELFTEST 45 IA descarta atipicos aislados                    PASS
+SELFTEST 46 IA detecta cambio y se adapta sin borrar         PASS
+SELFTEST 47 Plan IA: minima dosis y limites                  PASS
+SELFTEST FIN: 47 PASS, 0 FAIL
+SELFTEST 48 Comandos MQTT duplicados se descartan            PASS
+SELFTEST 49 Conversiones EC-5 (Act. 2.2) y nivel             PASS
+SELFTEST TOTAL: 49 PASS, 0 FAIL

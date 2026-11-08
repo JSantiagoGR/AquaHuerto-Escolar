@@ -1,0 +1,9 @@
+# Compilación
+build/
+managed_components/
+dependencies.lock
+
+# Contienen credenciales: NO versionar
+sdkconfig
+sdkconfig.old
+sdkconfig.secrets

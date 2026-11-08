@@ -1,0 +1,21 @@
+[14:43:33] === PRUEBA FINAL esp32_principal ===
+[14:43:33] [FAIL] ESP32 en línea y respondiendo -> uptime None s, rssi None
+[14:43:33] [PASS] Máximo diario 30 L -> Configuracion v526 aplicada y guardada (1 parametros)
+[14:43:35] [PASS] Modo MANUAL -> Modo MANUAL activo (sin cambios)
+[14:43:35] Antes: suelo None %VWC, hoy 0 L, tinaco None %
+[14:43:37] [PASS] START_MANUAL 2 L aceptado -> Riego manual de 2.00 L iniciado
+[14:44:21] [PASS] Abre primero la válvula y luego la bomba (separación ~1.5 s) -> válvula->bomba 1.3 s
+[14:44:21] [PASS] Pasa agua (caudal medido) -> caudal 3.02 L/min
+[14:44:21] [PASS] Riego termina en TARGET con ~2 L -> {'result': 'TARGET', 'delivered_l': 2.051, 'duration_s': 42.8, 'pulses': 923}
+[14:44:26] [PASS] Sin reinicio durante el riego -> uptime 2789 -> 2834 s
+[14:44:26] [PASS] Bomba y válvula apagadas al terminar -> B=False V=False
+[14:44:34] [PASS] START_MANUAL 1 L aceptado -> Riego manual de 1.00 L iniciado
+[14:44:47] STOP enviado -> OK
+[14:44:47] [PASS] STOP detiene el riego (STOP_CMD) -> {'result': 'STOP_CMD', 'delivered_l': 0.622, 'duration_s': 13.5}
+[14:44:52] [PASS] Tras STOP: bomba y válvula apagadas, sin reinicio -> B=False V=False uptime 2861
+[14:45:02] [PASS] La Pi guardó los 2 riegos en su base de datos -> 2 | (1, 200)
+[14:45:02] [PASS] Pronóstico Open-Meteo vigente en el ESP32 -> ET0 24h 4.59 mm, lluvia 6h 0 mm
+[14:45:02] IA: APRENDIZAJE, 1 riegos aprendidos, 0 h de secado
+[14:45:02] Después: suelo 21 %VWC (antes None), hoy 5.16 L
+[14:45:04] [PASS] Modo AUTOMATICO activado (recolecta datos para la IA) -> Modo AUTOMATICO activo
+[14:45:05] RESULTADO: 14 PASS, 1 FAIL

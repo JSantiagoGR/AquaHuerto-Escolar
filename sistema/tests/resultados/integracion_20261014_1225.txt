@@ -1,0 +1,31 @@
+PRUEBAS DE INTEGRACION (simulador sim_01 + broker + Node-RED + SQLite) 2026-10-14 12:25
+[PASS] Broker rechaza clientes anónimos 
+[PASS] ACL: el simulador NO puede enviar comandos al ESP32 real 
+[PASS] SET_MODE AUTOMATICO -> ACK OK con modo aplicado 
+[PASS] Comando con id repetido -> DUPLICATE 
+[PASS] Comando de riego RETENIDO al reconectar -> se ignora (RETAINED) 
+[PASS] Comando antiguo (ts -10 min) -> STALE 
+[PASS] Configuración inválida (mín > óptima) -> REJECTED y versión sin cambio 
+[PASS] Configuración válida -> OK con version_applied 
+[PASS] Riego manual 0.5 L termina por volumen (TARGET) 
+[PASS] Node-RED guarda el riego en SQLite 
+[PASS] STOP durante el riego -> STOP_CMD 
+[PASS] Falla del EC-5 simulada -> alarma SOIL_SENSOR 
+[PASS] La alerta queda registrada en SQLite 
+[PASS] Emergencia (15 %VWC a las 13:00) -> riego EMERGENCY limitado a emergency_liters (1.9 L) 
+[PASS] Mañana 06:30 con 30 %VWC (bajo óptima-histéresis) -> riego SCHEDULED 
+[PASS] Pronóstico de lluvia en modo IA -> pospone el riego rutinario (RAIN_EXPECTED) 
+[PASS] Lluvia simulada -> evento POSIBLE_LLUVIA (sin litros de bomba) 
+[PASS] El evento de lluvia queda en SQLite 
+[PASS] Riego externo simulado -> POSIBLE_RIEGO_EXTERNO 
+[PASS] IA del simulador publica estado y plan 
+[PASS] SET_MODE IA -> ACK OK 
+[PASS] Pérdida de MQTT -> mensaje de última voluntad (offline) 
+[PASS] Reconexión automática -> online 
+[PASS] Desconexión y reconexión registradas en SQLite 
+[PASS] Lecturas del simulador guardadas y marcadas como simuladas 
+[PASS] Open-Meteo real consultado por HTTPS (HTTP 200) 
+[PASS] Exportación CSV desde esta PC 
+[PASS] Dashboard abierto en la red local (DASHBOARD_PUBLIC=1, igual que la Pi) 
+[PASS] Editor/Admin API de Node-RED protegido (401 sin token) 
+RESULTADO: 29 PASS, 0 FAIL

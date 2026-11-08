@@ -1,0 +1,21 @@
+escenario,descripcion,epanet22_ok,mensajes_epanet,Q_total_Ls,Q_total_Lmin,Q_L1_Ls,Q_L2_Ls,Q_L3_Ls,P_min_m_PRELIM,P_max_m_PRELIM,P_min_bar_PRELIM,P_max_bar_PRELIM,uniformidad_hidraulica_presion_PminPmax,H_bomba_m,P_succion_m,V_principal_ms,V_manguera_max_ms,YF_Hz,margen_vs_6Lmin_pct,viable_hidraulicamente
+Q20,20 L/h por aspersor impuesto (x9 = 3.00 L/min); apertura fisica desconocida,True,,0.05000,3.000,0.01667,0.01667,0.01667,45.247,45.250,4.431,4.431,0.9999,45.960,1.006,0.3070,0.1474,22.5,50.0,SI
+Q25,25 L/h por aspersor impuesto (x9 = 3.75 L/min); apertura fisica desconocida,True,,0.06250,3.750,0.02083,0.02083,0.02083,33.554,33.558,3.286,3.286,0.9999,34.471,0.950,0.3838,0.1842,28.1,37.5,SI
+Q30,30 L/h por aspersor impuesto (x9 = 4.50 L/min); apertura fisica desconocida,True,,0.07500,4.500,0.02500,0.02500,0.02500,21.816,21.821,2.136,2.137,0.9998,22.981,0.882,0.4605,0.2210,33.7,25.0,SI
+Q35,35 L/h por aspersor impuesto (x9 = 5.25 L/min); apertura fisica desconocida,True,,0.08750,5.250,0.02917,0.02917,0.02917,10.034,10.041,0.983,0.983,0.9993,11.490,0.802,0.5373,0.2579,39.4,12.5,SI
+Q40,40 L/h por aspersor impuesto (x9 = 6.00 L/min); apertura fisica desconocida,False,WARNING: Negative pressures at 0:00:00 hrs.,0.10000,6.000,0.03333,0.03333,0.03333,-1.791,-1.782,-0.175,-0.174,0.0000,0.000,0.710,0.6140,0.2947,45.0,0.0,NO
+Q70,70 L/h por aspersor impuesto (x9 = 10.50 L/min); apertura fisica desconocida,False,WARNING: Negative pressures at 0:00:00 hrs. | WARNING: Pump PU1 open but exceeds maximum flow at 0:00:00 hrs. | EPyT: list index out of range,,,,,,,,,,,,,,,,,NO
+DH10,Manguera DI 10 mm (NO medido),True,,0.07500,4.500,0.02500,0.02500,0.02500,21.802,21.809,2.135,2.136,0.9997,22.981,0.882,0.4605,0.3183,33.7,25.0,SI
+DH12,Manguera DI 12 mm (NO medido),True,,0.07500,4.500,0.02500,0.02500,0.02500,21.816,21.821,2.136,2.137,0.9998,22.981,0.882,0.4605,0.2210,33.7,25.0,SI
+DH14,Manguera DI 14 mm (NO medido),True,,0.07500,4.500,0.02500,0.02500,0.02500,21.820,21.825,2.137,2.137,0.9998,22.981,0.882,0.4605,0.1624,33.7,25.0,SI
+CURVA_x0.25,Curva provisional con alturas x0.25,True,,0.07500,4.500,0.02500,0.02500,0.02500,4.581,4.586,0.449,0.449,0.9988,5.745,0.882,0.4605,0.2210,33.7,25.0,SI
+CURVA_x0.40,Curva provisional con alturas x0.40,True,,0.07500,4.500,0.02500,0.02500,0.02500,8.028,8.033,0.786,0.787,0.9993,9.192,0.882,0.4605,0.2210,33.7,25.0,SI
+CURVA_x0.50,Curva provisional con alturas x0.50,True,,0.07500,4.500,0.02500,0.02500,0.02500,10.326,10.331,1.011,1.012,0.9995,11.490,0.882,0.4605,0.2210,33.7,25.0,SI
+CURVA_x0.75,Curva provisional con alturas x0.75,True,,0.07500,4.500,0.02500,0.02500,0.02500,16.071,16.076,1.574,1.574,0.9997,17.235,0.882,0.4605,0.2210,33.7,25.0,SI
+HW150,Hazen-Williams C=150 (comparacion),True,,0.07500,4.500,0.02500,0.02500,0.02500,21.855,21.860,2.140,2.141,0.9998,22.980,0.890,0.4605,0.2211,33.8,25.0,SI
+TINACO_MIN,Tinaco casi vacio (agua +0.30 m),True,,0.07500,4.500,0.02500,0.02500,0.02500,20.926,20.931,2.049,2.050,0.9997,22.981,-0.008,0.4605,0.2210,33.7,25.0,SI
+K_ALTOS,K estimados x2 y Kv EV = 1,True,,0.07500,4.500,0.02500,0.02500,0.02500,20.746,20.752,2.032,2.032,0.9997,22.981,0.736,0.4605,0.2210,33.7,25.0,SI
+K_BAJOS,K estimados x0.5 y Kv EV = 6,True,,0.07500,4.500,0.02500,0.02500,0.02500,22.082,22.088,2.162,2.163,0.9998,22.981,0.954,0.4605,0.2210,33.7,25.0,SI
+GEO_A2,Geometria A2 (variante): Subida vertical + desvio de laterales exteriores con la manguera,True,,0.07500,4.500,0.02500,0.02500,0.02500,21.817,21.821,2.136,2.137,0.9998,22.981,0.882,0.4605,0.2210,33.7,25.0,SI
+GEO_B,Geometria B (ALTERNATIVA DE CONTINGENCIA): Subida a 45 deg (2 codos 45) + brazos Tuboplus con codos 90,True,,0.07500,4.500,0.02500,0.02500,0.02500,21.869,21.874,2.141,2.142,0.9998,22.981,0.882,0.4605,0.2210,33.7,25.0,SI
+GEO_B2,Geometria B2 (contingencia extrema): Subida a 45 deg + desvio exterior con la manguera,True,,0.07500,4.500,0.02500,0.02500,0.02500,21.870,21.874,2.142,2.142,0.9998,22.981,0.882,0.4605,0.2210,33.7,25.0,SI

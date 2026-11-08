@@ -1,0 +1,17 @@
+PRUEBAS CON EL ESP32 REAL esp32_01 (COM8, Wi-Fi RED_DE_CASA_2.4) 2026-10-11 23:13
+[PASS] ESP32 real publica estado (retenido) con firmware riego-2.0.0 
+[PASS] Salidas de potencia deshabilitadas y modo MANUAL al arrancar 
+[PASS] Telemetría real cada 10 s con hora NTP válida 
+[PASS] Sensores sin conectar se reportan como inválidos (no se inventan datos) 
+[PASS] GET_STATUS -> ACK OK 
+[PASS] START_MANUAL con potencia deshabilitada -> REJECTED (seguridad) 
+[PASS] SET_MODE AUTOMATICO -> OK (decide, no riega) 
+[PASS] SET_MODE MANUAL -> OK 
+[PASS] APPLY_CONFIG inválido -> REJECTED en el ESP32 
+[PASS] Duplicado -> DUPLICATE en el ESP32 
+[PASS] Comando viejo -> STALE en el ESP32 (hora NTP) 
+[PASS] Diagnóstico de red sin contraseñas 
+[PASS] Open-Meteo desde el ESP32 por HTTPS (vigente) 
+[PASS] IA del ESP32 real en APRENDIZAJE (sin datos: no se llama entrenada) 
+[PASS] Node-RED guarda la telemetría REAL en SQLite (simulated=0) 
+RESULTADO: 15 PASS, 0 FAIL

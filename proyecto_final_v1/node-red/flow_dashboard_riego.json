@@ -1,0 +1,2258 @@
+[
+  {
+    "id": "tab_riego",
+    "type": "tab",
+    "label": "Riego Huerto",
+    "disabled": false,
+    "info": "Dashboard del riego automatizado (Proyecto_Final_v1). Topics en MQTT_TOPICS.md."
+  },
+  {
+    "id": "broker_huerto",
+    "type": "mqtt-broker",
+    "name": "Broker huerto",
+    "broker": "raspberrypi.local",
+    "port": "1883",
+    "clientid": "nodered-huerto",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": "false",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closeRetain": "false",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": "false",
+    "willPayload": "",
+    "willMsg": {},
+    "userProps": "",
+    "sessionExpiry": ""
+  },
+  {
+    "id": "ui_base_huerto",
+    "type": "ui-base",
+    "name": "Huerto",
+    "path": "/dashboard",
+    "includeClientData": true,
+    "acceptsClientConfig": [
+      "ui-notification",
+      "ui-control"
+    ],
+    "showPathInSidebar": false,
+    "navigationStyle": "default",
+    "titleBarStyle": "default"
+  },
+  {
+    "id": "ui_theme_huerto",
+    "type": "ui-theme",
+    "name": "Tema huerto",
+    "colors": {
+      "surface": "#1b5e20",
+      "primary": "#2e7d32",
+      "bgPage": "#eef2ee",
+      "groupBg": "#ffffff",
+      "groupOutline": "#c8d6c8"
+    },
+    "sizes": {
+      "density": "default",
+      "pagePadding": "12px",
+      "groupGap": "12px",
+      "groupBorderRadius": "8px",
+      "widgetGap": "10px"
+    }
+  },
+  {
+    "id": "ui_page_riego",
+    "type": "ui-page",
+    "name": "Riego del huerto",
+    "ui": "ui_base_huerto",
+    "path": "/riego",
+    "icon": "water",
+    "layout": "grid",
+    "theme": "ui_theme_huerto",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ],
+    "order": 1,
+    "className": "",
+    "visible": "true",
+    "disabled": "false"
+  },
+  {
+    "id": "g_principal",
+    "type": "ui-group",
+    "name": "A. Panel principal",
+    "page": "ui_page_riego",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_humedad",
+    "type": "ui-group",
+    "name": "B. Configuración de humedad del suelo",
+    "page": "ui_page_riego",
+    "width": "4",
+    "height": "1",
+    "order": 2,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_manual",
+    "type": "ui-group",
+    "name": "C. Riego manual",
+    "page": "ui_page_riego",
+    "width": "4",
+    "height": "1",
+    "order": 3,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_auto",
+    "type": "ui-group",
+    "name": "D. Riego automático",
+    "page": "ui_page_riego",
+    "width": "4",
+    "height": "1",
+    "order": 4,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_graficas",
+    "type": "ui-group",
+    "name": "E. Gráficas",
+    "page": "ui_page_riego",
+    "width": "12",
+    "height": "1",
+    "order": 5,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_historial",
+    "type": "ui-group",
+    "name": "F. Historial",
+    "page": "ui_page_riego",
+    "width": "8",
+    "height": "1",
+    "order": 6,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_alertas",
+    "type": "ui-group",
+    "name": "G. Configuración y alertas",
+    "page": "ui_page_riego",
+    "width": "4",
+    "height": "1",
+    "order": 7,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "out_cmd",
+    "type": "mqtt out",
+    "z": "tab_riego",
+    "name": "Comando al ESP32",
+    "topic": "huerto/esp32/command",
+    "qos": "1",
+    "retain": "false",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "broker_huerto",
+    "x": 1740,
+    "y": 760,
+    "wires": []
+  },
+  {
+    "id": "f_cmd",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Añadir id y ts",
+    "func": "const now = Date.now();\nmsg.payload = Object.assign({ id: 'nr-' + now + '-' + Math.floor(Math.random()*1000), ts: Math.floor(now/1000) }, msg.payload);\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1480,
+    "y": 760,
+    "wires": [
+      [
+        "out_cmd"
+      ]
+    ]
+  },
+  {
+    "id": "in_tel",
+    "type": "mqtt in",
+    "z": "tab_riego",
+    "name": "telemetry",
+    "topic": "huerto/esp32/telemetry",
+    "qos": "0",
+    "datatype": "json",
+    "broker": "broker_huerto",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 60,
+    "wires": [
+      [
+        "f_tel"
+      ]
+    ]
+  },
+  {
+    "id": "f_tel",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Separar telemetría",
+    "func": "const t = msg.payload;\nconst ts = Date.now();\nfunction m(v, topic) { return (v === null || v === undefined) ? null : { payload: v, topic: topic, timestamp: ts }; }\nreturn [\n  m(t.soil && t.soil.valid ? t.soil.vwc_pct : null, 'Humedad suelo %VWC'),\n  m(t.tank && t.tank.level_pct !== null ? t.tank.level_pct : null, 'Tinaco %'),\n  m(t.env && t.env.valid ? t.env.temp_c : null, 'Temperatura C'),\n  m(t.env && t.env.valid ? t.env.rh_pct : null, 'HR ambiente %'),\n  m(t.flow ? t.flow.lpm : null, 'Caudal L/min'),\n  m(t.flow ? t.flow.today_l : null, 'Litros hoy'),\n  { payload: (t.soil ? t.soil.status : '-') + ' | ' + (t.soil ? t.soil.mv + ' mV' : '') },\n  { payload: (t.tank ? t.tank.status : '-') + ' | ' + (t.tank && t.tank.distance_cm !== null ? t.tank.distance_cm + ' cm' : 'sin eco') },\n  { payload: t.simulation ? 'SIMULACIÓN (salidas inactivas)' : 'Sensores reales' }\n];",
+    "outputs": 9,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 60,
+    "wires": [
+      [
+        "g_soil",
+        "c_soil"
+      ],
+      [
+        "g_tank",
+        "c_tank"
+      ],
+      [
+        "g_temp",
+        "c_temp"
+      ],
+      [
+        "g_rh",
+        "c_rh"
+      ],
+      [
+        "g_flow",
+        "c_flow"
+      ],
+      [
+        "t_today",
+        "c_today"
+      ],
+      [
+        "t_soilst"
+      ],
+      [
+        "t_tankst"
+      ],
+      [
+        "t_sim"
+      ]
+    ]
+  },
+  {
+    "id": "g_soil",
+    "type": "ui-gauge",
+    "z": "tab_riego",
+    "name": "Humedad del suelo",
+    "group": "g_principal",
+    "order": 1,
+    "width": "3",
+    "height": "3",
+    "gtype": "gauge-half",
+    "gstyle": "Rounded",
+    "title": "Humedad del suelo",
+    "units": "%VWC",
+    "icon": "",
+    "prefix": "",
+    "suffix": "",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#c62828"
+      },
+      {
+        "from": "25",
+        "color": "#f9a825"
+      },
+      {
+        "from": "35",
+        "color": "#2e7d32"
+      },
+      {
+        "from": "45",
+        "color": "#1565c0"
+      }
+    ],
+    "min": 0,
+    "max": 60,
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "className": "",
+    "x": 700,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "g_tank",
+    "type": "ui-gauge",
+    "z": "tab_riego",
+    "name": "Nivel del tinaco",
+    "group": "g_principal",
+    "order": 2,
+    "width": "3",
+    "height": "3",
+    "gtype": "gauge-half",
+    "gstyle": "Rounded",
+    "title": "Nivel del tinaco",
+    "units": "%",
+    "icon": "",
+    "prefix": "",
+    "suffix": "",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#c62828"
+      },
+      {
+        "from": "20",
+        "color": "#f9a825"
+      },
+      {
+        "from": "40",
+        "color": "#2e7d32"
+      }
+    ],
+    "min": 0,
+    "max": 100,
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "className": "",
+    "x": 700,
+    "y": 110,
+    "wires": []
+  },
+  {
+    "id": "g_temp",
+    "type": "ui-gauge",
+    "z": "tab_riego",
+    "name": "Temperatura ambiente",
+    "group": "g_principal",
+    "order": 3,
+    "width": "3",
+    "height": "3",
+    "gtype": "gauge-half",
+    "gstyle": "Rounded",
+    "title": "Temperatura ambiente",
+    "units": "°C",
+    "icon": "",
+    "prefix": "",
+    "suffix": "",
+    "segments": [
+      {
+        "from": "-5",
+        "color": "#1565c0"
+      },
+      {
+        "from": "15",
+        "color": "#2e7d32"
+      },
+      {
+        "from": "30",
+        "color": "#f9a825"
+      },
+      {
+        "from": "35",
+        "color": "#c62828"
+      }
+    ],
+    "min": -5,
+    "max": 50,
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "className": "",
+    "x": 700,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "g_rh",
+    "type": "ui-gauge",
+    "z": "tab_riego",
+    "name": "Humedad relativa del aire",
+    "group": "g_principal",
+    "order": 4,
+    "width": "3",
+    "height": "3",
+    "gtype": "gauge-half",
+    "gstyle": "Rounded",
+    "title": "Humedad relativa del aire",
+    "units": "%HR",
+    "icon": "",
+    "prefix": "",
+    "suffix": "",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#f9a825"
+      },
+      {
+        "from": "30",
+        "color": "#2e7d32"
+      },
+      {
+        "from": "80",
+        "color": "#1565c0"
+      }
+    ],
+    "min": 0,
+    "max": 100,
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "className": "",
+    "x": 700,
+    "y": 210,
+    "wires": []
+  },
+  {
+    "id": "g_flow",
+    "type": "ui-gauge",
+    "z": "tab_riego",
+    "name": "Caudal",
+    "group": "g_principal",
+    "order": 5,
+    "width": "3",
+    "height": "3",
+    "gtype": "gauge-half",
+    "gstyle": "Rounded",
+    "title": "Caudal",
+    "units": "L/min",
+    "icon": "",
+    "prefix": "",
+    "suffix": "",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#9e9e9e"
+      },
+      {
+        "from": "1",
+        "color": "#2e7d32"
+      },
+      {
+        "from": "6",
+        "color": "#c62828"
+      }
+    ],
+    "min": 0,
+    "max": 8,
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "className": "",
+    "x": 700,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "t_today",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 6,
+    "width": "3",
+    "height": "1",
+    "name": "Litros hoy",
+    "label": "Litros hoy",
+    "format": "{{msg.payload}} L",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 310,
+    "wires": []
+  },
+  {
+    "id": "t_soilst",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 7,
+    "width": "3",
+    "height": "1",
+    "name": "Estado EC-5",
+    "label": "Estado EC-5",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "t_tankst",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 8,
+    "width": "3",
+    "height": "1",
+    "name": "Estado tinaco",
+    "label": "Estado tinaco",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 410,
+    "wires": []
+  },
+  {
+    "id": "t_sim",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 9,
+    "width": "3",
+    "height": "1",
+    "name": "Origen de datos",
+    "label": "Origen de datos",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "in_state",
+    "type": "mqtt in",
+    "z": "tab_riego",
+    "name": "state",
+    "topic": "huerto/esp32/state",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "broker_huerto",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 560,
+    "wires": [
+      [
+        "f_state"
+      ]
+    ]
+  },
+  {
+    "id": "f_state",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Separar estado",
+    "func": "const s = msg.payload;\nconst w = s.watering || {}; const e = s.event || {};\nflow.set('state', s);\nreturn [\n  { payload: s.pump ? 'ENCENDIDA' : 'APAGADA' },\n  { payload: s.valve ? 'ABIERTA' : 'CERRADA' },\n  { payload: s.state + (s.phase && s.phase !== 'NONE' ? ' / ' + s.phase : '') },\n  { payload: (s.mqtt ? 'MQTT OK' : 'MQTT —') + ' | Wi-Fi ' + (s.wifi ? 'OK' : '—') + ' | RSSI ' + s.rssi },\n  { payload: w.active ? (w.delivered_l + ' / ' + w.target_l + ' L (' + w.progress_pct + ' %) ' + w.elapsed_s + ' s') : 'Sin riego' },\n  { payload: w.active ? w.progress_pct : 0 },\n  { payload: s.auto_enabled },\n  { payload: s.decision ? s.decision.code + ': ' + s.decision.text : '-' },\n  { payload: 'Próximo horario: ' + s.next_window + (s.time_valid ? '' : ' (SIN HORA)') },\n  { payload: 'Ciclos: ' + e.cycles + ' | ' + e.liters + ' L' + (e.infiltration_remaining_s ? ' | infiltración ' + e.infiltration_remaining_s + ' s' : '') },\n  { payload: (s.alarms && s.alarms.length) ? s.alarms.join(', ') : 'Sin alarmas' },\n  { payload: 'Modo ' + s.mode + ' | Potencia ' + (s.power_outputs ? 'HABILITADA' : 'DESHABILITADA') + (s.simulation ? ' | SIMULACIÓN' : '') }\n];",
+    "outputs": 12,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 560,
+    "wires": [
+      [
+        "t_pump"
+      ],
+      [
+        "t_valve"
+      ],
+      [
+        "t_state"
+      ],
+      [
+        "t_comms"
+      ],
+      [
+        "t_progress"
+      ],
+      [
+        "g_progress"
+      ],
+      [
+        "sw_auto"
+      ],
+      [
+        "t_decision"
+      ],
+      [
+        "t_next"
+      ],
+      [
+        "t_cycles"
+      ],
+      [
+        "t_alarms"
+      ],
+      [
+        "t_mode"
+      ]
+    ]
+  },
+  {
+    "id": "t_pump",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 10,
+    "width": "3",
+    "height": "1",
+    "name": "Bomba",
+    "label": "Bomba",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 510,
+    "wires": []
+  },
+  {
+    "id": "t_valve",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 11,
+    "width": "3",
+    "height": "1",
+    "name": "Electroválvula",
+    "label": "Electroválvula",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 560,
+    "wires": []
+  },
+  {
+    "id": "t_state",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 12,
+    "width": "3",
+    "height": "1",
+    "name": "Estado del riego",
+    "label": "Estado del riego",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 610,
+    "wires": []
+  },
+  {
+    "id": "t_comms",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 13,
+    "width": "3",
+    "height": "1",
+    "name": "Comunicación",
+    "label": "Comunicación",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 660,
+    "wires": []
+  },
+  {
+    "id": "t_mode",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 14,
+    "width": "3",
+    "height": "1",
+    "name": "Modo",
+    "label": "Modo",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 710,
+    "wires": []
+  },
+  {
+    "id": "in_status",
+    "type": "mqtt in",
+    "z": "tab_riego",
+    "name": "status",
+    "topic": "huerto/esp32/status",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "broker_huerto",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 760,
+    "wires": [
+      [
+        "f_status"
+      ]
+    ]
+  },
+  {
+    "id": "f_status",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Online / offline",
+    "func": "msg.payload = msg.payload.online ? 'ESP32 EN LÍNEA' : 'ESP32 DESCONECTADO (LWT)';\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 760,
+    "wires": [
+      [
+        "t_online"
+      ]
+    ]
+  },
+  {
+    "id": "t_online",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_principal",
+    "order": 15,
+    "width": "3",
+    "height": "1",
+    "name": "ESP32",
+    "label": "ESP32",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 760,
+    "wires": []
+  },
+  {
+    "id": "in_cfg",
+    "type": "mqtt in",
+    "z": "tab_riego",
+    "name": "config",
+    "topic": "huerto/esp32/config",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "broker_huerto",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 860,
+    "wires": [
+      [
+        "f_cfg"
+      ]
+    ]
+  },
+  {
+    "id": "f_cfg",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Separar configuración",
+    "func": "const p = msg.payload.params || {};\nflow.set('cfg', p);\nreturn [\n  { payload: p.hum_min }, { payload: p.hum_target }, { payload: p.hum_max },\n  { payload: 'Guardado en ESP32: mín ' + p.hum_min + ' / obj ' + p.hum_target + ' / máx ' + p.hum_max + ' %VWC' },\n  { payload: p.liters_per_cycle + ' L por ciclo | infiltración ' + p.infilt_min + ' min | máx ' + p.max_cycles + ' ciclos' },\n  { payload: 'Horario 1: ' + (p.win1_en ? p.win1_start + '-' + p.win1_end : 'OFF') + ' | Horario 2: ' + (p.win2_en ? p.win2_start + '-' + p.win2_end : 'OFF') },\n  { payload: 'Tinaco: ' + (msg.payload.tank_calibrated ? 'calibrado' : 'SIN CALIBRAR') + ' | mínimo ' + p.tank_min_pct + ' %' },\n  { payload: 'Máximos: ' + p.max_liters_event + ' L/evento, ' + p.max_liters_daily + ' L/día | ' + p.pulses_per_liter + ' pulsos/L' }\n];",
+    "outputs": 8,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 860,
+    "wires": [
+      [
+        "s_min"
+      ],
+      [
+        "s_target"
+      ],
+      [
+        "s_max"
+      ],
+      [
+        "t_hum_saved"
+      ],
+      [
+        "t_auto_cfg"
+      ],
+      [
+        "t_sched"
+      ],
+      [
+        "t_tankcfg"
+      ],
+      [
+        "t_limits"
+      ]
+    ]
+  },
+  {
+    "id": "s_min",
+    "type": "ui-slider",
+    "z": "tab_riego",
+    "group": "g_humedad",
+    "name": "HUMEDAD MÍNIMA (%VWC)",
+    "label": "HUMEDAD MÍNIMA (%VWC)",
+    "tooltip": "",
+    "order": 1,
+    "width": "4",
+    "height": "1",
+    "passthru": false,
+    "outs": "end",
+    "topic": "topic",
+    "topicType": "msg",
+    "thumbLabel": "always",
+    "showTicks": "always",
+    "min": "5",
+    "max": "60",
+    "step": "0.5",
+    "className": "",
+    "iconPrepend": "",
+    "iconAppend": "",
+    "color": "",
+    "colorTrack": "",
+    "colorThumb": "",
+    "showTextField": true,
+    "x": 700,
+    "y": 860,
+    "wires": [
+      [
+        "ch_min"
+      ]
+    ]
+  },
+  {
+    "id": "s_target",
+    "type": "ui-slider",
+    "z": "tab_riego",
+    "group": "g_humedad",
+    "name": "HUMEDAD RECOMENDADA / OBJETIVO (%VWC)",
+    "label": "HUMEDAD RECOMENDADA / OBJETIVO (%VWC)",
+    "tooltip": "",
+    "order": 2,
+    "width": "4",
+    "height": "1",
+    "passthru": false,
+    "outs": "end",
+    "topic": "topic",
+    "topicType": "msg",
+    "thumbLabel": "always",
+    "showTicks": "always",
+    "min": "5",
+    "max": "65",
+    "step": "0.5",
+    "className": "",
+    "iconPrepend": "",
+    "iconAppend": "",
+    "color": "",
+    "colorTrack": "",
+    "colorThumb": "",
+    "showTextField": true,
+    "x": 700,
+    "y": 910,
+    "wires": [
+      [
+        "ch_target"
+      ]
+    ]
+  },
+  {
+    "id": "s_max",
+    "type": "ui-slider",
+    "z": "tab_riego",
+    "group": "g_humedad",
+    "name": "HUMEDAD MÁXIMA (%VWC)",
+    "label": "HUMEDAD MÁXIMA (%VWC)",
+    "tooltip": "",
+    "order": 3,
+    "width": "4",
+    "height": "1",
+    "passthru": false,
+    "outs": "end",
+    "topic": "topic",
+    "topicType": "msg",
+    "thumbLabel": "always",
+    "showTicks": "always",
+    "min": "5",
+    "max": "70",
+    "step": "0.5",
+    "className": "",
+    "iconPrepend": "",
+    "iconAppend": "",
+    "color": "",
+    "colorTrack": "",
+    "colorThumb": "",
+    "showTextField": true,
+    "x": 700,
+    "y": 960,
+    "wires": [
+      [
+        "ch_max"
+      ]
+    ]
+  },
+  {
+    "id": "ch_min",
+    "type": "change",
+    "z": "tab_riego",
+    "name": "topic=min",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "min",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 960,
+    "y": 860,
+    "wires": [
+      [
+        "f_hum"
+      ]
+    ]
+  },
+  {
+    "id": "ch_target",
+    "type": "change",
+    "z": "tab_riego",
+    "name": "topic=target",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "target",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 960,
+    "y": 910,
+    "wires": [
+      [
+        "f_hum"
+      ]
+    ]
+  },
+  {
+    "id": "ch_max",
+    "type": "change",
+    "z": "tab_riego",
+    "name": "topic=max",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "max",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 960,
+    "y": 960,
+    "wires": [
+      [
+        "f_hum"
+      ]
+    ]
+  },
+  {
+    "id": "f_hum",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Rango de humedad",
+    "func": "// Guarda el valor del slider y envía SET_HUMIDITY_RANGE con los tres valores\nconst p = flow.get('cfg') || {};\nconst h = flow.get('hum') || { min: p.hum_min, target: p.hum_target, max: p.hum_max };\nh[msg.topic] = Number(msg.payload);\nflow.set('hum', h);\nif (!(h.min < h.target && h.target < h.max)) {\n  node.warn('No se envía: debe cumplirse MÍNIMA < OBJETIVO < MÁXIMA');\n  return [null, { payload: 'Revise: MÍNIMA < OBJETIVO < MÁXIMA' }];\n}\nreturn [{ payload: { cmd: 'SET_HUMIDITY_RANGE', min: h.min, target: h.target, max: h.max } }, null];",
+    "outputs": 2,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1220,
+    "y": 910,
+    "wires": [
+      [
+        "f_cmd"
+      ],
+      [
+        "t_hum_saved"
+      ]
+    ]
+  },
+  {
+    "id": "t_hum_saved",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_humedad",
+    "order": 4,
+    "width": "4",
+    "height": "1",
+    "name": "Confirmación",
+    "label": "Confirmación",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1010,
+    "wires": []
+  },
+  {
+    "id": "s_liters",
+    "type": "ui-slider",
+    "z": "tab_riego",
+    "group": "g_manual",
+    "name": "Litros a regar",
+    "label": "Litros a regar",
+    "tooltip": "",
+    "order": 1,
+    "width": "4",
+    "height": "1",
+    "passthru": false,
+    "outs": "end",
+    "topic": "topic",
+    "topicType": "msg",
+    "thumbLabel": "always",
+    "showTicks": "always",
+    "min": "0.1",
+    "max": "3",
+    "step": "0.1",
+    "className": "",
+    "iconPrepend": "",
+    "iconAppend": "",
+    "color": "",
+    "colorTrack": "",
+    "colorThumb": "",
+    "showTextField": true,
+    "x": 700,
+    "y": 1110,
+    "wires": [
+      [
+        "ch_liters"
+      ]
+    ]
+  },
+  {
+    "id": "ch_liters",
+    "type": "change",
+    "z": "tab_riego",
+    "name": "Guardar litros",
+    "rules": [
+      {
+        "t": "set",
+        "p": "liters",
+        "pt": "flow",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 960,
+    "y": 1110,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b_start",
+    "type": "ui-button",
+    "z": "tab_riego",
+    "group": "g_manual",
+    "name": "START",
+    "label": "START",
+    "order": 2,
+    "width": "2",
+    "height": "1",
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "#ffffff",
+    "bgcolor": "#2e7d32",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "start",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#2e7d32",
+    "textColor": "#ffffff",
+    "iconColor": "",
+    "enableClick": true,
+    "enablePointerdown": false,
+    "pointerdownPayload": "",
+    "pointerdownPayloadType": "str",
+    "enablePointerup": false,
+    "pointerupPayload": "",
+    "pointerupPayloadType": "str",
+    "x": 700,
+    "y": 1160,
+    "wires": [
+      [
+        "f_start"
+      ]
+    ]
+  },
+  {
+    "id": "f_start",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "START_MANUAL",
+    "func": "const l = Number(flow.get('liters') || 1.0);\nmsg.payload = { cmd: 'START_MANUAL', liters: Math.round(l * 100) / 100 };\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 960,
+    "y": 1160,
+    "wires": [
+      [
+        "f_cmd"
+      ]
+    ]
+  },
+  {
+    "id": "b_stop",
+    "type": "ui-button",
+    "z": "tab_riego",
+    "group": "g_manual",
+    "name": "STOP",
+    "label": "STOP",
+    "order": 3,
+    "width": "2",
+    "height": "1",
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "#ffffff",
+    "bgcolor": "#c62828",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "stop",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#c62828",
+    "textColor": "#ffffff",
+    "iconColor": "",
+    "enableClick": true,
+    "enablePointerdown": false,
+    "pointerdownPayload": "",
+    "pointerdownPayloadType": "str",
+    "enablePointerup": false,
+    "pointerupPayload": "",
+    "pointerupPayloadType": "str",
+    "x": 700,
+    "y": 1210,
+    "wires": [
+      [
+        "f_stop"
+      ]
+    ]
+  },
+  {
+    "id": "f_stop",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "STOP",
+    "func": "msg.payload = { cmd: 'STOP' };\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 960,
+    "y": 1210,
+    "wires": [
+      [
+        "f_cmd"
+      ]
+    ]
+  },
+  {
+    "id": "t_progress",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_manual",
+    "order": 4,
+    "width": "4",
+    "height": "1",
+    "name": "Progreso",
+    "label": "Progreso",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1260,
+    "wires": []
+  },
+  {
+    "id": "g_progress",
+    "type": "ui-gauge",
+    "z": "tab_riego",
+    "name": "Progreso del riego",
+    "group": "g_manual",
+    "order": 5,
+    "width": "4",
+    "height": "3",
+    "gtype": "gauge-half",
+    "gstyle": "Rounded",
+    "title": "Progreso del riego",
+    "units": "%",
+    "icon": "",
+    "prefix": "",
+    "suffix": "",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#1565c0"
+      },
+      {
+        "from": "100",
+        "color": "#2e7d32"
+      }
+    ],
+    "min": 0,
+    "max": 100,
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "className": "",
+    "x": 700,
+    "y": 1310,
+    "wires": []
+  },
+  {
+    "id": "sw_auto",
+    "type": "ui-switch",
+    "z": "tab_riego",
+    "name": "Riego automático",
+    "label": "Riego automático",
+    "group": "g_auto",
+    "order": 1,
+    "width": "4",
+    "height": "1",
+    "passthru": false,
+    "decouple": true,
+    "topic": "topic",
+    "topicType": "msg",
+    "style": "",
+    "className": "",
+    "layout": "row-spread",
+    "clickableArea": "switch",
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "onicon": "",
+    "oncolor": "",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "officon": "",
+    "offcolor": "",
+    "x": 700,
+    "y": 1410,
+    "wires": [
+      [
+        "f_auto"
+      ]
+    ]
+  },
+  {
+    "id": "f_auto",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "ENABLE/DISABLE_AUTO",
+    "func": "msg.payload = { cmd: msg.payload ? 'ENABLE_AUTO' : 'DISABLE_AUTO' };\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 960,
+    "y": 1410,
+    "wires": [
+      [
+        "f_cmd"
+      ]
+    ]
+  },
+  {
+    "id": "t_decision",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_auto",
+    "order": 2,
+    "width": "4",
+    "height": "1",
+    "name": "Decisión",
+    "label": "Decisión",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1460,
+    "wires": []
+  },
+  {
+    "id": "t_next",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_auto",
+    "order": 3,
+    "width": "4",
+    "height": "1",
+    "name": "Horario",
+    "label": "Horario",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1510,
+    "wires": []
+  },
+  {
+    "id": "t_cycles",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_auto",
+    "order": 4,
+    "width": "4",
+    "height": "1",
+    "name": "Evento",
+    "label": "Evento",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1560,
+    "wires": []
+  },
+  {
+    "id": "t_auto_cfg",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_auto",
+    "order": 5,
+    "width": "4",
+    "height": "1",
+    "name": "Parámetros",
+    "label": "Parámetros",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1610,
+    "wires": []
+  },
+  {
+    "id": "t_sched",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_auto",
+    "order": 6,
+    "width": "4",
+    "height": "1",
+    "name": "Horarios",
+    "label": "Horarios",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1660,
+    "wires": []
+  },
+  {
+    "id": "c_soil",
+    "type": "ui-chart",
+    "z": "tab_riego",
+    "group": "g_graficas",
+    "name": "Humedad del suelo (%VWC)",
+    "label": "Humedad del suelo (%VWC)",
+    "order": 1,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "",
+    "xAxisPropertyType": "timestamp",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "auto",
+    "yAxisLabel": "",
+    "yAxisProperty": "payload",
+    "yAxisPropertyType": "msg",
+    "ymin": "0",
+    "ymax": "60",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 2,
+    "showLegend": true,
+    "removeOlder": 1,
+    "removeOlderUnit": "86400",
+    "removeOlderPoints": "1000",
+    "colors": [
+      "#2e7d32",
+      "#1565c0",
+      "#ef6c00",
+      "#6a1b9a",
+      "#c62828",
+      "#00838f",
+      "#5d4037",
+      "#9e9d24",
+      "#455a64"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": "6",
+    "height": "4",
+    "className": "",
+    "interpolation": "linear",
+    "x": 960,
+    "y": 60,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c_tank",
+    "type": "ui-chart",
+    "z": "tab_riego",
+    "group": "g_graficas",
+    "name": "Nivel del tinaco (%)",
+    "label": "Nivel del tinaco (%)",
+    "order": 2,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "",
+    "xAxisPropertyType": "timestamp",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "auto",
+    "yAxisLabel": "",
+    "yAxisProperty": "payload",
+    "yAxisPropertyType": "msg",
+    "ymin": "0",
+    "ymax": "100",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 2,
+    "showLegend": true,
+    "removeOlder": 1,
+    "removeOlderUnit": "86400",
+    "removeOlderPoints": "1000",
+    "colors": [
+      "#2e7d32",
+      "#1565c0",
+      "#ef6c00",
+      "#6a1b9a",
+      "#c62828",
+      "#00838f",
+      "#5d4037",
+      "#9e9d24",
+      "#455a64"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": "6",
+    "height": "4",
+    "className": "",
+    "interpolation": "linear",
+    "x": 960,
+    "y": 110,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c_temp",
+    "type": "ui-chart",
+    "z": "tab_riego",
+    "group": "g_graficas",
+    "name": "Temperatura (°C)",
+    "label": "Temperatura (°C)",
+    "order": 3,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "",
+    "xAxisPropertyType": "timestamp",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "auto",
+    "yAxisLabel": "",
+    "yAxisProperty": "payload",
+    "yAxisPropertyType": "msg",
+    "ymin": "",
+    "ymax": "",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 2,
+    "showLegend": true,
+    "removeOlder": 1,
+    "removeOlderUnit": "86400",
+    "removeOlderPoints": "1000",
+    "colors": [
+      "#2e7d32",
+      "#1565c0",
+      "#ef6c00",
+      "#6a1b9a",
+      "#c62828",
+      "#00838f",
+      "#5d4037",
+      "#9e9d24",
+      "#455a64"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": "6",
+    "height": "4",
+    "className": "",
+    "interpolation": "linear",
+    "x": 960,
+    "y": 160,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c_rh",
+    "type": "ui-chart",
+    "z": "tab_riego",
+    "group": "g_graficas",
+    "name": "Humedad relativa del aire (%)",
+    "label": "Humedad relativa del aire (%)",
+    "order": 4,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "",
+    "xAxisPropertyType": "timestamp",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "auto",
+    "yAxisLabel": "",
+    "yAxisProperty": "payload",
+    "yAxisPropertyType": "msg",
+    "ymin": "0",
+    "ymax": "100",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 2,
+    "showLegend": true,
+    "removeOlder": 1,
+    "removeOlderUnit": "86400",
+    "removeOlderPoints": "1000",
+    "colors": [
+      "#2e7d32",
+      "#1565c0",
+      "#ef6c00",
+      "#6a1b9a",
+      "#c62828",
+      "#00838f",
+      "#5d4037",
+      "#9e9d24",
+      "#455a64"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": "6",
+    "height": "4",
+    "className": "",
+    "interpolation": "linear",
+    "x": 960,
+    "y": 210,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c_flow",
+    "type": "ui-chart",
+    "z": "tab_riego",
+    "group": "g_graficas",
+    "name": "Caudal (L/min)",
+    "label": "Caudal (L/min)",
+    "order": 5,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "",
+    "xAxisPropertyType": "timestamp",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "auto",
+    "yAxisLabel": "",
+    "yAxisProperty": "payload",
+    "yAxisPropertyType": "msg",
+    "ymin": "0",
+    "ymax": "8",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 2,
+    "showLegend": true,
+    "removeOlder": 1,
+    "removeOlderUnit": "86400",
+    "removeOlderPoints": "1000",
+    "colors": [
+      "#2e7d32",
+      "#1565c0",
+      "#ef6c00",
+      "#6a1b9a",
+      "#c62828",
+      "#00838f",
+      "#5d4037",
+      "#9e9d24",
+      "#455a64"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": "6",
+    "height": "4",
+    "className": "",
+    "interpolation": "linear",
+    "x": 960,
+    "y": 260,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c_today",
+    "type": "ui-chart",
+    "z": "tab_riego",
+    "group": "g_graficas",
+    "name": "Litros del día",
+    "label": "Litros del día",
+    "order": 6,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "",
+    "xAxisPropertyType": "timestamp",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "auto",
+    "yAxisLabel": "",
+    "yAxisProperty": "payload",
+    "yAxisPropertyType": "msg",
+    "ymin": "0",
+    "ymax": "",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 2,
+    "showLegend": true,
+    "removeOlder": 1,
+    "removeOlderUnit": "86400",
+    "removeOlderPoints": "1000",
+    "colors": [
+      "#2e7d32",
+      "#1565c0",
+      "#ef6c00",
+      "#6a1b9a",
+      "#c62828",
+      "#00838f",
+      "#5d4037",
+      "#9e9d24",
+      "#455a64"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": "6",
+    "height": "4",
+    "className": "",
+    "interpolation": "linear",
+    "x": 960,
+    "y": 310,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "in_event",
+    "type": "mqtt in",
+    "z": "tab_riego",
+    "name": "event",
+    "topic": "huerto/esp32/event",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "broker_huerto",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1760,
+    "wires": [
+      [
+        "f_event"
+      ]
+    ]
+  },
+  {
+    "id": "f_event",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Agregar al historial",
+    "func": "// Historial local (contexto de flujo; ver la guía para guardarlo en disco)\nconst e = msg.payload;\nif (e.type !== 'WATERING_END' && e.type !== 'AUTO_EVENT_END') return null;\nconst h = flow.get('historial') || [];\nconst fecha = e.ts ? new Date(e.ts * 1000).toLocaleString('es-MX') : 'sin hora';\nh.unshift({\n  Fecha: fecha,\n  Tipo: e.type === 'WATERING_END' ? 'Riego ' + e.reason : 'Evento automático',\n  Resultado: e.result || e.why,\n  Litros: e.delivered_l !== undefined ? e.delivered_l : e.liters,\n  'Duración s': e.duration_s,\n  'Humedad antes': e.vwc_before,\n  'Humedad después': e.vwc_after\n});\nflow.set('historial', h.slice(0, 50));\nmsg.payload = h.slice(0, 50);\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 1760,
+    "wires": [
+      [
+        "tb_hist"
+      ]
+    ]
+  },
+  {
+    "id": "tb_hist",
+    "type": "ui-table",
+    "z": "tab_riego",
+    "group": "g_historial",
+    "name": "Riegos",
+    "label": "Riegos",
+    "order": 1,
+    "width": "8",
+    "height": "6",
+    "maxrows": 12,
+    "passthru": false,
+    "autocols": true,
+    "showSearch": true,
+    "deselect": true,
+    "selectionType": "none",
+    "columns": [],
+    "mobileBreakpoint": "sm",
+    "mobileBreakpointType": "defaults",
+    "action": "replace",
+    "x": 700,
+    "y": 1760,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "t_alarms",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_alertas",
+    "order": 1,
+    "width": "4",
+    "height": "1",
+    "name": "Alarmas activas",
+    "label": "Alarmas activas",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1860,
+    "wires": []
+  },
+  {
+    "id": "t_tankcfg",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_alertas",
+    "order": 2,
+    "width": "4",
+    "height": "1",
+    "name": "Tinaco",
+    "label": "Tinaco",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1910,
+    "wires": []
+  },
+  {
+    "id": "t_limits",
+    "type": "ui-text",
+    "z": "tab_riego",
+    "group": "g_alertas",
+    "order": 3,
+    "width": "4",
+    "height": "1",
+    "name": "Límites",
+    "label": "Límites",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1b1b1b",
+    "wrapText": false,
+    "className": "",
+    "x": 700,
+    "y": 1960,
+    "wires": []
+  },
+  {
+    "id": "b_clear",
+    "type": "ui-button",
+    "z": "tab_riego",
+    "group": "g_alertas",
+    "name": "CLEAR_ALARM (ALL)",
+    "label": "CLEAR_ALARM (ALL)",
+    "order": 4,
+    "width": "4",
+    "height": "1",
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "#ffffff",
+    "bgcolor": "#ef6c00",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "clear",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#ef6c00",
+    "textColor": "#ffffff",
+    "iconColor": "",
+    "enableClick": true,
+    "enablePointerdown": false,
+    "pointerdownPayload": "",
+    "pointerdownPayloadType": "str",
+    "enablePointerup": false,
+    "pointerupPayload": "",
+    "pointerupPayloadType": "str",
+    "x": 700,
+    "y": 2010,
+    "wires": [
+      [
+        "f_clear"
+      ]
+    ]
+  },
+  {
+    "id": "f_clear",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "CLEAR_ALARM",
+    "func": "msg.payload = { cmd: 'CLEAR_ALARM', alarm: 'ALL' };\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 960,
+    "y": 2010,
+    "wires": [
+      [
+        "f_cmd"
+      ]
+    ]
+  },
+  {
+    "id": "notif",
+    "type": "ui-notification",
+    "z": "tab_riego",
+    "ui": "ui_base_huerto",
+    "position": "top right",
+    "colorDefault": false,
+    "color": "#2e7d32",
+    "displayTime": "6",
+    "showCountdown": true,
+    "outputs": 0,
+    "allowDismiss": true,
+    "dismissText": "Cerrar",
+    "raw": false,
+    "className": "",
+    "name": "Avisos",
+    "x": 960,
+    "y": 2110,
+    "wires": []
+  },
+  {
+    "id": "in_ack",
+    "type": "mqtt in",
+    "z": "tab_riego",
+    "name": "ack",
+    "topic": "huerto/esp32/ack",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "broker_huerto",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2110,
+    "wires": [
+      [
+        "f_ack"
+      ]
+    ]
+  },
+  {
+    "id": "f_ack",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Confirmación de comando",
+    "func": "const a = msg.payload;\nmsg.payload = a.cmd + ': ' + a.status + ' — ' + a.message;\nmsg.ui_update = { color: a.status === 'OK' ? '#2e7d32' : '#c62828' };\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 2110,
+    "wires": [
+      [
+        "notif"
+      ]
+    ]
+  },
+  {
+    "id": "in_alarm",
+    "type": "mqtt in",
+    "z": "tab_riego",
+    "name": "alarm",
+    "topic": "huerto/esp32/alarm",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "broker_huerto",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2160,
+    "wires": [
+      [
+        "f_alarm"
+      ]
+    ]
+  },
+  {
+    "id": "f_alarm",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Aviso de alarma",
+    "func": "const a = msg.payload;\nmsg.payload = 'ALARMA ' + a.code + (a.active ? ' ACTIVA: ' : ' resuelta: ') + a.message;\nmsg.ui_update = { color: a.severity === 'CRITICAL' ? '#c62828' : (a.severity === 'WARNING' ? '#ef6c00' : '#1565c0') };\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 2160,
+    "wires": [
+      [
+        "notif"
+      ]
+    ]
+  },
+  {
+    "id": "inj_status",
+    "type": "inject",
+    "z": "tab_riego",
+    "name": "Al iniciar: GET_STATUS + GET_CONFIG",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "3",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 180,
+    "y": 2260,
+    "wires": [
+      [
+        "f_init"
+      ]
+    ]
+  },
+  {
+    "id": "f_init",
+    "type": "function",
+    "z": "tab_riego",
+    "name": "Pedir estado y config",
+    "func": "return [[{ payload: { cmd: 'GET_STATUS' } }, { payload: { cmd: 'GET_CONFIG' } }]];",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 2260,
+    "wires": [
+      [
+        "f_cmd"
+      ]
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+PRUEBAS DE INTEGRACION (simulador sim_01 + broker + Node-RED + SQLite) 2026-10-11 17:42
+[PASS] Broker rechaza clientes anónimos 
+[PASS] ACL: el simulador NO puede enviar comandos al ESP32 real 
+[PASS] SET_MODE AUTOMATICO -> ACK OK con modo aplicado 
+[PASS] Comando con id repetido -> DUPLICATE 
+[FAIL] Comando de riego RETENIDO -> se ignora (RETAINED) {'id': 'test-1791761799983-26', 'cmd': 'START_MANUAL', 'status': 'OK', 'message': '[SIMULADOR] Riego manual de 0.50 L iniciado', 'state': 'MANUAL_WATERING', 'mode': 'AUTOMATICO', 'ts': 1791761800, 'uptime_s': 13, 'device': 'sim_01', 'simulated': True}
+[PASS] Comando antiguo (ts -10 min) -> STALE 
+[PASS] Configuración inválida (mín > óptima) -> REJECTED y versión sin cambio 
+[FAIL] Configuración válida -> OK con version_applied {'id': 'test-1791761800587-36', 'cmd': 'APPLY_CONFIG', 'status': 'REJECTED', 'message': '[SIMULADOR] Riego en curso: la configuracion anterior se mantiene', 'state': 'MANUAL_WATERING', 'mode': 'AUTOMATICO', 'ts': 1791761800, 'uptime_s': 14, 'device': 'sim_01', 'simulated': True}
+[PASS] Riego manual 0.5 L termina por volumen (TARGET) 
+[PASS] Node-RED guarda el riego en SQLite 
+[PASS] STOP durante el riego -> STOP_CMD 
+[PASS] Falla del EC-5 simulada -> alarma SOIL_SENSOR 
+[PASS] La alerta queda registrada en SQLite 
+[FAIL] Emergencia (15 %VWC a las 13:00) -> riego EMERGENCY limitado None
+[FAIL] Mañana 06:30 con 30 %VWC (bajo óptima-histéresis) -> riego SCHEDULED None
+[FAIL] Pronóstico de lluvia -> pospone el riego rutinario (RAIN_EXPECTED) 
+[FAIL] Lluvia simulada -> evento POSIBLE_LLUVIA (sin litros de bomba) None
+[FAIL] El evento de lluvia queda en SQLite []
+[FAIL] Riego externo simulado -> POSIBLE_RIEGO_EXTERNO None
+[PASS] IA del simulador publica estado y plan 
+[PASS] SET_MODE IA -> ACK OK 
+[PASS] Pérdida de MQTT -> mensaje de última voluntad (offline) 
+[PASS] Reconexión automática -> online 
+[PASS] Desconexión y reconexión registradas en SQLite 
+[PASS] Lecturas del simulador guardadas y marcadas como simuladas 
+[PASS] Open-Meteo real consultado por HTTPS (HTTP 200) 
+[PASS] Exportación CSV desde esta PC 
+[FAIL] Dashboard desde la red local exige usuario (401) y acepta credenciales (200) 200 200
+[PASS] Editor/Admin API de Node-RED protegido (401 sin token) 
+RESULTADO: 20 PASS, 9 FAIL

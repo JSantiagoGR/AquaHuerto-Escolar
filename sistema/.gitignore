@@ -1,0 +1,26 @@
+# Secretos y datos locales: NUNCA versionar ni exportar
+configs/secrets/
+mqtt/passwd
+mqtt/data/
+mqtt/log/
+database/*.db
+database/*.db-*
+nodered/userdata/.config.runtime.json
+nodered/userdata/.config.users.json*
+nodered/userdata/*_cred.json
+nodered/userdata/.sessions.json
+nodered/userdata/node_modules/
+nodered/runtime/node_modules/
+nodered/userdata/lib/
+nodered/userdata/*.backup
+backups/esp32_casa_flash_original/
+.venv/
+firmware/build*/
+firmware/managed_components/
+firmware/sdkconfig
+firmware/sdkconfig.old
+firmware/sdkconfig.secrets
+tests/host/build/
+__pycache__/
+data_usuario/
+run

@@ -1,0 +1,26 @@
+<v-dialog v-model="dlg.show" max-width="520">
+  <v-card>
+    <v-card-title class="text-wrap">{{ dlg.title }}</v-card-title>
+    <v-card-text style="white-space: pre-line">{{ dlg.text }}</v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn variant="text" @click="dlg.show = false">CANCELAR</v-btn>
+      <v-btn :color="dlg.danger ? 'error' : 'primary'" variant="flat" @click="dlgOk">{{ dlg.ok }}</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+<v-dialog v-model="modeDlg.show" max-width="520">
+  <v-card>
+    <v-card-title>¿Deseas cambiar al modo {{ modeName(modeDlg.mode) }}?</v-card-title>
+    <v-card-text>
+      El modo solo cambia cuando el ESP32 lo valide y lo confirme. Modo actual: <b>{{ modeName(modeNow) }}</b>.
+      <div v-if="modeDlg.mode === 'IA'" class="mt-2">Si el modelo todavía no está validado, el ESP32 usará el automático conservador como respaldo.</div>
+      <div v-if="ST.power_outputs === false" class="mt-2 text-warning">Las salidas de potencia están deshabilitadas: el sistema decidirá pero no activará la bomba ni la válvula.</div>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn variant="text" @click="modeDlg.show = false">CANCELAR</v-btn>
+      <v-btn color="primary" variant="flat" @click="confirmMode">CONFIRMAR</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
